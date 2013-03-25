@@ -38,7 +38,7 @@
 					<div class="excerpt">
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget lorem odio, id elementum massa. Cras arcu lacus, interdum et laoreet vitae, aliquet in odio. Etiam nec venenatis justo.</p>
 					</div>
-				</div>
+				</div> 
 			</div>
 			<div class="featured_item">
 				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/02/The-Virtuous-Misfortune_DS2-66x100.png" alt=""></div>
