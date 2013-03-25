@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <html>
 <head>
 <meta charset="<?php bloginfo('charset'); ?>">
@@ -12,49 +13,36 @@
 </head>
 
 <body>
-<div id="header_wrap">
-	<header>
-		<div id="logo">
-			<h1>
-				<a href="<?php get_site_url(); ?>">
-					<img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="Reader Crowd logo">
-				</a>
-			</h1>
-		</div>
-
-		<!-- login -->
-		<?php the_widget(
-			'Theme_My_Login_Widget',
-			array(
-				'default_action' => 'login',
-				'logged_in_widget' => 1,
-				'show_title' => 1,
-				'show_log_link' => 1,
-				'show_reg_link' => 1,
-				'show_pass_link' => 1,
-				'show_gravatar' => 1,
-				'gravatar_size' => 50,
-				'register_widget' => 1,
-				'lostpassword_widget' => 1
-			),
-			array(
-				'before_title' => '<span>',
-				'after_title' => '</span>',
-				'before_widget' => '<div id="login_wrap">',
-				'after_widget' => '</div>'
-			));
-		?>
-		<a id="new_post" href="<?php echo site_url(); ?>/wp-admin/post-new.php">Write</a>
-	</header>
-</div>
-
-<div id="nav_wrap">
-	<nav>
-		<?php wp_nav_menu('menu_class=nav_menu'); ?>
-
-		<!-- search_form -->
-		<form id="search_form" method="get" action="<?php echo home_url(); ?>" >
-			<input type="text" id="search_input" name="s" value="" placeholder="Search...">
-		</form>
-	</nav>
-</div>
+<div id="container">
+	<div id="header" class="fl">
+    	<a href="<?php get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.jpg" class="indexlogo fl" /></a>
+        <form>
+        	<ul class="login">
+            	<li><b>Username</b></li>
+                <li><input type="text" class="input1" /><br />
+					Register
+                </li>
+                <li>&nbsp;&nbsp;<b>Password</b></li>
+                <li><input type="password" class="input1" /><br />
+					Forgot
+                </li>
+                <li><input type="button" class="input2" value="log in" /></li>
+            </ul>
+            <div class="searchform">
+            	<span><input type="text" class="search"/></span><input type="button" class="input2" value="Search" />
+            </div>
+            <span class="write"><a href="<?php echo site_url(); ?>/wp-admin/post-new.php">write</a></span>
+        </form>
+        <ul class="nav">  
+        		<?php wp_nav_menu( array('container' => false,"depth"=>1)); ?>
+        		
+        </ul> 
+       
+        <!--  <ul class="nav">  
+        	<li><a href="#">All Books</a></li>
+            <li><a href="#">Forum</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Writers'Wiki</a></li>
+            <li><a href="#">About</a></li>
+        </ul>  -->
+    </div>

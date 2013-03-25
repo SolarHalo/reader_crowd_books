@@ -39,5 +39,69 @@ function content_nav( $html_id ) {
 		</nav><!-- #<?php echo $html_id; ?> .navigation -->
 	<?php endif;
 }
+
+// add by yuyue 2013-3-25======================
+/**
+ get user login name by user id
+ */
+function get_user_loginname($userid=''){
+	 $user="'".$userid."'";
+	 global $wpdb;
+	 $user_names = $wpdb->get_col("SELECT user_login FROM $wpdb->users WHERE id = $user ORDER BY ID");
+	 foreach($user_names as $user_name){
+	 return $user_name;
+	 }
+}
+/*
+ * get the top views posts
+ */
+
+function getTopReviewd ($showNum){
+	global $wpdb;
+	$selectSql = "select t.post_title,t.post_author,m.meta_value,t.ID from wp_posts t,wp_postmeta m where t.ID = m.post_id and m.meta_key = 'custom_total_hits' order by m.meta_value desc limit $showNum";
+	 
+	$top_posts = $wpdb->get_results($selectSql);
+	$output = "";
+	$i = 1;
+	foreach ($top_posts as $top_post) { 
+	     $hit = (int)$top_post->meta_value;
+	      $author = get_user_loginname($top_post->post_author);
+	      $image = get_the_post_thumbnail($top_post->ID,array(45,70));
+	       $permalink = get_permalink( $top_post->ID );
+		 $output.="<li><a href='$permalink' title='$top_post->post_title'> $image $i.$top_post->post_title </a> <span >$author</span><span >($hit) </span></li>"; 
+			 $i++;	
+	}
+	echo $output;
+}
+function getHighestRation ($showNum){
+	global $wpdb;
+	$selectSql = "select rating_id,rating_postid,rating_posttitle,sum(rating_rating)/count(rating_rating) aa from wp_ratings  group by rating_postid order by aa desc limit $showNum";
+	 
+	$top_posts = $wpdb->get_results($selectSql);
+	$output = "";
+	$i = 1;
+	foreach ($top_posts as $top_post) {  
+	     $hit = (int)$top_post->meta_value;
+	      $author = get_user_loginname($top_post->post_author);
+	      $image = get_the_post_thumbnail($top_post->ID,array(45,70));
+	       $permalink = get_permalink( $top_post->rating_postid );
+	        $uri = get_template_directory_uri();
+		 $output.=<<<html
+		          <li>
+					<a href='$permalink' title='' ">$top_post->rating_posttitle</a>
+                    <div class='ratingsbox'>
+                        <img src='$uri/images/rating_on.gif' />
+                        <img src='$uri/images/rating_on.gif' />
+                        <img src='$uri/images/rating_on.gif' />
+                        <img src='$uri/images/rating_off.gif' />
+                        <img src='$uri/images/rating_off.gif' /> 
+                     </div> 
+				</li>
+html;
+		 $i++; 
+				
+	}
+	echo $output;
+}
 endif;
 ?>
