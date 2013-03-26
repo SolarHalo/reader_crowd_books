@@ -5,20 +5,20 @@
 	</h1>
 	<div class="ratings fl">
 		<div class="ratingsbox">
-			<img src="images/rating_on.gif" /> <img src="images/rating_on.gif" />
-			<img src="images/rating_on.gif" /> <img src="images/rating_off.gif" />
-			<img src="images/rating_off.gif" /> (20)
+			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>images/rating_on.gif" />
+			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>images/rating_off.gif" />
+			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> (20)
 		</div>
 	</div>
 	<div class="mark fl">
-		<a href="#"><img src="images/bookmark-ioc.gif" /> Book mark</a>
+		<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/bookmark-ioc.gif" /> Book mark</a>
 	</div>
 	<div class="share">
-		<a href="#"><img src="images/like-ioc.gif" /> </a> <a href="#"><img
-			src="images/tweter-ioc.gif" /> </a>
+		<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/like-ioc.gif" /> </a> <a href="#"><img
+			src="<?php echo get_template_directory_uri(); ?>/images/tweter-ioc.gif" /> </a>
 	</div>
 	<div class="bookcontentbox">
-		<img src="images/photo01.jpg" class="fl" width="181" height="270" />
+		<img src="<?php echo get_template_directory_uri(); ?>/images/photo01.jpg" class="fl" width="181" height="270" />
 		<p>Captain Hesperus, a grey furry feline from Orrira, wiped goat soup
 			from his eyes and sighed. A torsion wave, burped out from the badly
 			maintained engines of the Dubious Profit, had slid through the ship's
