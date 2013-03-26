@@ -72,12 +72,12 @@ function get_post_rating ($pid){
 	$output = "";
 	for ($i = 0; $i < $rating; $i++) {
 		$output.=<<<html
-                        <img src='$uri/images/rating_on.gif' />
+<img src='$uri/images/rating_on.gif' />
 html;
 	}
 	for ($i = 0; $i < 5-$rating; $i++) {
 		$output.=<<<html
-                        <img src='$uri/images/rating_off.gif' />
+<img src='$uri/images/rating_off.gif' />
 html;
 	}
 	echo $output;
