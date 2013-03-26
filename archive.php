@@ -5,9 +5,9 @@
 	</h1>
 	<div class="ratings fl">
 		<div class="ratingsbox">
-			<img src="images/rating_on.gif" /> <img src="images/rating_on.gif" />
-			<img src="images/rating_on.gif" /> <img src="images/rating_off.gif" />
-			<img src="images/rating_off.gif" /> (20)
+			<img src="<?php echo get_template_directory_uri(); ?>images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>images/rating_on.gif" />
+			<img src="<?php echo get_template_directory_uri(); ?>images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>images/rating_off.gif" />
+			<img src="<?php echo get_template_directory_uri(); ?>images/rating_off.gif" /> (20)
 		</div>
 	</div>
 	<div class="mark fl">
