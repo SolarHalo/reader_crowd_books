@@ -5,8 +5,8 @@
 	</h1>
 	<div class="ratings fl">
 		<div class="ratingsbox">
-			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>images/rating_on.gif" />
-			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>images/rating_off.gif" />
+			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
+			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
 			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> (20)
 		</div>
 	</div>
@@ -51,8 +51,8 @@
 
 		<ul>
 			<li class="titleChapter"><?php the_ID()?></li>
-			<li class="titleContent"><?php the_title()?></li>
-			<li class="titleWords"><?php $str=the_content();count_words($str)?></li>
+			<li class="titleContent"><a href="?p=<?php the_ID()?>"><?php the_title()?></a></li>
+			<li class="titleWords"><?php  echo wcount();?></li>
 			<li class="titleViews"><?php get_post_clicked_nums(the_ID())?></li>
 			<li class="titleRating">
 				<div class="ratingsbox">

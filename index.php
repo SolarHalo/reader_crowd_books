@@ -11,20 +11,16 @@
 				<li><a href="<?php echo get_page_link(155); ?>">Elite Universe</a></li>
 			</ul>
         </div>
+         <?php
+				$post_id = 121;
+				$queried_post = get_post($post_id);
+				$post_link = get_permalink($post_id);
+			?>
         <div class="clmu fl ml15" id="mc_featured">
         	<h5 class="title">Launch</h5>
-           <a href="#"> <img src="images/photo.jpg" width="225" height="225" /></a>
-           <p class="mt20"><font color="#6b2704">n case you are intereste</font><br />
-                n case you are interested in the process, I thought I'd also provide a 
-                little bit of the background. 
-                <br />
-                <br />
-                I am changing the format of. -my ebooks from a horizontal 
-                orientation to  a vertical one. -The reason for this is two- fold.
-                <br />
-                <br />
-                -ng the format of. my ebooks from a horizontal orientation to  a 
-                vertical one. 
+           <a href="#"> <img src="<?php echo get_template_directory_uri(); ?>/images/photo.jpg" width="225" height="225" /></a>
+           <p class="mt20"><font color="#6b2704"><?php echo $queried_post->post_title; ?></font><br />
+                <?php echo $queried_post->post_excerpt; ?>.. <a href="<?php echo get_permalink(); ?>">Read more</a>
             </p>
         </div>
         <div class="clmu fl" id="left_sidebar">
@@ -103,19 +99,15 @@
 				<li><a href="#">Elite Universe</a></li> 
 			</ul>
         </div>
+        <?php
+				$post_id = 121;
+				$queried_post = get_post($post_id);
+				$post_link = get_permalink($post_id);
+			?>
         <div class="clmu fl ml15" id="News">
         	<h5 class="title">News</h5> 
-           <p class="mt20"><font color="#6b2704">n case you are intereste</font><br />
-                n case you are interested in the process, I thought I'd also provide a 
-                little bit of the background. 
-                <br />
-                <br />
-                I am changing the format of. -my ebooks from a horizontal 
-                orientation to  a vertical one. -The reason for this is two- fold.
-                <br />
-                <br />
-                -ng the format of. my ebooks from a horizontal orientation to  a 
-                vertical one. 
+           <p class="mt20"><font color="#6b2704"><?php echo $queried_post->post_title; ?></font><br />
+                <?php echo $queried_post->post_excerpt; ?>.. <a href="<?php echo get_permalink(); ?>">Read more</a>
             </p>
         </div>
          <div class="clmu fl tag">

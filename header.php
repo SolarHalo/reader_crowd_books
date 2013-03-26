@@ -15,24 +15,44 @@
 <body>
 <div id="container">
 	<div id="header" class="fl">
+	 
     	<a href="<?php get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.jpg" class="indexlogo fl" /></a>
-        <form>
+    	
+    	<?php
+    	 $current_user = wp_get_current_user();
+    	 if( 0 == $current_user->ID) {?> 
+    	 
+       <form name="loginform" id="loginform1" action="/?action=login&instance=1" method="post">
         	<ul class="login">
             	<li><b>Username</b></li>
-                <li><input type="text" class="input1" /><br />
-					Register
+                <li><input type="text" class="input1"  name="log" id="user_login1" /><br />
+					<a href="?page_id=4&action=register">Register</a>
                 </li>
                 <li>&nbsp;&nbsp;<b>Password</b></li>
-                <li><input type="password" class="input1" /><br />
-					Forgot
+                <li><input type="password" name="pwd" id="user_pass1"  class="input1" /><br />
+					<a href="?page_id=4&action=lostpassword">Forgot</a>
                 </li>
-                <li><input type="button" class="input2" value="log in" /></li>
+                <li><input type="submit" name="wp-submit" id="wp-submit1" class="input2" value="log in" /></li>
             </ul>
+             <input type="hidden" name="redirect_to" value="<?php echo home_url(); ?>/wp-admin/" />
+			<input type="hidden" name="testcookie" value="1" />
+			<input type="hidden" name="instance" value="1" />
+        </form> 
+        <?php }else{?>
+        	<ul class="login">
+        	 <li>       welcome  <b><?php echo$current_user->user_login; ?></b> </li>
+        	 <li><a href="<?php get_site_url(); ?>/wp-admin">Dashboard</a></li>
+        	 <li><a href="?page_id=4&action=profile">Profile</a></li>
+        	 <li><a href="<?php echo wp_logout_url(); ?>">Login out</a></li>
+        	 </ul>
+       <?php }?> 
             <div class="searchform">
-            	<span><input type="text" class="search"/></span><input type="button" class="input2" value="Search" />
+            		<form id="search_form" method="get" action="<?php echo home_url(); ?>" >
+            
+            	<span><input type="text"  id="search_input"   name="s" value="" class="search"/></span><input type="submit" class="input2" value="Search" />
+            	</form>
             </div>
             <span class="write"><a href="<?php echo site_url(); ?>/wp-admin/post-new.php">write</a></span>
-        </form>
         <ul class="nav">  
         		<?php wp_nav_menu( array('container' => false,"depth"=>1)); ?>
         		
