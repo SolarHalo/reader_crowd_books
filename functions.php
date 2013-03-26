@@ -40,6 +40,50 @@ function content_nav( $html_id ) {
 	<?php endif;
 }
 
+//function count_words($str) was added by ian to count words' numbers in a post   
+function count_words($str){
+	$words = 0;
+	$str = eregi_replace(" +", " ", $str);
+	$array = explode(" ", $str);
+	for($i=0;$i < count($array);$i++)
+	{
+		if (eregi("[0-9A-Za-zÀ-ÖØ-öø-ÿ]", $array[$i]))
+		$words++;
+	}
+	echo $words;
+}
+
+//function get_post_clicked_nums was added by ian
+function get_post_clicked_nums($pid){
+	$pid = "'".$pid."'";
+	global $wpdb;
+	$sql = "select m.meta_value from wp_postmeta m where m.post_id = $pid and m.meta_key = 'custom_total_hits'";
+	$viewNums = $wpdb->get_var($sql);
+	echo $viewNums;
+}
+
+//function get_post_rating was add by ian
+function get_post_rating ($pid){
+	$pid = "'".$pid."'";
+	global $wpdb;
+	$selectSql = "select sum(rating_rating)/count(rating_rating) aa from wp_ratings where rating_postid=$pid";
+	 
+	$rating = $wpdb->get_var($selectSql);
+	$output = "";
+	for ($i = 0; $i < $rating; $i++) {
+		$output.=<<<html
+<img src='$uri/images/rating_on.gif' />
+html;
+	}
+	for ($i = 0; $i < 5-$rating; $i++) {
+		$output.=<<<html
+<img src='$uri/images/rating_off.gif' />
+html;
+	}
+	echo $output;
+}
+
+
 // add by yuyue 2013-3-25======================
 /**
  get user login name by user id

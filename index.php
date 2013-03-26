@@ -15,7 +15,7 @@
         	<h5 class="title">Launch</h5>
            <a href="#"> <img src="images/photo.jpg" width="225" height="225" /></a>
            <p class="mt20"><font color="#6b2704">n case you are intereste</font><br />
-                n case you are interested in the process, I thought I¡¯d also provide a 
+                n case you are interested in the process, I thought I'd also provide a 
                 little bit of the background. 
                 <br />
                 <br />
@@ -43,7 +43,7 @@
 					<div class="excerpt">
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget lorem odio, id elementum massa. Cras arcu lacus, interdum et laoreet vitae, aliquet in odio. Etiam nec venenatis justo.</p>
 					</div>
-				</div>
+				</div> 
 			</div>
             <div class="featured_item">
 				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/02/The-Virtuous-Misfortune_DS2-66x100.png" alt=""></div>
@@ -106,7 +106,7 @@
         <div class="clmu fl ml15" id="News">
         	<h5 class="title">News</h5> 
            <p class="mt20"><font color="#6b2704">n case you are intereste</font><br />
-                n case you are interested in the process, I thought I¡¯d also provide a 
+                n case you are interested in the process, I thought I'd also provide a 
                 little bit of the background. 
                 <br />
                 <br />

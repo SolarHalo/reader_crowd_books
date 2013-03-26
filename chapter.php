@@ -31,13 +31,11 @@
             </div>
         </div>  
         <div class="clmu fl ml15" id="book_mc_featured">
-        <?php while (have_posts()):the_post();?>
         	<h6 class="subnav">
         	<a title="Go to homepage" href="<?php echo get_settings('home'); ?>/">Home</a> > <?php the_title(); ?>
             </h6> 
-            
             <?php the_content()?>
-            <?php endwhile; ?>
+            
             <div id="commentform" class="mt20">
             	<div class="clmu Author">
                     <h5 class="title">Author's Note</h5>

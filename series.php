@@ -52,7 +52,7 @@
 		<ul>
 			<li class="titleChapter"><?php the_ID()?></li>
 			<li class="titleContent"><?php the_title()?></li>
-			<li class="titleWords"><?php $str=the_content();count_words($str)?></li>
+			<li class="titleWords"><?php count_words(the_content());?></li>
 			<li class="titleViews"><?php get_post_clicked_nums(the_ID())?></li>
 			<li class="titleRating">
 				<div class="ratingsbox">
@@ -62,7 +62,24 @@
 			<li class="titleLast"><?php the_modified_date()?></li>
 		</ul>
 
-		
+		<hr>
+		<div class="post_item">
+			<h2>
+				<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?> </a>
+			</h2>
+
+			<p class="post_details">
+				<span class="date"><?php the_time('j F, Y'); ?> </span> / <span
+					class="author">Published by <?php the_author_posts_link(); ?> </span>
+				/ <span class="comments"><?php comments_popup_link('No comment yet', '1 Comment', '% Comments'); ?>
+				</span>
+			</p>
+
+			<?php the_excerpt(); ?>
+
+			<a class="read_more" href="<?php echo get_permalink(); ?>">Read
+				more...</a>
+		</div>
 		<?php endwhile; ?>
 	</div>
 </div>
