@@ -240,17 +240,18 @@ function getBookInfo(){
 	foreach($bookBasicInfos as $bookBasicInfo){ 
 		$term_id = $bookBasicInfo->term_id;
 		$book_name = $bookBasicInfo->name;
-		$url = $bookBasicInfo->slug;
-		
+		$slug = $bookBasicInfo->slug;
+		$uri = get_site_url();
+		$uri .= "/?series=$slug";
 		//鏍规嵁term_id鑾峰彇涔︽湰鍏朵粬淇℃伅...
 		
 		//鑾峰彇涔︽湰浣滆�
 		//$authSql = "select u.user_login from wp_term_taxonomy t,wp_term_relationships r,wp_posts p,wp_users u where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id and p.post_author=u.id";
 	
-                  	$output.="<tr><td width='245'><a href='$url'><b>$book_name</b></a></td>
-                    <td width='145'>Elizabeth Vastro</td>
+                  	$output.="<tr><td width='245'><a href='$uri'><b>$book_name</b></a></td>
+                    <td width='145'>".getAuthorByTermID($term_id)."</td>
                     <td width='65'>Health</td>
-                    <td width='65'>3000</td>
+                    <td width='65'>".countTheWordsByTermId($term_id)."</td>
                    	<td width='65'>Finished</td>
                     <td width='95'>
                        <div class='ratingsbox'>
