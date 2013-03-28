@@ -172,7 +172,7 @@ function allBooks(){
  *get lastUpdate posts
  */
 function getLastUpate($postnum){
-	$sql = "select id,post_title,post_content from wp_posts p,wp_term_relationships s,wp_term_taxonomy x where p.ID = s.object_id and s.term_taxonomy_id = x.term_taxonomy_id and x.taxonomy = 'series'order by post_modified desc  limit ".$postnum;
+	$sql = "select id,post_title,post_content from wp_posts p,wp_term_relationships s,wp_term_taxonomy x where p.ID = s.object_id and s.term_taxonomy_id = x.term_taxonomy_id and x.taxonomy = 'series' and p.post_status ='publish' order by post_modified desc  limit ".$postnum;
 	global $wpdb;
 	$lastUpdatePosts = $wpdb->get_results($sql);
 	$output = "";
