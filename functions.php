@@ -159,5 +159,19 @@ function wcount(){
     $content = ob_get_clean();
     return sizeof(explode(" ", $content));
 }
+
+/**
+ * get all books
+ */
+function allBooks(){
+	$selSQL = "";
+	
+	
+}
+/**
+ *get lastUpdate posts
+ */
+function getLastUpate(){
+}
 endif;
 ?>

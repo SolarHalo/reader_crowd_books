@@ -16,7 +16,7 @@
 <div id="container">
 	<div id="header" class="fl">
 	 
-    	<a href="<?php get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.jpg" class="indexlogo fl" /></a>
+    	<a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.jpg" class="indexlogo fl" /></a>
     	
     	<?php
     	 $current_user = wp_get_current_user();

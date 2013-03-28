@@ -635,3 +635,23 @@ text-decoration:underline;
 	display: inline;
 	text-decoration: none;
 }
+/*===========================0130327==================*/
+.tabbox{
+	width:800px; 
+	margin:35px 77px;
+	font-size:14px;
+	border:1px solid #999;
+	}
+
+ 
+.tabbox table tr td{
+	border:1px solid #999;
+	height:40px; 
+	line-height:40px; 
+	padding:0 5px;
+	}
+
+.tabtitle td b{
+	color:#692704;
+	line-height:40px;
+	}
