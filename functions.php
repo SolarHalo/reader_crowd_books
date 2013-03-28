@@ -172,13 +172,14 @@ function allBooks(){
  *get lastUpdate posts
  */
 function getLastUpate($postnum){
-	$sql = "select id,post_title,post_content from wp_posts order by post_modified desc limit ".$postnum;
+	$sql = "select id,post_title,post_content from wp_posts p,wp_term_relationships s,wp_term_taxonomy x where p.ID = s.object_id and s.term_taxonomy_id = x.term_taxonomy_id and x.taxonomy = 'series'order by post_modified desc  limit ".$postnum;
 	global $wpdb;
 	$lastUpdatePosts = $wpdb->get_results($sql);
 	$output = "";
 	foreach ($lastUpdatePosts as $lastUpdatePost) { 
-		$post_id = get_permalink($lastUpdatePost->id);
-	  $output.="<li><h4>".$lastUpdatePost->post_title."</h4><p>".$lastUpdatePost->post_content."</p><a href='".$post_id."'>read more</a></li>";
+		$posturl = get_permalink($lastUpdatePost->id);
+		$content = mb_substr($lastUpdatePost->post_content,0,60,'UTF-8');
+	    $output.="<li><h4>".$lastUpdatePost->post_title."</h4><p>$content ...</p><a href='$posturl'>read more</a></li>";
 	}
 	echo $output;
 }

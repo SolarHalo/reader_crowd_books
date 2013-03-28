@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <div id="conter" class="bookcontent mt30 fl">
 	<h1>
-		Life Plan <strong>Michael Hyatt</strong>
+		<?php single_cat_title(); ?> <strong>  Admin</strong>
 	</h1>
 	<div class="ratings fl">
 		<div class="ratingsbox">
