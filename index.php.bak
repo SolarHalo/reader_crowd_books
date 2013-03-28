@@ -127,7 +127,7 @@
                        <div id="view_pic0" style="height:100px;width:1650px">
                         <ul id="view_pic"  class=view_pic> 
                         	<?php 
-                        	getLastUpate(8);
+                        	getLastUpate();
                         	
 										  		?> 
                         	<!--     

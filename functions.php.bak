@@ -171,8 +171,8 @@ function allBooks(){
 /**
  *get lastUpdate posts
  */
-function getLastUpate($postnum){
-	$sql = "select id,post_title,post_content from wp_posts order by post_modified desc limit ".$postnum;
+function getLastUpate(){
+	$sql = "select id,post_title,post_content from wp_posts order by post_modified desc limit 8";
 	global $wpdb;
 	$lastUpdatePosts = $wpdb->get_results($sql);
 	$output = "";
