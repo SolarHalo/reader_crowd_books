@@ -16,6 +16,10 @@
                     <td width="95"><b>Rating</b></td>
                     <td width="50"><b>Date</b></td>
                 </tr>
+                <?php 
+                	getBookInfo();
+                ?>
+                <!--
                 <tr>
                 	<td width="245"><b>A Healethy Diet</b></td>
                     <td width="145">Elizabeth Vastro</td>
@@ -101,6 +105,7 @@
                     </td>
                     <td width="50">13/03</td>
                 </tr>
+                -->
             </table>  
         </div>
     </div> 

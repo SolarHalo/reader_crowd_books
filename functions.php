@@ -47,7 +47,7 @@ function count_words($str){
 	$array = explode(" ", $str);
 	for($i=0;$i < count($array);$i++)
 	{
-		if (eregi("[0-9A-Za-zÀ-ÖØ-öø-ÿ]", $array[$i]))
+		if (eregi("[0-9A-Za-z脌-脰脴-枚酶-每]", $array[$i]))
 		$words++;
 	}
 	echo $words;
@@ -206,6 +206,7 @@ function getLastUpate($postnum){
 	}
 	echo $output;
 }
+ 
 /**
  * get Author name by term_id
  */
@@ -226,8 +227,44 @@ function getSeriesIDByName($serName){
 	$term_ids = $wpdb->get_results($sql);
     foreach ($term_ids as $term_id) {
 	  return   $term_id->term_id;
-	}
+	} 
 }
-
+/**
+ * get book info
+ */
+function getBookInfo(){
+	$sql = "select t.term_id,t.name,t.slug from wp_terms t,wp_term_taxonomy m where t.term_id = m.term_id and taxonomy = 'series'";
+	global $wpdb;
+	$bookBasicInfos = $wpdb->get_results($sql);
+	$output = "";
+	foreach($bookBasicInfos as $bookBasicInfo){ 
+		$term_id = $bookBasicInfo->term_id;
+		$book_name = $bookBasicInfo->name;
+		$url = $bookBasicInfo->slug;
+		
+		//鏍规嵁term_id鑾峰彇涔︽湰鍏朵粬淇℃伅...
+		
+		//鑾峰彇涔︽湰浣滆�
+		//$authSql = "select u.user_login from wp_term_taxonomy t,wp_term_relationships r,wp_posts p,wp_users u where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id and p.post_author=u.id";
+	
+                  	$output.="<tr><td width='245'><a href='$url'><b>$book_name</b></a></td>
+                    <td width='145'>Elizabeth Vastro</td>
+                    <td width='65'>Health</td>
+                    <td width='65'>3000</td>
+                   	<td width='65'>Finished</td>
+                    <td width='95'>
+                       <div class='ratingsbox'>
+                          <img src='images/rating_on.gif' />
+                          <img src='images/rating_on.gif' />
+                          <img src='images/rating_on.gif' />
+                          <img src='images/rating_off.gif' />
+                          <img src='images/rating_off.gif' />
+                       </div>
+                  </td>
+                  <td width='50'>13/03</td></tr>";
+	} 
+	echo $output; 
+}
+ 
 endif;
 ?>
