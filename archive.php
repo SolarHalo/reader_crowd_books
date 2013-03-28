@@ -34,7 +34,7 @@
 		<ul>
 			<li><strong>Category:</strong> <?php $category = get_the_category(); 
         echo $category[0]->cat_name?></li>
-			<li><strong>Words:</strong>17766</li>
+			<li><strong>Words:</strong><?php echo countTheWordsByTermId(getSeriesIDByName($current_category));?></li>
 			<li><strong>Progress:</strong>Finished</li>
 			<li><strong>Tags:</strong>Captain hesperus,Feline, Qudira</li>
 		</ul>

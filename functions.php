@@ -66,7 +66,7 @@ function get_post_clicked_nums($pid){
 function get_post_rating ($pid){
 	$pid = "'".$pid."'";
 	global $wpdb;
-	$selectSql = "select sum(rating_rating)/count(rating_rating) aa from wp_ratings where rating_postid=$pid";
+	$selectSql = "select (sum(rating_rating)/count(rating_rating) )aa from wp_ratings where rating_postid=$pid";
 	 
 	$rating = $wpdb->get_var($selectSql);
 	$output = "";
@@ -173,7 +173,7 @@ function allBooks(){
  *  .
  * @param str $content post content
  */
-function wcount($content){
+function wcountbycontent($content){
 	 return sizeof(explode(" ", $content));
 }
 /**
@@ -182,7 +182,14 @@ function wcount($content){
  * @param unknown_type $term_id
  */
 function countTheWordsByTermId($term_id){
-	
+	$sql = "select p.post_content from wp_posts p,wp_terms t,wp_term_taxonomy m where t.term_id = m.term_id and t.term_id = '$term_id'";
+	global $wpdb;
+	$lastUpdatePosts = $wpdb->get_results($sql);
+	$countwords = 0;
+    foreach ($lastUpdatePosts as $lastUpdatePost) {   
+	   $countwords += wcountbycontent($lastUpdatePost->post_content );
+	}
+	return $countwords;
 }
 /**
  *get lastUpdate posts
