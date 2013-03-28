@@ -243,6 +243,7 @@ function getBookInfo(){
 		$slug = $bookBasicInfo->slug;
 		$uri = get_site_url();
 		$uri .= "/?series=$slug";
+		 $template_uri = get_template_directory_uri();
 		//鏍规嵁term_id鑾峰彇涔︽湰鍏朵粬淇℃伅...
 		
 		//鑾峰彇涔︽湰浣滆�
@@ -255,11 +256,11 @@ function getBookInfo(){
                    	<td width='65'>Finished</td>
                     <td width='95'>
                        <div class='ratingsbox'>
-                          <img src='images/rating_on.gif' />
-                          <img src='images/rating_on.gif' />
-                          <img src='images/rating_on.gif' />
-                          <img src='images/rating_off.gif' />
-                          <img src='images/rating_off.gif' />
+                          <img src='$template_uri/images/rating_on.gif' />
+                          <img src='$template_uri/images/rating_on.gif' />
+                          <img src='$template_uri/images/rating_on.gif' />
+                          <img src='$template_uri/images/rating_off.gif' />
+                          <img src='$template_uri/images/rating_off.gif' />
                        </div>
                   </td>
                   <td width='50'>13/03</td></tr>";
