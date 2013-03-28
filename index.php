@@ -2,7 +2,7 @@
 <!--  contaienr  -->
 <div id="conter" class="fl">
     	<div class="clmu fl bgcolor1" id="ls_elite">
-        	<h5 class="title">Elite Chronilces</h5>
+        	 
             <ul class="index-list">
 				<li><a href="<?php echo get_page_link(150); ?>">What is this?</a></li>
 				<li><a href="<?php echo get_page_link(152); ?>">Top 10</a></li>
@@ -242,16 +242,17 @@ GradientClose()
 				<li><a href="#">Elite Universe</a></li> 
 			</ul>
         </div>
-        <div class="clmu fl blog">
+        <div class="clmu fl blog" id="vid">
         	<h5 class="title">Blog>Interviews</h5> 
-            <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/photo03.jpg" class="fl" /></a>
+            <a href="#">  <img src="<?php echo get_template_directory_uri(); ?>/images/v_bg1.png" />
+            <img src="<?php echo get_template_directory_uri(); ?>/images/photo03.jpg" class="fl v-image" /></a>
             <?php
 				$post_id = 123;
 				$queried_post = get_post($post_id);
 				$post_link = get_permalink($post_id);
 			?>
             <p><font color="#6b2704"><?php echo $queried_post->post_title; ?></font><br />
-               <?php echo $queried_post->post_excerpt; ?>.. <a href="<?php echo get_permalink(); ?>">Read more</a>
+               <?php echo mb_substr($queried_post->post_excerpt,0,90,'UTF-8') ; ?>.. <a href="<?php echo get_permalink(); ?>">Read more</a>
             </p>
         </div>
         <div class="clmu fl blog ml15">

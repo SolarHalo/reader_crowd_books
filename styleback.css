@@ -39,37 +39,37 @@ a:hover{
 		}
 .login{
 	float:right;
-	width:325px;
-	height:65px;
+	width:430px;
 	}
 .login li{
 	float:left;
-	height:17px;
+	height:41px;
 	padding-left:5px;
 	vertical-align: top;
 	font-size:10px;
 	}
 .login li b{
-	font-size:14px;
+	font-size:12px;
 	}
 .input1{
 	border:1px solid #e3e3e3;
-	width:121px;
-	height:21px;
-	line-height:21px;
-	font-size:12px;
+	width:117px;
+	height:15px;
+	line-height:15px;
+	font-size:10px;
 	padding-left:2px;
 	letter-spacing:0.6px;
 	}
 .input2{
-	padding:0 8px;
-	height:21px;
+	padding:0 5px;
+	height:17px;
 	border:1px solid #d9d9d9;
-	background:url(../images/input_button-bg.gif); 
-	font-size:11px;
+	background:url(../images/input_button-bg.gif);
+	border-radius: 2px 2px 2px 2px;
+	font-size:9px;
 	font-weight:700;
-	color:#000;
-	vertical-align:middle;
+	color:#98999d;
+	vertical-align: top;
 	cursor:pointer;
 	}
 .comments .input2:hover,.input2:hover{
@@ -85,18 +85,18 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 .searchform{
 	float:left;
 	width:450px;
-	margin-top:15px;
+	margin-top:60px;
 	}
 
 .searchform span{
-	border-radius:2px;
-	background:#f1f1f1;    
-	display: inline-block; 
-    padding:2px;
+	border-radius:4px;
+	background:#f1f1f1;
+	padding:4px 3px 4px;
 	}
 .searchform .search{
 	width:315px;
-	height:24px; 
+	height:18px;
+	border:1px solid #E3E3E3;
 	}
 .searchform .input2{
 	height:21px;
@@ -105,20 +105,19 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 
 .write{
 	float:right;
-	width:143px;
+	width:140px;
 	height:24px;
-	margin-top:15px;
+	margin-top:60px;
 	}
 .write a{
 	background:#eeeaeb;
-	border:1px solid #d9d9d9;
 	display:block;
 	width:140px;
 	height:24px;
-	line-height:22px;
+	line-height:24px;
 	text-align:center;
 	font-weight:bold;
-	font-size:21px;
+	font-size:16px;
 	color:#000;
 	text-decoration:none;
 	}
@@ -135,23 +134,18 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	margin-top:5px;
 	}
 .nav li{
-	float:left; 
-	text-align:center;
-	width:176px;
+	float:left;
+	padding:0 115px 0 10px;
 	}
 
 .nav li a{
 	color:#fff;
-	font-size:18px; 
-	line-height: 23px;
-	height:24px;
-	width:176px;
-	display:block;
+	font-size:14px;
 	}
 
-.navativ,.nav li a:hover{
-	color:#fff; 
-	background:#362d2e;
+.nav li a:hover{
+	color:#eeeaeb;
+	text-decoration:underline;
 	}
 
 .clmu{
@@ -176,12 +170,10 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 #ls_elite{
 	border:none;
 	width:140px;
-	height:247px;
+	height:325px;
 	}
 
-#ls_elite .index-list a{
-	font-size:18px;
-	}
+
 #ls_elite .title{
 	border:1px solid #d8d6d7;
 	color:#000;
@@ -195,12 +187,8 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	}
 #mc_featured{
 	width:783px;
-	height:250px; 
-	padding:0;
+	height:325px;
 	}
-#mc_featured h5.title{
-	margin:0;
-	} 
 .bookcontent{
 	width:938px;
 	border-left:1px solid #f2f2f2;
@@ -225,7 +213,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	}
 
 .ratings{
-	width:192px;
+	width:200px;
 	height:40px;
 	padding-left:5px;
 	} 
@@ -253,34 +241,16 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	}
 .share{
 	float:right;
-	width:370px;
+	width:200px;
 	height:40px;
-	line-height:40px; 
+	line-height:40px;
+	text-align:right; 
 	}
 .share a{
 	padding:0 5px 0 0;
 	}
-.share span font{
-	position:absolute;
-	height:31px;
-	width:51px;
-	text-align:center;
-	color:#333;
-	font-weight:bold;
-	background:url(./images/tweet_bg.png) no-repeat;
-	display:block;
-	top:-42px;
-	left:1px;
-	padding-top:3px;
-	font-size:14px;
-	 
-	}
-.share span{
-	position:relative;
-	top:7px;
-	}
 #mc_featured img{
-	padding-right:10px; 
+	padding:35px 20px 0 3px;
 	}
 #mc_featured p{
 	width:520px;
@@ -304,11 +274,9 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 }
 .featured_item:first-of-type .fi_left img {
     width: 85px;
-	margin:0;
 }
 .fi_left img {
     width: 75px;
-	margin-left:10px;
 }
 .fi_right h3 {
     font-weight: bold;
@@ -357,8 +325,6 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 
 .mlrp_ul li a{
 	font-size:14px;
-	font-weight: bold;
-    line-height: 12px;
 	}
 
 .more{
@@ -407,35 +373,23 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 
 .tag{
 	width:140px;
-	height:155px; 
+	height:171px; 
 	}
 #Lastest{
 	 width:624px;
-	 height:155px;
+	 height:171px;
 	 overflow: hidden;
 	 }
 .blog{
 	width:460px;
-	height:187px;
-	position:relative;
+	height:195px; 
 	}
 .blog p{
 	padding-left:15px;
 	display:table;
  }
 .blog img{
-	position:absolute;
-	z-index:5;
-	}
-.blog img.v-image{
-	left:92px;
-	top:44px; 
-	z-index:2;
-	}
-#vid p{
-	float:right;
-	width:160px;
-	margin-top:10px;
+	padding:0 5px;
 	}
 #footer{
 	width:940px;
@@ -512,7 +466,6 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	}
 .titleChapter{
 	width:75px;
-	text-align:center;
 	}
 
 .titleContent{
@@ -526,11 +479,9 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	}
 .titleRating{
 	width:125px;
-	text-align:center;
 	}
 .titleLast{
 	width:130px;
-	text-align:center;
 	} 
 	
 .bookboxlist ul:first-of-type li{
@@ -542,20 +493,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
     height: 535px;
     width: 140px;
 }
-.total{
-	float:left;
-	height:30px;
-	background:#EDEAEA;
-	line-height:30px;
-	font-weight:bold;
-	font-size:16px;
-	color:#6a2603;
-	text-align:center;
-	width:100%;
-	}
-.total font{
-	padding:0 12px;
-	}
+
 .subnav{
 	height:25px;
 	background:#eeeaeb;
@@ -697,12 +635,6 @@ text-decoration:underline;
 	display: inline;
 	text-decoration: none;
 }
-
-.blog .title{
-	margin:0;
-	}
-
-
 /*===========================0130327==================*/
 .tabbox{
 	width:800px; 
@@ -714,8 +646,8 @@ text-decoration:underline;
  
 .tabbox table tr td{
 	border:1px solid #999;
-	height:33px; 
-	line-height:33px; 
+	height:40px; 
+	line-height:40px; 
 	padding:0 5px;
 	}
 

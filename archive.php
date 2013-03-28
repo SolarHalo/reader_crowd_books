@@ -18,8 +18,10 @@
 		<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/bookmark-ioc.gif" /> Book mark</a>
 	</div>
 	<div class="share">
-		<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/like-ioc.gif" /> </a> <a href="#"><img
-			src="<?php echo get_template_directory_uri(); ?>/images/tweter-ioc.gif" /> </a>
+		<span><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/like-ioc.gif" /> </a> <font>2.2K</font></span>
+		<span><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/tweter-ioc.gif" /> </a><font>2.5K</font></span>
+		<span><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/+2-ioc.gif" /></a><font>2</font></span>
+			
 	</div>
 	<div class="bookcontentbox">
 		<img src="<?php echo get_template_directory_uri(); ?>/images/photo01.jpg" class="fl" width="181" height="270" />
@@ -70,6 +72,11 @@
 		
 		<?php endwhile; ?>
 	</div>
+	<div class="total">
+        	<font>Total Views:1200</font>
+            <font>Total Bookmarks:100</font>
+            <font>Total Comments:20</font>
+        </div>
 </div>
 		<?php get_footer(); ?>
 

@@ -24,15 +24,15 @@
     	 
        <form name="loginform" id="loginform1" action="/?action=login&instance=1" method="post">
         	<ul class="login">
-            	<li><b>Username</b></li>
-                <li><input type="text" class="input1"  name="log" id="user_login1" /><br />
+            	<li><b>Username</b> <br />
+                 <input type="text" class="input1"  name="log" id="user_login1" /><br />
 					<a href="?page_id=4&action=register">Register</a>
                 </li>
-                <li>&nbsp;&nbsp;<b>Password</b></li>
-                <li><input type="password" name="pwd" id="user_pass1"  class="input1" /><br />
+                <li><b>Password</b> <br />
+                <input type="password" name="pwd" id="user_pass1"  class="input1" /><br />
 					<a href="?page_id=4&action=lostpassword">Forgot</a>
                 </li>
-                <li><input type="submit" name="wp-submit" id="wp-submit1" class="input2" value="log in" /></li>
+                <li><input type="submit" name="wp-submit" id="wp-submit1" class="input2" value="log in"  style="margin-top:25px;"/></li>
             </ul>
              <input type="hidden" name="redirect_to" value="<?php echo home_url(); ?>/wp-admin/" />
 			<input type="hidden" name="testcookie" value="1" />
