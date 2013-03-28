@@ -17,7 +17,7 @@
                     <td width="50"><b>Date</b></td>
                 </tr>
                 <?php 
-                	getBookInfo();
+                	
                 ?>
                 <!--
                 <tr>
