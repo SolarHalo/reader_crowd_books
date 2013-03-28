@@ -1,7 +1,11 @@
 <?php get_header(); ?>
 <div id="conter" class="bookcontent mt30 fl">
 	<h1>
-		<?php single_cat_title(); ?> <strong>  Admin</strong>
+		<?php single_cat_title();?> <strong>
+		<?php
+		 $current_category = single_cat_title("", false);  
+		echo getAuthorByTermID(getSeriesIDByName($current_category));
+		?>  </strong>
 	</h1>
 	<div class="ratings fl">
 		<div class="ratingsbox">
@@ -28,7 +32,8 @@
 			times, and possibly at its most inconvenient when one was seated in
 			front of a large bowl of hot and oily soup...</p>
 		<ul>
-			<li><strong>Category:</strong>Space Opera</li>
+			<li><strong>Category:</strong> <?php $category = get_the_category(); 
+        echo $category[0]->cat_name?></li>
 			<li><strong>Words:</strong>17766</li>
 			<li><strong>Progress:</strong>Finished</li>
 			<li><strong>Tags:</strong>Captain hesperus,Feline, Qudira</li>

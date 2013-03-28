@@ -169,6 +169,22 @@ function allBooks(){
 	
 }
 /**
+ * count the words of posts
+ *  .
+ * @param str $content post content
+ */
+function wcount($content){
+	 return sizeof(explode(" ", $content));
+}
+/**
+ * 
+ * count the word
+ * @param unknown_type $term_id
+ */
+function countTheWordsByTermId($term_id){
+	
+}
+/**
  *get lastUpdate posts
  */
 function getLastUpate($postnum){
@@ -183,5 +199,28 @@ function getLastUpate($postnum){
 	}
 	echo $output;
 }
+/**
+ * get Author name by term_id
+ */
+function getAuthorByTermID($term_id){
+	$sql = "select p.post_author from wp_posts p,wp_terms t,wp_term_taxonomy m where t.term_id = m.term_id and t.term_id = '$term_id' limit 1";
+	global $wpdb;
+	$user_authors = $wpdb->get_results($sql);
+	foreach ($user_authors as $user_author) {
+	  return   get_user_loginname($user_author->post_author);
+	}
+}
+/**
+ * get series id by series name
+ */
+function getSeriesIDByName($serName){
+	$sql = "select term_id from wp_terms where name = '$serName'";
+	global $wpdb;
+	$term_ids = $wpdb->get_results($sql);
+    foreach ($term_ids as $term_id) {
+	  return   $term_id->term_id;
+	}
+}
+
 endif;
 ?>
