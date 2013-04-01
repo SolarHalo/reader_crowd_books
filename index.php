@@ -18,17 +18,20 @@
 			?>
         <div class="clmu fl ml15" id="mc_featured">
         	<h5 class="title">Launch</h5>
-           <a href="#"> <img src="<?php echo get_template_directory_uri(); ?>/images/photo.jpg" width="225" height="225" /></a>
-           <p class="mt20"><font color="#6b2704"><?php echo $queried_post->post_title; ?></font><br />
-                <?php echo $queried_post->post_excerpt; ?>.. <a href="<?php echo get_permalink(); ?>">Read more</a>
+           <a class = "fl" href="<?php echo get_page_link(150); ?>"> 
+           <img src="<?php echo get_template_directory_uri(); ?>/images/photo.jpg" width="225" height="225" /></a>
+           <p class="mt20">Unleash your creativity, come and join the crowd-writing initiative based on <a href="http://elite.frontier.co.uk/">Elite Dangerous</a>, sequel to one of the most iconic sci-fi video game: <a href="http://www.eliteforever.co.uk/history.html">Elite</a>. Create or choose your own characters, and storylines, and see them immortalized in a published book complete with bespoke artwork.</p>
+            
+			<p class="mt20"> Thanks all to backers on our successful Kickstarter, ReaderCrowd.com is now our online writing platform for everyone to publish their writings online, to interact with their own readers, and join the fun Playbook project.
+				<a href="<?php echo get_page_link(150); ?>">Read more</a>
             </p>
         </div>
         <div class="clmu fl" id="left_sidebar">
         	<h5 class="title">Featured</h5>
             <div class="featured_item">
-				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/02/The-Virtuous-Misfortune_DS2-66x100.png" alt=""></div>
+				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/03/SnakeCharming.png" alt=""></div>
 				<div class="fi_right">
-					<h3>Life Plan<span>Michael Hyatt</span></h3>
+					<h3><a href="http://elitechronicles.tk/?series=snake-charming">Snake Charming</a><span>John Hoggard, aka DaddyHoggy</span></h3>
 					<div class="ratingsbox">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
                         <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
@@ -37,14 +40,15 @@
                         <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> 
                     </div> 
 					<div class="excerpt">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget lorem odio, id elementum massa. Cras arcu lacus, interdum et laoreet vitae, aliquet in odio. Etiam nec venenatis justo.</p>
+						<p>This short story is the gripping tale of a race between varying spaceships and teams. The story focuses on one racer, Chad Stormbowl, racing in the atmosphere around Diso which shocking results. <a href="http://elitechronicles.tk/?series=snake-charming">Read more</a>
+</p>
 					</div>
 				</div> 
 			</div>
             <div class="featured_item">
-				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/02/The-Virtuous-Misfortune_DS2-66x100.png" alt=""></div>
+				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/03/TheVirtuousMisfortune.png" alt=""></div>
 				<div class="fi_right">
-					<h3>Life Plan<span>Michael Hyatt</span></h3>
+					<h3><a href="http://elitechronicles.tk/?series=the-virtuous-misfortune">The Virtuous Misfortune</a><span>Dylan Smith</span></h3>
 					<div class="rated">
 						<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
                         <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
@@ -53,14 +57,15 @@
                         <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> 
 					</div>
 					<div class="excerpt">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget lorem odio, id elementum massa. Cras arcu lacus, interdum et laoreet vitae, aliquet in odio. Etiam nec venenatis justo.</p>
+						<p>This tale focuses on a team of less-than-virtuous crew members, braving the perils of witch space, mis-jumps and run-ins with Thargoids. <a href="http://elitechronicles.tk/?series=the-virtuous-misfortune">Read more</a>
+                        </p>
 					</div>
 				</div>
 			</div>
             <div class="featured_item">
-				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/02/The-Virtuous-Misfortune_DS2-66x100.png" alt=""></div>
+				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/03/Coyote.png" alt=""></div>
 				<div class="fi_right">
-					<h3>Life Plan<span>Michael Hyatt</span></h3>
+					<h3><a href="http://elitechronicles.tk/?series=coyote">Coyote</a><span>El Viejo</span></h3>
 					<div class="rated">
 						<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
                         <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
@@ -69,7 +74,8 @@
                         <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> 
 					</div>
 					<div class="excerpt">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget lorem odio, id elementum massa. Cras arcu lacus, interdum et laoreet vitae, aliquet in odio. Etiam nec venenatis justo.</p>
+						<p>Onboard the Dark Star, Coyote as he deals with former colleagues in the army and ultimately meets up with Sahana, a beautiful woman searching for distant relatives. <a href="http://elitechronicles.tk/?series=coyote">Read more</a>
+                        </p>
 					</div>
 				</div>
 			</div>
@@ -91,12 +97,12 @@
         <div class="clmu fl" id="Genres">
         	<h5 class="title">Genres</h5>
             <ul class="index-list">
-				<li><a href="<?php echo get_page_link(181); ?>">Fantasy</a></li>
-				<li><a href="<?php echo get_page_link(184); ?>">Science Fiction</a></li>
-				<li><a href="#">Playbook</a></li>
-				<li><a href="#">Elite Universe</a></li>
-                <li><a href="#">Playbook</a></li>
-				<li><a href="#">Elite Universe</a></li> 
+				<li><a href="<?php echo get_page_link(263); ?>">Apocalyptic</a></li>
+				<li><a href="#">Biopunk</a></li>
+				<li><a href="#">Military</a></li>
+				<li><a href="#">Time Travel</a></li>
+                <li><a href="#">Space Opera</a></li>
+				<li><a href="#">Superheroes</a></li> 
 			</ul>
         </div>
         <?php
@@ -104,18 +110,20 @@
 				$queried_post = get_post($post_id);
 				$post_link = get_permalink($post_id);
 			?>
-        <div class="clmu fl ml15" id="News">
+<!--        <div class="clmu fl ml15" id="News">
         	<h5 class="title">News</h5> 
            <p class="mt20"><font color="#6b2704"><?php echo $queried_post->post_title; ?></font><br />
                 <?php echo $queried_post->post_excerpt; ?>.. <a href="<?php echo get_permalink(); ?>">Read more</a>
             </p>
         </div>
+
          <div class="clmu fl tag">
         	<h5 class="title">Tags</h5>
             <ul class="index-list">
 				<?php the_tags('', ' '); ?>
 			</ul>
         </div>
+-->
         <div class="clmu fl ml15" id="Lastest">
         	<h5 class="title">Lastest Update</h5> 
 <div id="outer">
@@ -231,22 +239,15 @@ LayerMenu.style.display="none";
 }
 GradientClose() 
 </SCRIPT>
-        <div class="clmu fl tag ml15">
+        <div class="clmu fl tag">
         	<h5 class="title">Forum</h5>
-            <ul class="index-list">
-				<li><a href="#">What is this?</a></li> 
-				<li><a href="#">Current Event</a></li>
-				<li><a href="#">Playbook</a></li>
-				<li><a href="#">Elite Universe</a></li>
-                <li><a href="#">Playbook</a></li>
-				<li><a href="#">Elite Universe</a></li> 
-			</ul>
+
         </div>
-        <div class="clmu fl blog" id="vid">
+        <div class="clmu fl blog ml15" id="vid">
         	<h5 class="title">Blog>Interviews</h5> 
-            <a href="#">  <img src="<?php echo get_template_directory_uri(); ?>/images/v_bg1.png" />
+            <a href="#">  <img src="<?php echo get_template_directory_uri(); ?>/images/v_bg1.png"/ class="t-image">
             <img src="<?php echo get_template_directory_uri(); ?>/images/photo03.jpg" class="fl v-image" /></a>
-            <?php
+<!--            <?php
 				$post_id = 123;
 				$queried_post = get_post($post_id);
 				$post_link = get_permalink($post_id);
@@ -254,6 +255,7 @@ GradientClose()
             <p><font color="#6b2704"><?php echo $queried_post->post_title; ?></font><br />
                <?php echo mb_substr($queried_post->post_excerpt,0,90,'UTF-8') ; ?>.. <a href="<?php echo get_permalink(); ?>">Read more</a>
             </p>
+-->
         </div>
         <div class="clmu fl blog ml15">
         	<h5 class="title">Blog>Writers School</h5>  

@@ -19,10 +19,7 @@
 	</div>
 	<div class="bookcontentbox">
 		<img src="images/photo01.jpg" class="fl" width="181" height="270" />
-		<p>Captain Hesperus, a grey furry feline from Orrira, wiped goat soup
-			from his eyes and sighed. A torsion wave, burped out from the badly
-			maintained engines of the Dubious Profit, had slid through the ship's
-			mess just as he and his crew were sitting down to dine. Local s
+		<p> down to dine. Local s
 			pacetime in the cramped little room had briefly bulged and twisted,
 			gravity pulling six ways at once. A nauseous sensation at the best of
 			times, and possibly at its most inconvenient when one was seated in
