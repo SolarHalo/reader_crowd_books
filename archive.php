@@ -1,30 +1,72 @@
 <?php get_header(); ?>
+<script type="text/javascript">
+function AddFavorite(){
+	   
+	   var sURL = document.URL;
+	   var sTitle = location.href;
+
+	   try
+	    {
+	        window.external.addFavorite(sURL, sTitle);
+	    }
+	    catch (e)
+	    {
+	        try
+	        {
+	            window.sidebar.addPanel(sTitle, sURL, "");
+	        }
+	        catch (e)
+	        {
+	            alert("add to favorite failed,please press 'CTRL+D'");
+	        }
+	    }
+
+	}
+</script>
 <div id="conter" class="bookcontent mt30 fl">
 	<h1>
-		<?php single_cat_title();?> <strong>
-		<?php
-		 $current_category = single_cat_title("", false);  
+	<?php single_cat_title();?>
+		<strong> <?php
+		$current_category = single_cat_title("", false);
 		echo getAuthorByTermID(getSeriesIDByName($current_category));
-		?>  </strong>
+		?> </strong>
 	</h1>
 	<div class="ratings fl">
 		<div class="ratingsbox">
-			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" /> <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
-			<img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> (20)
+			<img
+				src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
+			<img
+				src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
+			<img
+				src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
+			<img
+				src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
+			<img
+				src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
+			(20)
 		</div>
 	</div>
 	<div class="mark fl">
-		<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/bookmark-ioc.gif" /> Book mark</a>
+		<a href="#"><img
+			src="<?php echo get_template_directory_uri();?>/images/bookmark-ioc.gif"
+			onclick="AddFavorite();" /> Book mark</a>
 	</div>
+	
 	<div class="share">
-		<span><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/like-ioc.gif" /> </a> <font>2.2K</font></span>
-		<span><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/tweter-ioc.gif" /> </a><font>2.5K</font></span>
-		<span><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/+2-ioc.gif" /></a><font>2</font></span>
-			
+	<div class="fb-like" data-href="¡¾µ±Ç°Ò³ÃæURL¡¿" data-send="true" data-width="450" data-show-faces="true"></div>
+		<span><a href="#"><img
+				src="<?php echo get_template_directory_uri(); ?>/images/like-ioc.gif" />
+		</a> <font>2.2K</font> </span> <span><a href="#"><img
+				src="<?php echo get_template_directory_uri(); ?>/images/tweter-ioc.gif" />
+		</a><font>2.5K</font> </span> <span><a href="#"><img
+				src="<?php echo get_template_directory_uri(); ?>/images/+2-ioc.gif" />
+		</a><font>2</font> </span>
+
 	</div>
 	<div class="bookcontentbox">
-		<img src="<?php echo get_template_directory_uri(); ?>/images/photo01.jpg" class="fl" width="181" height="270" />
+		<img
+			src="<?php echo get_template_directory_uri(); ?>/images/photo01.jpg"
+			class="fl" width="181" height="270" />
 		<p>Captain Hesperus, a grey furry feline from Orrira, wiped goat soup
 			from his eyes and sighed. A torsion wave, burped out from the badly
 			maintained engines of the Dubious Profit, had slid through the ship's
@@ -35,8 +77,10 @@
 			front of a large bowl of hot and oily soup...</p>
 		<ul>
 			<li><strong>Category:</strong> <?php $category = get_the_category(); 
-        echo $category[0]->cat_name?></li>
-			<li><strong>Words:</strong><?php echo countTheWordsByTermId(getSeriesIDByName($current_category));?></li>
+			echo $category[0]->cat_name?>
+			</li>
+			<li><strong>Words:</strong> <?php echo countTheWordsByTermId(getSeriesIDByName($current_category));?>
+			</li>
 			<li><strong>Progress:</strong>Finished</li>
 			<li><strong>Tags:</strong>Captain hesperus,Feline, Qudira</li>
 		</ul>
@@ -58,7 +102,8 @@
 
 		<ul>
 			<li class="titleChapter"><?php the_ID()?></li>
-			<li class="titleContent"><a href="?p=<?php the_ID()?>"><?php the_title()?></a></li>
+			<li class="titleContent"><a href="?p=<?php the_ID()?>"><?php the_title()?>
+			</a></li>
 			<li class="titleWords"><?php  echo wcount();?></li>
 			<li class="titleViews"><?php get_post_clicked_nums(the_ID())?></li>
 			<li class="titleRating">
@@ -69,14 +114,13 @@
 			<li class="titleLast"><?php the_modified_date()?></li>
 		</ul>
 
-		
+
 		<?php endwhile; ?>
 	</div>
 	<div class="total">
-        	<font>Total Views:1200</font>
-            <font>Total Bookmarks:100</font>
-            <font>Total Comments:20</font>
-        </div>
+		<font>Total Views:1200</font> <font>Total Bookmarks:100</font> <font>Total
+			Comments:20</font>
+	</div>
 </div>
-		<?php get_footer(); ?>
+<?php get_footer(); ?>
 
