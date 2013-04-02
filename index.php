@@ -28,57 +28,7 @@
         </div>
         <div class="clmu fl" id="left_sidebar">
         	<h5 class="title">Featured</h5>
-            <div class="featured_item">
-				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/03/SnakeCharming.png" alt=""></div>
-				<div class="fi_right">
-					<h3><a href="http://elitechronicles.tk/?series=snake-charming">Snake Charming</a><span>John Hoggard, aka DaddyHoggy</span></h3>
-					<div class="ratingsbox">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> 
-                    </div> 
-					<div class="excerpt">
-						<p>This short story is the gripping tale of a race between varying spaceships and teams. The story focuses on one racer, Chad Stormbowl, racing in the atmosphere around Diso which shocking results. <a href="http://elitechronicles.tk/?series=snake-charming">Read more</a>
-</p>
-					</div>
-				</div> 
-			</div>
-            <div class="featured_item">
-				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/03/TheVirtuousMisfortune.png" alt=""></div>
-				<div class="fi_right">
-					<h3><a href="http://elitechronicles.tk/?series=the-virtuous-misfortune">The Virtuous Misfortune</a><span>Dylan Smith</span></h3>
-					<div class="rated">
-						<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> 
-					</div>
-					<div class="excerpt">
-						<p>This tale focuses on a team of less-than-virtuous crew members, braving the perils of witch space, mis-jumps and run-ins with Thargoids. <a href="http://elitechronicles.tk/?series=the-virtuous-misfortune">Read more</a>
-                        </p>
-					</div>
-				</div>
-			</div>
-            <div class="featured_item">
-				<div class="fi_left"><img src="http://elitechronicles.tk/wp-content/uploads/2013/03/Coyote.png" alt=""></div>
-				<div class="fi_right">
-					<h3><a href="http://elitechronicles.tk/?series=coyote">Coyote</a><span>El Viejo</span></h3>
-					<div class="rated">
-						<img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" /> 
-					</div>
-					<div class="excerpt">
-						<p>Onboard the Dark Star, Coyote as he deals with former colleagues in the army and ultimately meets up with Sahana, a beautiful woman searching for distant relatives. <a href="http://elitechronicles.tk/?series=coyote">Read more</a>
-                        </p>
-					</div>
-				</div>
-			</div>
+            <?php getFeatured();?>
         </div>
         <div class="clmu fl ml15" id="center_sidebar">
         	<h5 class="title">Top Viewed</h5>
