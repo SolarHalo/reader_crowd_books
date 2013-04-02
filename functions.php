@@ -233,7 +233,11 @@ function getHighestRation ($showNum){
 	//为了防止同一本数的不同章节有不同的作者，做如下处理
 	foreach($bookrates as $bookrate){
 		$name = $bookrate->name;
-		$avgrate = intval($bookrate->avgrate);
+		$avgrate = 0;
+		if($bookrate->avgrate!=null&&$bookrate->avgrate!=''){
+			
+			$avgrate = intval($bookrate->avgrate);
+		}
 		
 		$term_id = $bookrate->term_id;
 		if(!array_key_exists($name, $books)){
@@ -273,9 +277,9 @@ function getHighestRation ($showNum){
 	echo $output;
 }
 
-function getRatingImage($rate,$dir_uri){
+function getRatingImage($avgrate,$dir_uri){
 	$output = "<div class='ratingsbox'>";
-	$avgrate = intval($rate);
+//	$avgrate = intval($rate);
 	if($avgrate>0){
 		for($i=0;$i<$avgrate;$i++){
 			$output.="<img src='$dir_uri/images/rating_on.gif' />";
