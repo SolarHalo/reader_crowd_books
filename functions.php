@@ -317,13 +317,14 @@ SQL;
 		$bookurl = $site_uri.'/?series='.$book->slug;
 		$img = getBookImg($book->term_id);
 		$bookrating = getRationgBySeriesId($book->term_id);
+		$bookRateCount = getCountBySeriesId($book->term_id);
 		$desc = mb_substr($book->description,0,40,'UTF-8');
 		$output .= <<<HTML
 <div class="featured_item">
 				<div class="fi_left"><img src="$img" alt=""></div>
 				<div class="fi_right">
 					<h3><a href="$bookurl">$book->name</a><span>$book->user_login</span></h3>
-					 $bookrating (20)
+					 $bookrating ($bookRateCount)
 					<div class="excerpt">
 						<p>$desc ...
 						<a href="$bookurl">Read more</a>
@@ -338,6 +339,8 @@ HTML;
 
 	
 }
+
+
 /**
  * 
  * count the content words
@@ -469,6 +472,35 @@ SQL;
 	}
 	echo $output;
 }
+/**
+ *
+ * get Rating by book id
+ * @param str $SeriesId book id
+ */
+function getCountBySeriesId($SeriesId){
+	$sql = <<<SQL
+		select count( a.rating_id) total
+		from 
+			wp_terms m,
+			wp_term_taxonomy t, 
+			wp_term_relationships r ,
+			wp_ratings a,
+			wp_posts p 
+		where
+			m.term_id=t.term_id 
+		and t.taxonomy='series' and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id 
+		and p.id=rating_postid and m.term_id = '$SeriesId'
+SQL;
+	global $wpdb;
+	$ratingims = 0;
+	$ratings = $wpdb->get_results($sql);
+	foreach ($ratings as $rating) {
+		return $rating->total;
+	}
+	return $ratingims;
+
+}
+
 /**
  * 
  * get Rating by book id
