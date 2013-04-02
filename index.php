@@ -96,13 +96,8 @@
         </div>
         <div class="clmu fl" id="Genres">
         	<h5 class="title">Genres</h5>
-            <ul class="index-list">
-				<li><a href="<?php echo get_page_link(263); ?>">Apocalyptic</a></li>
-				<li><a href="#">Biopunk</a></li>
-				<li><a href="#">Military</a></li>
-				<li><a href="#">Time Travel</a></li>
-                <li><a href="#">Space Opera</a></li>
-				<li><a href="#">Superheroes</a></li> 
+            <ul class="index-list"> 
+				<?php getGener();?>
 			</ul>
         </div>
         <?php

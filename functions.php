@@ -126,15 +126,7 @@ function getTopReviewd ($showNum){
 	$selectSql = "select  m.term_id,m.name,sum(CONVERT(pm.meta_value,UNSIGNED))sumhit,m.slug,u.user_login from wp_terms m,wp_term_taxonomy t,wp_term_relationships r,wp_posts p,wp_postmeta pm ,wp_users u where m.term_id = t.term_id and t.taxonomy='series' and r.term_taxonomy_id=t.term_taxonomy_id and r.object_id=p.id and p.id=pm.post_id and pm.meta_key='custom_total_hits' and p.post_author=u.id group by  m.term_id, m.name,m.slug,u.user_login order by sumhit desc limit $showNum";
 	$top_posts = $wpdb->get_results($selectSql);
 	$output = "";
-//	$i = 1;
-//	foreach ($top_posts as $top_post) { 
-//	     $hit = (int)$top_post->meta_value;
-//	      $author = get_user_loginname($top_post->post_author);
-//	      $image = get_the_post_thumbnail($top_post->ID,array(45,70));
-//	       $permalink = get_permalink( $top_post->ID );
-//		 $output.="<li><a href='$permalink' title='$top_post->post_title'> $image $i.$top_post->post_title </a> <span >$author</span><span >($hit) </span></li>"; 
-//			 $i++;	
-//	}
+ 
 	$i = 1;
 	$books = array();
 	foreach($top_posts as $top_post){
@@ -169,7 +161,7 @@ function getTopReviewd ($showNum){
 }
 
 function getBookImg($term_id,$user_id=null){
-	$sql = "select * from wp_orgseriesicons where term_id=".$term_id;
+	$sql = "select * from wp_orgSeriesIcons where term_id=".$term_id;
 	if($user_id!=null){
 		$sql.=" and user_id=".$term_id;
 	}	
@@ -181,34 +173,7 @@ function getBookImg($term_id,$user_id=null){
 }
 
 function getHighestRation ($showNum){
-	global $wpdb;
-	
-//	$selectSql = "select rating_id,rating_postid,rating_posttitle,sum(rating_rating)/count(rating_rating) aa from wp_ratings  group by rating_postid order by aa desc limit $showNum";
-//	 
-//	$top_posts = $wpdb->get_results($selectSql);
-//	$output = "";
-//	$i = 1;
-//	foreach ($top_posts as $top_post) {  
-//	     $hit = (int)$top_post->meta_value;
-//	      $author = get_user_loginname($top_post->post_author);
-//	      $image = get_the_post_thumbnail($top_post->ID,array(45,70));
-//	       $permalink = get_permalink( $top_post->rating_postid );
-//	        $uri = get_template_directory_uri();
-//		 $output.=<<<html
-//		          <li>
-//					<a href='$permalink' title='' ">$top_post->rating_posttitle</a>
-//                    <div class='ratingsbox'>
-//                        <img src='$uri/images/rating_on.gif' />
-//                        <img src='$uri/images/rating_on.gif' />
-//                        <img src='$uri/images/rating_on.gif' />
-//                        <img src='$uri/images/rating_off.gif' />
-//                        <img src='$uri/images/rating_off.gif' /> 
-//                     </div> 
-//				</li>
-//html;
-//		 $i++; 
-//				
-//	}
+	global $wpdb; 
 	$sql = "select m.name,round(avg(rating_rating),0)avgrate,m.slug,m.term_id,u.user_login from wp_terms m,wp_term_taxonomy t,wp_term_relationships r ,wp_ratings a,wp_posts p,wp_users u where m.term_id=t.term_id and t.taxonomy='series' and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id and p.id=rating_postid and p.post_author=u.id group by m.name,m.slug,m.term_id,u.user_login order by avgrate desc limit ".$showNum;
 	$bookrates = $wpdb->get_results($sql);
 	$i = 1;
@@ -243,7 +208,7 @@ function getHighestRation ($showNum){
 			foreach ($avgrateArr as $r){
 				$ratesum = $ratesum+$r;
 			}
-			$avgrate = $ratesum/count(avgrateArr);
+			$avgrate = $ratesum/count($avgrateArr);
 		}
 		$image;
 		if($bookImg){
@@ -269,7 +234,10 @@ function getRatingImage($rate,$dir_uri){
 	}
 	$rateOff = 5-$avgrate;
 	if($rateOff>0){
-		$output.="<img src='$dir_uri/images/rating_off.gif' />";
+	   for($i=0;$i<$rateOff;$i++){
+			$output.="<img src='$dir_uri/images/rating_off.gif' />";
+		}
+	 
 	}
 	$output.="</div>";
 	return $output;
@@ -369,12 +337,7 @@ function getBookInfo(){
 		$slug = $bookBasicInfo->slug;
 		$uri = get_site_url();
 		$uri .= "/?series=$slug";
-		 $template_uri = get_template_directory_uri();
-		//鏍规嵁term_id鑾峰彇涔︽湰鍏朵粬淇℃伅...
-		
-		//鑾峰彇涔︽湰浣滆�
-		//$authSql = "select u.user_login from wp_term_taxonomy t,wp_term_relationships r,wp_posts p,wp_users u where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id and p.post_author=u.id";
-	
+		 $template_uri = get_template_directory_uri(); 
                   	$output.="<tr><td width='245'><a href='$uri'><b>$book_name</b></a></td>
                     <td width='145'>".getAuthorByTermID($term_id)."</td>
                     <td width='65'>Health</td>
@@ -393,6 +356,48 @@ function getBookInfo(){
 	} 
 	echo $output; 
 }
- 
+/**
+ * add by yuyue
+ * get the gener for index show gener don't show blog
+ */
+function getGener(){
+	$seleSql = <<<SQL
+select t.term_id,t.name,t.slug,x.term_taxonomy_id from wp_terms t left join wp_term_taxonomy x on (t.term_id = x.term_id ) 
+where t.name != 'Blog' and x.taxonomy='category'
+order by  t.term_id
+SQL;
+	global $wpdb;
+	$output = "";
+	$geners = $wpdb->get_results($seleSql);
+	foreach($geners as $gener){ 	
+		$output .= "<li><a href='".get_category_link( $gener->term_taxonomy_id )."'>$gener->name</a></li>";
+	}
+	echo $output;
+}
+/**
+ * 
+ * get Rating by book id
+ * @param str $SeriesId book id
+ */
+function getRationgBySeriesId($SeriesId){
+	 $sql = <<<SQL
+	 select round(avg(rating_rating),0)avgrate,
+from wp_terms m,wp_term_taxonomy t, 
+wp_term_relationships r ,wp_ratings a,wp_posts p,wp_users u where m.term_id=t.term_id 
+and t.taxonomy='series' and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id 
+and p.id=rating_postid and p.post_author=u.id  and m.term_id = '$SeriesId' group by m.name,m.slug,
+m.term_id,u.user_login
+SQL;
+	global $wpdb;
+	$output = "";
+	$ratings = $wpdb->get_results($sql);
+	$output = " <div class='ratingsbox'>";
+	$ratingims = "";
+	foreach ($ratings as $rating) {
+		$ratingims  = getRatingImage($rating,get_template_directory_uri());
+	} 
+	echo $ratingims;
+  
+} 
 endif;
 ?>
