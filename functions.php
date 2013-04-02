@@ -214,7 +214,8 @@ function getHighestRation ($showNum){
 }
 
 function getRatingImage($rate,$dir_uri){
-	$output = "<div class='ratingsbox'>";
+	$output = "<div class='ratingsbox'>"; 
+	 
 	$avgrate = intval($rate);
 	if($avgrate>0){
 		for($i=0;$i<$avgrate;$i++){
@@ -248,17 +249,17 @@ SQL;
 	$site_uri = get_site_url();
 	$output = "";
 	foreach($bookrates as $book){
-		$bookname = $books[$key][0];
+		 
 		$bookurl = $site_uri.'/?series='.$book->slug;
 		$img = getBookImg($book->term_id);
 		$bookrating = getRationgBySeriesId($book->term_id);
-		$desc = mb_substr($lastUpdatePost->post_content,0,40,'UTF-8');
+		$desc = mb_substr($book->description,0,40,'UTF-8');
 		$output .= <<<HTML
 <div class="featured_item">
 				<div class="fi_left"><img src="$img" alt=""></div>
 				<div class="fi_right">
 					<h3><a href="$bookurl">$book->name</a><span>$book->user_login</span></h3>
-					 $bookrating
+					 $bookrating (20)
 					<div class="excerpt">
 						<p>$desc ...
 						<a href="$bookurl">Read more</a>
@@ -411,7 +412,7 @@ SQL;
  */
 function getRationgBySeriesId($SeriesId){
 	 $sql = <<<SQL
-	 select round(avg(rating_rating),0)avgrate,
+	 select round(avg(rating_rating),0)avgrate
 from wp_terms m,wp_term_taxonomy t, 
 wp_term_relationships r ,wp_ratings a,wp_posts p,wp_users u where m.term_id=t.term_id 
 and t.taxonomy='series' and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id 
