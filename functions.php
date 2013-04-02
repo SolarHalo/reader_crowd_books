@@ -59,18 +59,7 @@ function content_nav( $html_id ) {
 	<?php endif;
 }
 
-//function count_words($str) was added by ian to count words' numbers in a post   
-function count_words($str){
-	$words = 0;
-	$str = eregi_replace(" +", " ", $str);
-	$array = explode(" ", $str);
-	for($i=0;$i < count($array);$i++)
-	{
-		if (eregi("[0-9A-Za-z脌-脰脴-枚酶-每]", $array[$i]))
-		$words++;
-	}
-	echo $words;
-}
+ 
 
 //function get_post_clicked_nums was added by ian
 function get_post_clicked_nums($pid){
@@ -277,8 +266,17 @@ function getHighestRation ($showNum){
 	echo $output;
 }
 
-function getRatingImage($avgrate,$dir_uri){
-	$output = "<div class='ratingsbox'>";
+function getRatingImage($rate,$dir_uri){
+	$output = "<div class='ratingsbox'>"; 
+//	$avgrate = 0;
+//	if(gettype($rate)!='integer'){
+//		$avgrate = intval($rate);
+//	}
+	$avgrate = 0;
+	if($rate!=null&&$rate!=''){
+		$avgrate = intval($rate);
+		
+	}
 //	$avgrate = intval($rate);
 	if($avgrate>0){
 		for($i=0;$i<$avgrate;$i++){
@@ -295,7 +293,48 @@ function getRatingImage($avgrate,$dir_uri){
 	$output.="</div>";
 	return $output;
 }
+/**
+ * 
+ * Enter get featured books
+ */
+function getFeatured(){
+	$sql = <<<SQL
+select m.term_id,m.name,m.slug,u.user_login,t.description from wp_terms m,wp_term_taxonomy t,
+wp_term_relationships r,wp_posts p,wp_postmeta pm ,wp_users u where m.term_id = t.term_id and 
+t.taxonomy='series' and r.term_taxonomy_id=t.term_taxonomy_id and r.object_id=p.id and p.id=pm.post_id 
+and pm.meta_key='featured'  and pm.meta_value='1' and p.post_author=u.id  group by  m.term_id, m.name,
+m.slug,u.user_login ORDER BY m.term_id desc limit 3
+SQL;
+	global $wpdb; 
+	$bookrates = $wpdb->get_results($sql);
+	$site_uri = get_site_url();
+	$output = "";
+	foreach($bookrates as $book){
+		 
+		$bookurl = $site_uri.'/?series='.$book->slug;
+		$img = getBookImg($book->term_id);
+		$bookrating = getRationgBySeriesId($book->term_id);
+		$desc = mb_substr($book->description,0,40,'UTF-8');
+		$output .= <<<HTML
+<div class="featured_item">
+				<div class="fi_left"><img src="$img" alt=""></div>
+				<div class="fi_right">
+					<h3><a href="$bookurl">$book->name</a><span>$book->user_login</span></h3>
+					 $bookrating (20)
+					<div class="excerpt">
+						<p>$desc ...
+						<a href="$bookurl">Read more</a>
+            </p>
+					</div>
+				</div> 
+</div>
+HTML;
+		
+	}
+	echo $output;
 
+	
+}
 /**
  * 
  * count the content words
@@ -347,7 +386,7 @@ function getLastUpate($postnum){
 	$lastUpdatePosts = $wpdb->get_results($sql);
 	$output = "";
 	foreach ($lastUpdatePosts as $lastUpdatePost) { 
-		$posturl = get_permalink($lastUpdatePost->id);
+		$posturl = get_permalink($lastUpdatePost->id);	
 		$content = mb_substr($lastUpdatePost->post_content,0,60,'UTF-8');
 	    $output.="<li><h4>".$lastUpdatePost->post_title."</h4><p>$content ...</p><a href='$posturl'>read more</a></li>";
 	}
@@ -434,7 +473,7 @@ SQL;
  */
 function getRationgBySeriesId($SeriesId){
 	 $sql = <<<SQL
-	 select round(avg(rating_rating),0)avgrate,
+	 select round(avg(rating_rating),0)avgrate
 from wp_terms m,wp_term_taxonomy t, 
 wp_term_relationships r ,wp_ratings a,wp_posts p,wp_users u where m.term_id=t.term_id 
 and t.taxonomy='series' and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id 
@@ -449,7 +488,7 @@ SQL;
 	foreach ($ratings as $rating) {
 		$ratingims  = getRatingImage($rating,get_template_directory_uri());
 	} 
-	echo $ratingims;
+	return $ratingims;
   
 } 
 endif;
