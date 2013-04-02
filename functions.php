@@ -160,10 +160,10 @@ function getTopReviewd ($showNum){
 		$author = $b[2];
 		$url = $b[3];
 		$term_id = $b[4];
-		$uri = get_site_url();
+		$root_uri = get_site_url();
 		$bookImg = getBookImg($term_id);
-		$image = $uri.'/'.$bookImg;
-		$output.="<li><a href='$uri' title='$name'><img src='$image' /> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
+		$image = $root_uri.'/'.$bookImg;
+		$output.="<li><a href='$url' title='$name'><img src='$image' /> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
 		$i++;
 	}
 	echo $output;
