@@ -181,6 +181,55 @@ function getBookImg($term_id,$user_id=null){
 	}
 }
 
+function getBookGenres($term_id){
+	$sql ="
+		select te.name from wp_terms te,wp_term_taxonomy tt,wp_term_relationships rr,( 
+		select r.* from wp_term_relationships r, wp_term_taxonomy t where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id limit 1) ss 
+		where tt.term_taxonomy_id=rr.term_taxonomy_id and rr.object_id=ss.object_id and tt.taxonomy='category' and tt.term_id=te.term_id";
+	global $wpdb;
+	$genres = $wpdb->get_results($sql);
+	foreach($genres as $genre){
+		return $genre->name;
+	}
+}
+
+function getBookLastUpdate($term_id){
+	$sql = "select p.post_modified from wp_posts p,
+			(select r.* from wp_term_relationships r, wp_term_taxonomy t where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id) ss 
+			where p.ID=ss.object_id order by post_modified desc limit 1";
+	global $wpdb;
+	$lastupdates = $wpdb->get_results($sql);
+	foreach($lastupdates as $lastupdate){
+		return $lastupdate->post_modified;
+	}
+}
+
+function getBookTotalView($term_id){
+	$sql = "select sum(p.meta_value) as viewNums from wp_postmeta p,
+			(select r.* from wp_term_relationships r, wp_term_taxonomy t where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id) ss 
+			where p.post_id=ss.object_id and p.meta_key='custom_total_hits'";
+	global $wpdb;
+	$totals = $wpdb->get_results($sql);
+	foreach($totals as $total){
+		return $total->viewNums;
+	}
+}
+
+function getTotalBookMark(){
+	
+}
+
+function getBookTotalComments($term_id){
+	$sql = "select sum(p.comment_count) as commentNums from wp_posts p,
+			(select r.* from wp_term_relationships r, wp_term_taxonomy t where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id) ss 
+			where p.ID=ss.object_id";
+	global $wpdb;
+	$totals = $wpdb->get_results($sql);
+	foreach($totals as $total){
+		return $total->commentNums;
+	}
+}
+
 function getHighestRation ($showNum){
 	global $wpdb;
 	$selectSql = "select rating_id,rating_postid,rating_posttitle,sum(rating_rating)/count(rating_rating) aa from wp_ratings  group by rating_postid order by aa desc limit $showNum";
@@ -314,7 +363,7 @@ function getBookInfo(){
 	
                   	$output.="<tr><td width='245'><a href='$uri'><b>$book_name</b></a></td>
                     <td width='145'>".getAuthorByTermID($term_id)."</td>
-                    <td width='65'>Health</td>
+                    <td width='65'>".getBookGenres($term_id)."</td>
                     <td width='65'>".countTheWordsByTermId($term_id)."</td>
                    	<td width='65'>Finished</td>
                     <td width='95'>
@@ -326,7 +375,7 @@ function getBookInfo(){
                           <img src='$template_uri/images/rating_off.gif' />
                        </div>
                   </td>
-                  <td width='50'>13/03</td></tr>";
+                  <td width='50'>".mysql2date(get_option('date_format'), getBookLastUpdate($term_id),false)."</td></tr>";
 	} 
 	echo $output; 
 }

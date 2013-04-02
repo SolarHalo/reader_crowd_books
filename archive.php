@@ -53,7 +53,6 @@ function AddFavorite(){
 	</div>
 	
 	<div class="share">
-	<div class="fb-like" data-href="¡¾µ±Ç°Ò³ÃæURL¡¿" data-send="true" data-width="450" data-show-faces="true"></div>
 		<span><a href="#"><img
 				src="<?php echo get_template_directory_uri(); ?>/images/like-ioc.gif" />
 		</a> <font>2.2K</font> </span> <span><a href="#"><img
@@ -65,7 +64,7 @@ function AddFavorite(){
 	</div>
 	<div class="bookcontentbox">
 		<img
-			src="<?php echo get_template_directory_uri(); ?>/images/photo01.jpg"
+			src="<?php echo getBookImg(getSeriesIDByName($current_category)); ?>"
 			class="fl" width="181" height="270" />
 		<p>Captain Hesperus, a grey furry feline from Orrira, wiped goat soup
 			from his eyes and sighed. A torsion wave, burped out from the badly
@@ -118,8 +117,8 @@ function AddFavorite(){
 		<?php endwhile; ?>
 	</div>
 	<div class="total">
-		<font>Total Views:1200</font> <font>Total Bookmarks:100</font> <font>Total
-			Comments:20</font>
+		<font>Total Views:<?php echo getBookTotalView(getSeriesIDByName($current_category))?></font> <font>Total Bookmarks:100</font> <font>Total
+			Comments:<?php echo getBookTotalComments(getSeriesIDByName($current_category))?></font>
 	</div>
 </div>
 <?php get_footer(); ?>
