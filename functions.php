@@ -475,16 +475,16 @@ function getRationgBySeriesId($SeriesId){
 	 $sql = <<<SQL
 	 select round(avg(rating_rating),0)avgrate
 from wp_terms m,wp_term_taxonomy t, 
-wp_term_relationships r ,wp_ratings a,wp_posts p,wp_users u where m.term_id=t.term_id 
+wp_term_relationships r ,wp_ratings a,wp_posts p where m.term_id=t.term_id 
 and t.taxonomy='series' and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id 
-and p.id=rating_postid and p.post_author=u.id  and m.term_id = '$SeriesId' group by m.name,m.slug,
-m.term_id,u.user_login
+and p.id=rating_postid and m.term_id = '$SeriesId' group by
+m.term_id
 SQL;
 	global $wpdb;
 	$output = "";
 	$ratings = $wpdb->get_results($sql);
 	$output = " <div class='ratingsbox'>";
-	$ratingims = "";
+	$ratingims = getRatingImage(0,get_template_directory_uri());
 	foreach ($ratings as $rating) {
 		$ratingims  = getRatingImage($rating,get_template_directory_uri());
 	} 
