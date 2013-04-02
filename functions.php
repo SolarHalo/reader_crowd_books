@@ -277,7 +277,6 @@ function getRatingImage($rate,$dir_uri){
 		$avgrate = intval($rate);
 		
 	}
-//	$avgrate = intval($rate);
 	if($avgrate>0){
 		for($i=0;$i<$avgrate;$i++){
 			$output.="<img src='$dir_uri/images/rating_on.gif' />";
@@ -290,6 +289,7 @@ function getRatingImage($rate,$dir_uri){
 		}
 	 
 	}
+	
 	$output.="</div>";
 	return $output;
 }
@@ -481,12 +481,10 @@ and p.id=rating_postid and m.term_id = '$SeriesId' group by
 m.term_id
 SQL;
 	global $wpdb;
-	$output = "";
 	$ratings = $wpdb->get_results($sql);
-	$output = " <div class='ratingsbox'>";
 	$ratingims = getRatingImage(0,get_template_directory_uri());
 	foreach ($ratings as $rating) {
-		$ratingims  = getRatingImage($rating,get_template_directory_uri());
+		$ratingims  = getRatingImage($rating->avgrate,get_template_directory_uri());
 	} 
 	return $ratingims;
   
