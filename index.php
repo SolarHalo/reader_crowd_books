@@ -118,7 +118,7 @@
                             <h4>Chapter two</h4>
                             <p>little bit of the background. </p>
                             <a href="#">read more</a>
-                          </li> 
+                          </li> 	
                           <li>
                             <h4>Chapter two</h4>
                             <p>little bit of the background. </p>

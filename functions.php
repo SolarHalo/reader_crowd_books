@@ -173,7 +173,11 @@ function getHighestRation ($showNum){
 	//为了防止同一本数的不同章节有不同的作者，做如下处理
 	foreach($bookrates as $bookrate){
 		$name = $bookrate->name;
-		$avgrate = intval($bookrate->avgrate);
+		$avgrate = 0;
+		if($bookrate->avgrate!=null&&$bookrate->avgrate!=''){
+			
+			$avgrate = intval($bookrate->avgrate);
+		}
 		
 		$term_id = $bookrate->term_id;
 		if(!array_key_exists($name, $books)){
@@ -214,8 +218,19 @@ function getHighestRation ($showNum){
 }
 
 function getRatingImage($rate,$dir_uri){
-	$output = "<div class='ratingsbox'>";
-	$avgrate = intval($rate);
+ 
+	$output = "<div class='ratingsbox'>"; 
+//	$avgrate = 0;
+//	if(gettype($rate)!='integer'){
+//		$avgrate = intval($rate);
+//	}
+	$avgrate = 0;
+	if($rate!=null&&$rate!=''){
+		$avgrate = intval($rate);
+		
+	}
+//	$avgrate = intval($rate);
+ 
 	if($avgrate>0){
 		for($i=0;$i<$avgrate;$i++){
 			$output.="<img src='$dir_uri/images/rating_on.gif' />";
@@ -324,7 +339,7 @@ function getLastUpate($postnum){
 	$lastUpdatePosts = $wpdb->get_results($sql);
 	$output = "";
 	foreach ($lastUpdatePosts as $lastUpdatePost) { 
-		$posturl = get_permalink($lastUpdatePost->id);
+		$posturl = get_permalink($lastUpdatePost->id);	
 		$content = mb_substr($lastUpdatePost->post_content,0,60,'UTF-8');
 	    $output.="<li><h4>".$lastUpdatePost->post_title."</h4><p>$content ...</p><a href='$posturl'>read more</a></li>";
 	}
