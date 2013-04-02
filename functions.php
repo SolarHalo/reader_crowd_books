@@ -145,7 +145,6 @@ function getTopReviewd ($showNum){
 		$uri .= "/?series=$top_post->slug";
 		$term_id = $top_post->term_id;
 		if(!array_key_exists($name, $books)){
-			$book = array();
 			$books[$name] = array($name,$sumhit,$author,$uri,$term_id);
 		}else{
 			$book = $books[$name];
@@ -163,7 +162,7 @@ function getTopReviewd ($showNum){
 		$root_uri = get_site_url();
 		$bookImg = getBookImg($term_id);
 		$image = $root_uri.'/'.$bookImg;
-		$output.="<li><a href='$url' title='$name'><img src='$image' /> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
+		$output.="<li><a href='$url' title='$name'><img src='$image' alt='$i.$name'/> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
 		$i++;
 	}
 	echo $output;
@@ -183,33 +182,97 @@ function getBookImg($term_id,$user_id=null){
 
 function getHighestRation ($showNum){
 	global $wpdb;
-	$selectSql = "select rating_id,rating_postid,rating_posttitle,sum(rating_rating)/count(rating_rating) aa from wp_ratings  group by rating_postid order by aa desc limit $showNum";
-	 
-	$top_posts = $wpdb->get_results($selectSql);
-	$output = "";
+	
+//	$selectSql = "select rating_id,rating_postid,rating_posttitle,sum(rating_rating)/count(rating_rating) aa from wp_ratings  group by rating_postid order by aa desc limit $showNum";
+//	 
+//	$top_posts = $wpdb->get_results($selectSql);
+//	$output = "";
+//	$i = 1;
+//	foreach ($top_posts as $top_post) {  
+//	     $hit = (int)$top_post->meta_value;
+//	      $author = get_user_loginname($top_post->post_author);
+//	      $image = get_the_post_thumbnail($top_post->ID,array(45,70));
+//	       $permalink = get_permalink( $top_post->rating_postid );
+//	        $uri = get_template_directory_uri();
+//		 $output.=<<<html
+//		          <li>
+//					<a href='$permalink' title='' ">$top_post->rating_posttitle</a>
+//                    <div class='ratingsbox'>
+//                        <img src='$uri/images/rating_on.gif' />
+//                        <img src='$uri/images/rating_on.gif' />
+//                        <img src='$uri/images/rating_on.gif' />
+//                        <img src='$uri/images/rating_off.gif' />
+//                        <img src='$uri/images/rating_off.gif' /> 
+//                     </div> 
+//				</li>
+//html;
+//		 $i++; 
+//				
+//	}
+	$sql = "select m.name,round(avg(rating_rating),0)avgrate,m.slug,m.term_id,u.user_login from wp_terms m,wp_term_taxonomy t,wp_term_relationships r ,wp_ratings a,wp_posts p,wp_users u where m.term_id=t.term_id and t.taxonomy='series' and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id and p.id=rating_postid and p.post_author=u.id group by m.name,m.slug,m.term_id,u.user_login order by avgrate desc limit ".$showNum;
+	$bookrates = $wpdb->get_results($sql);
 	$i = 1;
-	foreach ($top_posts as $top_post) {  
-	     $hit = (int)$top_post->meta_value;
-	      $author = get_user_loginname($top_post->post_author);
-	      $image = get_the_post_thumbnail($top_post->ID,array(45,70));
-	       $permalink = get_permalink( $top_post->rating_postid );
-	        $uri = get_template_directory_uri();
-		 $output.=<<<html
-		          <li>
-					<a href='$permalink' title='' ">$top_post->rating_posttitle</a>
-                    <div class='ratingsbox'>
-                        <img src='$uri/images/rating_on.gif' />
-                        <img src='$uri/images/rating_on.gif' />
-                        <img src='$uri/images/rating_on.gif' />
-                        <img src='$uri/images/rating_off.gif' />
-                        <img src='$uri/images/rating_off.gif' /> 
-                     </div> 
-				</li>
-html;
-		 $i++; 
-				
+	$output = "";
+	$books = array();
+	$dir_uri = get_template_directory_uri();
+	$site_uri = get_site_url();
+	//为了防止同一本数的不同章节有不同的作者，做如下处理
+	foreach($bookrates as $bookrate){
+		$name = $bookrate->name;
+		$avgrate = intval($bookrate->avgrate);
+		
+		$term_id = $bookrate->term_id;
+		if(!array_key_exists($name, $books)){
+			$books[$name] = array($name,array($avgrate),$bookrate->user_login,$bookrate->slug,$term_id);
+		}else{
+			$book = $books[$name];
+			array_push($book[1], $avgrate);
+			$books[$name] = $book;
+		}
+	}
+	foreach($books as $key=>$book){
+		$bookname = $books[$key][0];
+		$bookurl = $site_uri.'/?series='.$books[$key][3];
+		$term_id = $books[$key][4];
+		$bookImg = getBookImg($term_id);
+		$author = $books[$key][2];
+		$avgrateArr = $books[$key][1];
+		$ratesum = 0;
+		$avgrate = 0;
+		if($avgrateArr!=null&&count($avgrateArr)>0){
+			foreach ($avgrateArr as $r){
+				$ratesum = $ratesum+$r;
+			}
+			$avgrate = $ratesum/count(avgrateArr);
+		}
+		$image;
+		if($bookImg){
+			$image = $site_uri.'/'.$bookImg;
+		}
+		$rateImage = getRatingImage($avgrate, $dir_uri);
+		$output.="<li><a href='$bookurl' title='$bookname'><img src='$image' alt='$i.$bookname'/> $i.$bookname </a> <span >$author</span>
+		<span >
+			$rateImage
+		</span><li>"; 
+		$i++;
 	}
 	echo $output;
+}
+
+function getRatingImage($rate,$dir_uri){
+	$output = "<div class='ratingsbox'>";
+	$avgrate = intval($rate);
+	if($avgrate>0){
+		for($i=0;$i<$avgrate;$i++){
+			$output.="<img src='$dir_uri/images/rating_on.gif' />";
+		}
+	}
+	$rateOff = 5-$avgrate;
+	if($rateOff>0){
+		$output.="<img src='$dir_uri/images/rating_off.gif' />";
+	}
+	$output.="</div>";
+	return $output;
 }
 
 /**
