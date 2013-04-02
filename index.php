@@ -35,14 +35,14 @@
             <ul class="mlrp_ul">
             	 <?php getTopReviewd (5) ?>
             </ul>
-            <a href="#" class="more">more Top Viewed Books</a>
+            <a href="http://localhost/?page_id=161" class="more">more Top Viewed Books</a>
         </div>
         <div class="clmu fl ml15" id="right_sidebar">
         	<h5 class="title">Top Rated</h5>
             <ul class="mlrp_ul">
             	<?php getHighestRation(5);?>
             </ul>
-            <a href="#" class="more">more Top Viewed Books</a>
+            <a href="http://localhost/?page_id=161" class="more">more TopRated</a>
         </div>
         <div class="clmu fl" id="Genres">
         	<h5 class="title">Genres</h5>
@@ -159,7 +159,7 @@ function doSlide(s){
 }}
 </script>
 <SCRIPT language=javascript>
-var intDelay=30; //设置菜单显示速度，越大越慢
+var intDelay=30; //锟斤拷锟矫菜碉拷锟斤拷示锟劫度ｏ拷越锟斤拷越锟斤拷
 var intInterval=5; 
 function MenuClick(){
 LayerMenu.filters.alpha.opacity=0; 
