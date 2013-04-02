@@ -434,6 +434,7 @@ function getBookInfo(){
 		$book_name = $bookBasicInfo->name;
 		$slug = $bookBasicInfo->slug;
 		$uri = get_site_url();
+		$rating = getRationgBySeriesId($bookBasicInfo->term_id);
 		$uri .= "/?series=$slug";
 		 $template_uri = get_template_directory_uri(); 
                   	$output.="<tr><td width='245'><a href='$uri'><b>$book_name</b></a></td>
@@ -441,14 +442,7 @@ function getBookInfo(){
                     <td width='65'>".getBookGenres($term_id)."</td>
                     <td width='65'>".countTheWordsByTermId($term_id)."</td>
                    	<td width='65'>Finished</td>
-                    <td width='95'>
-                       <div class='ratingsbox'>
-                          <img src='$template_uri/images/rating_on.gif' />
-                          <img src='$template_uri/images/rating_on.gif' />
-                          <img src='$template_uri/images/rating_on.gif' />
-                          <img src='$template_uri/images/rating_off.gif' />
-                          <img src='$template_uri/images/rating_off.gif' />
-                       </div>
+                    <td width='95'> $rating
                   </td>
                   <td width='50'>".mysql2date(get_option('date_format'), getBookLastUpdate($term_id),false)."</td></tr>";
 	} 

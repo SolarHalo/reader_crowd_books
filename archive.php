@@ -28,26 +28,17 @@ function AddFavorite(){
 	<?php single_cat_title();?>
 		<strong> <?php
 		$current_category = single_cat_title("", false);
+		$currnt_term_id = getSeriesIDByName($current_category);
 		echo getAuthorByTermID(getSeriesIDByName($current_category));
 		?> </strong>
 	</h1>
 	<div class="ratings fl">
-		<div class="ratingsbox">
-			<img
-				src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-			<img
-				src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-			<img
-				src="<?php echo get_template_directory_uri(); ?>/images/rating_on.gif" />
-			<img
-				src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
-			<img
-				src="<?php echo get_template_directory_uri(); ?>/images/rating_off.gif" />
-			(20)
-		</div>
+		 <?php echo getRationgBySeriesId($currnt_term_id);
+		  // echo $current_category;
+		 ?>(<?php echo getCountBySeriesId($currnt_term_id);?>)
 	</div>
 	<div class="mark fl">
-		<a href="#"><img
+		<a href="javascript:AddFavorite();"><img
 			src="<?php echo get_template_directory_uri();?>/images/bookmark-ioc.gif"
 			onclick="AddFavorite();" /> Book mark</a>
 	</div>
@@ -66,14 +57,7 @@ function AddFavorite(){
 		<img
 			src="<?php echo getBookImg(getSeriesIDByName($current_category)); ?>"
 			class="fl" width="181" height="270" />
-		<p>Captain Hesperus, a grey furry feline from Orrira, wiped goat soup
-			from his eyes and sighed. A torsion wave, burped out from the badly
-			maintained engines of the Dubious Profit, had slid through the ship's
-			mess just as he and his crew were sitting down to dine. Local s
-			pacetime in the cramped little room had briefly bulged and twisted,
-			gravity pulling six ways at once. A nauseous sensation at the best of
-			times, and possibly at its most inconvenient when one was seated in
-			front of a large bowl of hot and oily soup...</p>
+		<p> </p>
 		<ul>
 			<li><strong>Category:</strong> <?php $category = get_the_category(); 
 			echo $category[0]->cat_name?>
@@ -107,7 +91,10 @@ function AddFavorite(){
 			<li class="titleViews"><?php get_post_clicked_nums(the_ID())?></li>
 			<li class="titleRating">
 				<div class="ratingsbox">
-				<?php get_post_rating(the_ID())?>
+				<?php 
+				   $postid = get_the_ID(); 
+				  get_post_rating($postid);
+				?>
 				</div>
 			</li>
 			<li class="titleLast"><?php the_modified_date()?></li>
