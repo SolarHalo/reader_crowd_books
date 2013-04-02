@@ -438,7 +438,9 @@ SQL;
 	$ratings = $wpdb->get_results($sql);
 	$output = " <div class='ratingsbox'>";
 	$ratingims = "";
+	 
 	foreach ($ratings as $rating) {
+		$rating1 = $rating;
 		$ratingims  = getRatingImage($rating,get_template_directory_uri());
 	} 
 	return $ratingims;
