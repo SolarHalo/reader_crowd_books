@@ -212,7 +212,7 @@ function getBoookTag($term_id){
 	$tags = $wpdb->get_results($sql);
 	$ret="";
 	foreach($tags as $tag){
-		$e = "<a href=\"<?php echo get_tag_link($tag->term_id); ?>\">$tag->slug</a>";
+		$e = "<a href=\"?s=$tag->slug\">$tag->slug</a>";
 		$ret =$ret.$e.",";
 	}
 	$ret[strlen($ret)-1] = '';

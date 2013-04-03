@@ -59,8 +59,12 @@ function AddFavorite(){
 			class="fl" width="181" height="270" />
 		<p> <?php echo getBoookDescription(getSeriesIDByName($current_category))?></p>
 		<ul>
-			<li><strong>Category:</strong> <?php $category = get_the_category(); 
-			echo $category[0]->cat_name?>
+			<li><strong>Category:</strong>
+			<?php $category = get_the_category(); ?>
+			 <a href="<?php echo get_category_link($category[0]->term_id )?>">
+			 <?php   
+				   echo $category[0]->cat_name
+			  ?></a>
 			</li>
 			<li><strong>Words:</strong> <?php echo countTheWordsByTermId(getSeriesIDByName($current_category));?>
 			</li>
