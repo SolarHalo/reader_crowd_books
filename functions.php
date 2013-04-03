@@ -194,6 +194,29 @@ function getBookTotalView($term_id){
 	}
 }
 
+function getBoookDescription($term_id){
+	$sql = "select description from wp_term_taxonomy where term_id=".$term_id." and taxonomy='series'";
+	global $wpdb;
+	$dess = $wpdb->get_results($sql);
+	foreach($dess as $des){
+		return $des->description;
+	}
+}
+
+function getBoookTag($term_id){
+	$sql ="
+		select te.name from wp_terms te,wp_term_taxonomy tt,wp_term_relationships rr,( 
+		select r.* from wp_term_relationships r, wp_term_taxonomy t where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id) ss 
+		where tt.term_taxonomy_id=rr.term_taxonomy_id and rr.object_id=ss.object_id and tt.taxonomy='post_tag' and tt.term_id=te.term_id";
+	global $wpdb;
+	$tags = $wpdb->get_results($sql);
+	$ret="";
+	foreach($tags as $tag){
+		$ret =$ret.$tag->name.",";
+	}
+	return $ret;
+}
+
 function getTotalBookMark(){
 	
 }

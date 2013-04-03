@@ -57,7 +57,7 @@ function AddFavorite(){
 		<img
 			src="<?php echo getBookImg(getSeriesIDByName($current_category)); ?>"
 			class="fl" width="181" height="270" />
-		<p> </p>
+		<p> <?php echo getBoookDescription(getSeriesIDByName($current_category))?></p>
 		<ul>
 			<li><strong>Category:</strong> <?php $category = get_the_category(); 
 			echo $category[0]->cat_name?>
@@ -65,7 +65,7 @@ function AddFavorite(){
 			<li><strong>Words:</strong> <?php echo countTheWordsByTermId(getSeriesIDByName($current_category));?>
 			</li>
 			<li><strong>Progress:</strong>Finished</li>
-			<li><strong>Tags:</strong>Captain hesperus,Feline, Qudira</li>
+			<li><strong>Tags:</strong><?php echo getBoookTag(getSeriesIDByName($current_category))?></li>
 		</ul>
 
 
