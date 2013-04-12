@@ -1,6 +1,5 @@
 <?php
 /* Set max number of excerpt string lengty for output used in catergory-blog.php (http://codex.wordpress.org/Function_Reference/get_the_excerpt)*/
-
 function the_excerpt_max_charlength($charlength) {
 	$excerpt = get_the_excerpt();
 	$charlength++;
@@ -481,7 +480,7 @@ function getGener(){
 	$seleSql = <<<SQL
 select t.term_id,t.name,t.slug,x.term_taxonomy_id from wp_terms t left join wp_term_taxonomy x on (t.term_id = x.term_id ) 
 where t.name != 'Blog' and x.taxonomy='category'
-order by  t.term_id
+order by  t.term_id limit 5
 SQL;
 	global $wpdb;
 	$output = "";

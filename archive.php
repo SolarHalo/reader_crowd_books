@@ -1,4 +1,12 @@
 <?php get_header(); ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <script type="text/javascript">
 function AddFavorite(){
 	   
@@ -44,6 +52,9 @@ function AddFavorite(){
 	</div>
 	
 	<div class="share">
+	<div class="fb-like" data-href="http://elitechronicles.tk/?series=coyote" data-send="true" data-width="450" data-show-faces="true"></div>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://elitechronicles.tk/?series=coyote">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		<span><a href="#"><img
 				src="<?php echo get_template_directory_uri(); ?>/images/like-ioc.gif" />
 		</a> <font>2.2K</font> </span> <span><a href="#"><img

@@ -32,7 +32,7 @@ margin-right: 20px;
 	}
 body{
 	font-family:Calibri,"微软雅黑",helvetica,Arial;
-	font-size:14px;
+	font-size:12px;
 	}
 .readingText p{
 	font-family: Georgia, Times,"Times New Roman", serif;
@@ -80,7 +80,7 @@ a:hover{
 	padding:0 8px;
 	height:21px;
 	border:1px solid #d9d9d9;
-	background:url(../images/input_button-bg.gif); 
+	background:url(http://readercrowd.com/wp-content/themes/reader_crowd_books//images/input_button-bg.gif); 
 	font-size:11px;
 	font-weight:700;
 	color:#000;
@@ -355,6 +355,9 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	}
 .excerpt a{
 	text-decoration:underline;
+	}
+.excerpt p a{
+	font-size:12px;
 	}
 #center_sidebar{
 	width:297px;
@@ -698,16 +701,16 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	
 /*============================*/
 #outer{
-  width:624px; 
+  width:780px; 
   }
 #focus{   
-  width:624px;
+  width:780px;
   position: relative;
-  height: 124px
+  height: 145px
   }
 #description{
-  width:499px;/*=188*3+15*2*/    /*128 *4=512+15*2=542  |  550*3=1650*/
-  height:115px;
+  width:654px;/*=188*3+15*2*/    /*128 *4=512+15*2=542  |  550*3=1650*/
+  height:145px;
   overflow:hidden;
   margin-right:15px;
 	float:left;
@@ -716,19 +719,19 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	float:left;
 	width:55px;
 	text-align: center;
-	padding-top:35px;
+	padding-top:50px;
 	cursor:pointer;
 }
 /*#description ul, */#description li {
 	float:left;
 display: inline; 
-height:115px;
+height:145px;
 margin:0 45px 0 10px;
 width:120px;
 }
 #description li p{
 	line-height:1em;
-	height:50px;
+	height:75px;
 	margin-top:20px;
 	}
 .view_pic a:active,
@@ -770,4 +773,12 @@ text-decoration:underline;
 .tabtitle td b{
 	color:#692704;
 	line-height:40px;
+	}
+
+
+/*================================*/
+
+#center_sidebar .mlrp_ul li a img{
+	width:45px;
+	height:70px;
 	}
