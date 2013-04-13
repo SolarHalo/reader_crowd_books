@@ -43,7 +43,7 @@ function AddFavorite(){
 	<div class="ratings fl">
 		 <?php echo getRationgBySeriesId($currnt_term_id);
 		  // echo $current_category;
-		 ?>(<?php echo getCountBySeriesId($currnt_term_id);?>)
+		 ?>
 	</div>
 	<div class="mark fl">
 		<a href="javascript:AddFavorite();"><img

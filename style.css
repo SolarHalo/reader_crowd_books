@@ -496,7 +496,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	width:938px;
 	}
 .bookcontentbox p{
-	width:535px;
+	width:485px;
 	height:269px;
 	border-top:1px solid #eee;
 	border-right:1px solid #eee;
@@ -506,19 +506,21 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 
 .bookcontentbox ul{
 	float:left;
-	width:196px;
+	width:246px;
 	}
 .bookcontent .bookcontentbox  strong{
 	float:left;
-	width:55px;
-	line-height:15px;
-	height:20px;
-	padding-left:5px; 
+	width:65px;
+	line-height:40px;
+	height:40px;
+	padding-left:5px;
+	font-weight:normal;
+	color:#782505;
 	}
 .bookcontentbox ul li{ 
 	border-top:1px solid #eee; 
-	line-height:14px;
-	padding:15px 0 10px;
+	line-height:40px;
+	height:40px;
 	}
 .bookboxlist{
 	float:left;
