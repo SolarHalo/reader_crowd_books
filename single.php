@@ -40,6 +40,8 @@
 			<a title="Go to homepage" href="<?php echo get_settings('home'); ?>/">Home</a>
 			>
 			<?php the_title(); ?>
+		 <?php if(function_exists('the_ratings')) { the_ratings(); } ?>
+			
 		</h6>
 		
         <div class ="readingText">
