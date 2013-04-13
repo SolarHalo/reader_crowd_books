@@ -160,10 +160,14 @@ function getBookImg($term_id,$user_id=null){
 	}
 }
 function getBookGenres($term_id){
-	$sql ="
-		select te.name from wp_terms te,wp_term_taxonomy tt,wp_term_relationships rr,( 
-		select r.* from wp_term_relationships r, wp_term_taxonomy t where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id limit 1) ss 
-		where tt.term_taxonomy_id=rr.term_taxonomy_id and rr.object_id=ss.object_id and tt.taxonomy='category' and tt.term_id=te.term_id";
+//	$sql ="
+//		select te.name from wp_terms te,wp_term_taxonomy tt,wp_term_relationships rr,( 
+//		select r.* from wp_term_relationships r, wp_term_taxonomy t where t.term_id=".$term_id." and t.term_taxonomy_id=r.term_taxonomy_id limit 1) ss 
+//		where tt.term_taxonomy_id=rr.term_taxonomy_id and rr.object_id=ss.object_id and tt.taxonomy='category' and tt.term_id=te.term_id";
+	$sql = <<<SQL
+	select t.name from wp_terms t,wp_term_taxonomy p,
+	wp_term_taxonomy c where c.term_id='$term_id' and c.parent=p.term_taxonomy_id and p.term_id=t.term_id
+SQL;
 	global $wpdb;
 	$genres = $wpdb->get_results($sql);
 	foreach($genres as $genre){
@@ -398,7 +402,11 @@ function wcountbycontent($content){
  * @param unknown_type $term_id
  */
 function countTheWordsByTermId($term_id){
-	$sql = "select p.post_content from wp_posts p,wp_terms t,wp_term_taxonomy m where t.term_id = m.term_id and t.term_id = '$term_id'";
+//	$sql = "select p.post_content from wp_posts p,wp_terms t,wp_term_taxonomy m where t.term_id = m.term_id and t.term_id = '$term_id'";
+	$sql = <<<SQL
+	select p.post_content from wp_term_taxonomy m,wp_term_relationships r,
+	wp_posts p where m.term_id='$term_id' and m.term_taxonomy_id = r.term_taxonomy_id and r.object_id=p.id
+SQL;
 	global $wpdb;
 	$lastUpdatePosts = $wpdb->get_results($sql);
 	$countwords = 0;
