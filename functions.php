@@ -477,10 +477,16 @@ function getBookInfo(){
  * get the gener for index show gener don't show blog
  */
 function getGener(){
+//	$seleSql = <<<SQL
+//select t.term_id,t.name,t.slug,x.term_taxonomy_id from wp_terms t left join wp_term_taxonomy x on (t.term_id = x.term_id ) 
+//where t.name != 'Blog' and x.taxonomy='category'
+//order by  t.term_id limit 5
+//SQL;
+
 	$seleSql = <<<SQL
-select t.term_id,t.name,t.slug,x.term_taxonomy_id from wp_terms t left join wp_term_taxonomy x on (t.term_id = x.term_id ) 
-where t.name != 'Blog' and x.taxonomy='category'
-order by  t.term_id limit 5
+select tc.term_id,tc.name,tc.slug,c.term_taxonomy_id from wp_terms tc,wp_term_taxonomy c
+		 where c.parent in(select g.term_taxonomy_id from wp_terms t,wp_term_taxonomy g 
+		 where t.name='Genres' and t.term_id=g.term_id) and tc.term_id=c.term_id order by tc.term_id limit 5
 SQL;
 	global $wpdb;
 	$output = "";
