@@ -1,4 +1,5 @@
 <?php
+include 'ajax_functions.php';
 /* Set max number of excerpt string lengty for output used in catergory-blog.php (http://codex.wordpress.org/Function_Reference/get_the_excerpt)*/
 function the_excerpt_max_charlength($charlength) {
 	$excerpt = get_the_excerpt();
