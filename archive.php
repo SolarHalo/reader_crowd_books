@@ -71,7 +71,9 @@ function AddFavorite(){
 		<p> <?php echo getBoookDescription(getSeriesIDByName($current_category))?></p>
 		<ul>
 			<li><strong>Category:</strong>
-			<?php $category = get_the_category(); ?>
+			<?php //$category = get_the_category(); 
+				$category = getBookGenres(getSeriesIDByName($current_category));
+			?>
 			 <a href="<?php echo get_category_link($category[0]->term_id )?>">
 			 <?php   
 				   echo $category[0]->cat_name
