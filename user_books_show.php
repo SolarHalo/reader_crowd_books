@@ -4,7 +4,7 @@
  */
  get_header(); ?>
   <div class="startbut">
-        <a href="#">Start a New Book</a>
+        <a href="<?php get_site_url(); ?>/?page_id=225">Start a New Book</a>
      </div>
      
      <?php 

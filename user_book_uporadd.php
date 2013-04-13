@@ -13,7 +13,7 @@
         	<a href="#" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
-        	<a href="#"><img src="images/bookcover.gif" class="fl" width="181"  height="270"/></a>
+        	<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/bookcover.gif" class="fl" width="181"  height="270"/></a>
            <textarea class="bor-top booktextbox2">Write your story here</textarea>
             <ul>
             	<li><strong>Category:</strong>

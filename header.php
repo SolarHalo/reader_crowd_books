@@ -42,7 +42,7 @@
                 </li>
                 <li><input type="submit" name="wp-submit" id="wp-submit1" class="input2" value="log in"  style="margin-top:25px;"/></li>
             </ul>
-             <input type="hidden" name="redirect_to" value="<?php echo home_url(); ?>/wp-admin/" />
+             <input type="hidden" name="redirect_to" value="<?php echo home_url(); ?>" />
 			<input type="hidden" name="testcookie" value="1" />
 			<input type="hidden" name="instance" value="1" />
         </form> 
@@ -57,7 +57,7 @@
             	<li><img src="<?php echo get_template_directory_uri(); ?>/images/suerimg.jpg" /></li>
               
                 <li><a href="<?php get_site_url(); ?>/wp-admin"><?php echo$current_user->user_login; ?> Dashboard</a></li>
-                <li class="active"><a href="#">My Book</a></li> 
+                <li class="active"><a href="<?php get_site_url(); ?>/?page_id=223">My Book</a></li> 
                 <li><a href="<?php echo wp_logout_url(); ?>">Log Out</a></li>  
             </ul>
        <?php }?> 
