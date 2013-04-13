@@ -552,5 +552,54 @@ SQL;
 	return $ratingims;
   
 } 
+function vf_widget_activities2($args) {
+		//extract($args);
+
+		// Each widget can store its own options. We keep strings here.
+		$options = get_option(VF_OPTIONS_NAME);
+		$title = vf_get_value('widget-discussions-title', $options, '');
+		$categoryid = (int)vf_get_value('widget-discussions-categoryid', $options, '');
+		$count = (int)vf_get_value('widget-discussions-count', $options, '');
+		$count = 5;
+			
+		$url = vf_get_value('url', $options, '');
+		$link_url = vf_get_link_url($options);
+		$resturl = array($url, '?p=discussions.json');
+		if ($categoryid > 0)
+			$resturl = array($url, '?p=categories/'.$categoryid.'.json');
+			
+//		$DataName = $categoryid > 0 ? 'DiscussionData' : 'Discussions';
+		
+		// Retrieve the latest discussions from the Vanilla API
+		$resturl = vf_combine_paths($resturl, '/');
+		$data = json_decode(vf_rest($resturl));
+		if (!is_object($data))
+			return;
+      
+      if (isset($data->Discussions))
+         $Discussions = $data->Discussions;
+      elseif (isset($data->DiscussionData))
+         $Discussions = $data->DiscussionData;
+      else
+         $Discussions = array();
+      
+      if (empty($Discussions))
+         return;
+
+		// These lines generate our output. Widgets can be very complex
+		// but as you can see here, they can also be very, very simple.
+		 
+		echo '<ul>';
+		$i = 0;
+		foreach ($Discussions as $Discussion) {
+//         var_dump($Discussion);
+			$i++;
+			if ($i > $count)
+				break;
+			$desc = mb_substr($Discussion->Name,0,30,'UTF-8');
+			echo '<li><a href="'.vf_combine_paths(array($link_url, '??page_id=437&discussion/'.$Discussion->DiscussionID.'/'.vf_format_url($Discussion->Name)), '/').'">'.$desc.'</a></li>';
+		}
+		echo '</ul>';
+	}
 endif;
 ?>

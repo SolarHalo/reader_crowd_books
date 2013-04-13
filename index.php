@@ -186,7 +186,7 @@ GradientClose()
 </SCRIPT>
         <div class="clmu fl tag">
         	<h5 class="title">Forum</h5>
-
+<?php vf_widget_activities2(array()); ?>
         </div>
         <div class="clmu fl blog ml15" id="vid">
         	<h5 class="title">Blog>Interviews</h5> 
