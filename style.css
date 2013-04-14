@@ -52,19 +52,19 @@ a{
 a:hover{
 		color:#b80008
 		}
-.login{
+.login2{
 	float:right;
 	width:325px;
 	height:65px;
 	}
-.login li{
+.login2 li{
 	float:left;
 	height:17px;
 	padding-left:5px;
 	vertical-align: top;
 	font-size:10px;
 	}
-.login li b{
+.login2 li b{
 	font-size:14px;
 	}
 .input1{
