@@ -400,6 +400,9 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	height:435px;
 	width:220px;
 	}
+#right_sidebar .mlrp_ul li a img{
+width:35px;
+}
 
 #right_sidebar .ratingsbox{
 	line-height:20px;

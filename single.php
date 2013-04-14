@@ -1,4 +1,12 @@
 <?php get_header(); ?>
+<script type="text/javascript">
+<!--
+var ratingsL10n={"plugin_url":"<?php echo get_site_url(); ?>\/wp-content\/plugins\/wp-postratings","ajax_url":"<?php echo get_site_url(); ?>\/wp-admin\/admin-ajax.php","text_wait":"Please rate only 1 post at a time.","image":"stars_crystal","image_ext":"gif","max":"5","show_loading":"0","show_fading":"0","custom":"0"};var ratings_mouseover_image=new Image();ratings_mouseover_image.src=ratingsL10n.plugin_url+"/images/"+ratingsL10n.image+"/rating_over."+ratingsL10n.image_ext;;
+
+//-->
+</script>
+<script type='text/javascript' src='<?php echo get_site_url(); ?>/wp-content/plugins/wp-postratings/postratings-js.js'></script>
+
 <!--
 	====DO NOT NEED THE SIDE NAV FOR READING PAGE====
 <div id="conter" class="fl">
@@ -40,6 +48,8 @@
 			<a title="Go to homepage" href="<?php echo get_settings('home'); ?>/">Home</a>
 			>
 			<?php the_title(); ?>
+		 <?php if(function_exists('the_ratings')) { the_ratings(); } ?>
+			
 		</h6>
 		
         <div class ="readingText">
