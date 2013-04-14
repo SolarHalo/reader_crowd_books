@@ -11,6 +11,7 @@ var userbookOpr = function (){
 					data: {'method':'addbook','bookname':bookname,'bookDes':bookDes,'progress':progress,'category':category},  
 					success: function(data){
 						var termid = $("#term_id").val(data);
+						alert("the book submit ,please upload the book image");
 					},  
 				});
 			}); 

@@ -38,7 +38,7 @@ if($method == "addbook"){
   {
   	
   	$filebak = explode("." , $_FILES["bookcover"]["name"]);
-  	$filename = $filename.$filebak[count($filebak) -1];
+  	$filename = $filename.$filebak[count($filebak) -1].$_FILES["bookcover"]["name"];
   	
 	  if ($_FILES["file"]["error"] > 0)
 	    {
@@ -51,7 +51,7 @@ if($method == "addbook"){
 	    
 		      move_uploaded_file($_FILES["bookcover"]["tmp_name"],
 		      $file_path .$filename);
-		      $data_array = array("term_id"=>$term_id,'user_id'=>$userid,"icon"=>$file_path);
+		      $data_array = array("term_id"=>$term_id,'user_id'=>$userid,"icon"=>$filename);
 		      $wpdb->insert("wp_orgseriesicons", $data_array);
 		      
 		      echo "success:::". get_template_directory_uri()."/upload/".$filename;

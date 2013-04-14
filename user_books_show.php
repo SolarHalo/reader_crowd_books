@@ -14,8 +14,10 @@
 		select 	te.`name` bookname ,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid 
 		from wp_terms te 
 		JOIN 			wp_term_taxonomy tx 	on te.term_id = tx.term_id and tx.taxonomy = 'series' 
-		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   
+		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID'
 SQL;
+      
+	  
      $books = $wpdb->get_results($sql);
      foreach ($books as $book) {
      	$catname = "";
