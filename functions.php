@@ -266,6 +266,9 @@ function getHighestRation ($showNum){
 	}
 	foreach($books as $key=>$book){
 		$bookname = $books[$key][0];
+		if(empty($bookname)){
+			continue;
+		}
 		$bookurl = $site_uri.'/?series='.$books[$key][3];
 		$term_id = $books[$key][4];
 		$bookImg = getBookImg($term_id);
@@ -287,7 +290,7 @@ function getHighestRation ($showNum){
 		$output.="<li><a href='$bookurl' title='$bookname'><img src='$image' alt='$i.$bookname'/> $i.$bookname </a> <span >$author</span>
 		<span >
 			$rateImage
-		</span><li>"; 
+		</span></li>"; 
 		$i++;
 	}
 	echo $output;
