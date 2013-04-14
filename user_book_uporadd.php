@@ -24,21 +24,44 @@ SQL;
  	}
  }
  ?>
- <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/ajaxfileupload.js" ></script>
+ <script type="text/javascript">
+<!--
+jQuery(document).ready(function($) { 
+	$("#bookname").click(function(){
+		var tex = $("#bookname").val();
+		if(tex=='Write Your Chapter Name here'){
+			$("#bookname").val("");
+		}
+   });
+	$("#bookDes").click(function(){
+		var tex = $("#bookDes").val();
+		if(tex=='Write your story here'){
+			$("#bookDes").val("");
+		}
+   });
+
+	 
+ }); 
+//-->
+</script>
+  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.form.js" ></script>
  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/bookoper.js" ></script>
  <div class="startbut">
         <a href="#">Start a New Book</a>
      </div>
     <div id="conter"class="bookcontent fl"> 
-    	<form> 
-    	<div class="usertitle"><input id="bookname" name="bookname" type="text"  class="h-inpt" value="Write Your Chapter Name here"/></div> 
+    	
+    	<div class="usertitle"><input id="bookname"  name="bookname" type="text"  class="h-inpt" value="Write Your Chapter Name here"/></div> 
         <div class="mark fl">
         	<a href="<?php echo get_site_url(); ?>/?series=the-virtuous-misfortune" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
         	<a href=""><img src="<?php echo get_template_directory_uri(); ?>/images/bookcover.gif" class="fl" width="181"  height="270"/></a>
-           	<input id='bookcover' type='file' name='bookcover' size='20' />
-           	<input type='button' value='上传' onclick="userbookOpr.bookPhoto('<?php echo $operPageUrl;?>')"/>
+           <form id="fileform" enctype='multipart/form-data'>	<input id='bookcover' type='file' name='bookcover' size='20' />
+           	<input type='button' value='upload' onclick="userbookOpr.bookPhoto('<?php echo $operPageUrl;?>')"/>
+           </form>
+           <input type="hidden" id="userid" value="<?php echo $current_user->ID;?>" />
+           <input type="hidden" id="term_id" value="<?php echo $_GET['term_id'] ?>" />
            	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2">Write your story here</textarea>
             <ul>
             	<li><strong>Category:</strong>
@@ -59,7 +82,7 @@ SQL;
                         	$categoryName = $category->catname;
                         	$categoryId = $category->id;
                         ?>
-                        	<option value="<?php echo $categoryId;?>" s><?php echo $categoryName;?></option> 
+                        	<option value="<?php echo $categoryId;?>"><?php echo $categoryName;?></option> 
                         <?php
 						}?>
                             <!-- 
@@ -102,6 +125,6 @@ SQL;
         <div class="total">
         	<a href="javascript:"><font>Add a New CHapter</font> </a>
         </div>
-        </form>  
+        
     </div>
 <?php get_footer(); ?>
