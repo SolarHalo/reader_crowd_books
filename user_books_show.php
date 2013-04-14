@@ -104,7 +104,7 @@ SQL;
            <?php }?>
         </div>
         <div class="total">
-        	<a href="#"><font>Add a New CHapter</font> </a>
+        	<a href="<?php get_site_url(); ?>/?page_id=231&series_id=<?php echo $book->shipid;?>"><font>Add a New CHapter</font> </a>
         </div>
     </div> 
     <?php 

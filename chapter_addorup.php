@@ -4,8 +4,9 @@
  */
  get_header(); ?>
  <?php 
-  $series_id = $_GET['series_id']; 
-  $series_id= "14";
+  $series_id = $_GET['series_id'];  
+  $term = get_term( $series_id,'series');
+  $slug = $term->slug;
  ?>
  <script type="text/javascript">
 <!--
@@ -43,7 +44,7 @@ jQuery(document).ready(function($) {
     	<form action=""> 
     	<div class="usertitle"><input type="text" id="chtitle" name="chtitle" class="h-inpt" value="Write Your Chapter Name here"/></div> 
         <div class="mark fl">
-        	<a href="#" class="viewbook">View Book</a>
+        	<a href="<?php echo get_site_url(); ?>/?series=<?php echo $slug; ?>" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
         	<textarea class="bor-top booktextbox" id="chcotent" name="chcotent" >Write your story here</textarea>
