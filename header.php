@@ -31,7 +31,7 @@
     	 if( 0 == $current_user->ID) {?> 
     	 
        <form name="loginform" id="loginform1" action="/?action=login&instance=1" method="post">
-        	<ul class="login">
+        	<ul class="login2">
             	<li><b>Username</b> <br />
                  <input type="text" class="input1"  name="log" id="user_login1" /><br />
 					<a href="?page_id=4&action=register">Register</a>
