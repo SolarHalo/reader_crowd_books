@@ -23,6 +23,21 @@ SQL;
  		$operPageUrl=$page->uid;
  	}
  }
+ $books = false;
+ if(isset($_GET['termid'])){
+ $termid = $_GET['termid'];
+ 
+ 
+ $sql = <<<SQL
+		select 	te.`name` bookname ,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id termid,
+		org.words  words, org.progress  progress from wp_terms te 
+		JOIN 			wp_term_taxonomy tx 	on te.term_id = tx.term_id and tx.taxonomy = 'series' 
+		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID and te.term_id=$termid'
+SQL;
+      
+	  
+     $books = $wpdb->get_row($sql);
+ }
  ?>
  <script type="text/javascript">
 <!--
@@ -51,18 +66,18 @@ jQuery(document).ready(function($) {
      </div>
     <div id="conter"class="bookcontent fl"> 
     	
-    	<div class="usertitle"><input id="bookname"  name="bookname" type="text"  class="h-inpt" value="Write Your Chapter Name here"/></div> 
+    	<div class="usertitle"><input id="bookname"  name="bookname" type="text"  class="h-inpt" value="<?php if ($books) echo $books->bookname; else echo "Write Your Chapter Name here";?>"/></div> 
         <div class="mark fl">
         	<a href="<?php echo get_site_url(); ?>/?series=the-virtuous-misfortune" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
-        	<a href=""><img id="bookcoverimg" src="<?php echo get_template_directory_uri(); ?>/images/bookcover.gif" class="fl" width="181"  height="270"/></a>
+        	<a href=""><img id="bookcoverimg" src="<?php echo get_template_directory_uri(); ?><?php if($books) echo "/upload/".$books->bookico; else echo "/images/bookcover.gif";?>" class="fl" width="181"  height="270"/></a>
            <form id="fileform" enctype='multipart/form-data'>	<input id='bookcover' type='file' name='bookcover' size='20' />
            	<input type='button' value='upload' onclick="userbookOpr.bookPhoto('<?php echo $operPageUrl;?>')"/>
            </form>
            <input type="hidden" id="userid" value="<?php echo $current_user->ID;?>" />
-           <input type="hidden" id="term_id" value="<?php echo $_GET['term_id'] ?>" />
-           	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2">Write your story here</textarea>
+           <input type="hidden" id="term_id" value="<?php echo $_GET['termid']; ?>" />
+           	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2"><?php if ($books) echo $books->bookdes; else echo "Write your story here";?></textarea>
             <ul>
             	<li><strong>Category:</strong>
                 	<div class="bookmenubut">
@@ -98,11 +113,11 @@ SQL;
                          </select>
                     </div>
                 </li>
-                <li><strong>Words:</strong>0</li>
+                <li><strong>Words:</strong><?php if($books) echo $books->words; else echo "0";?></li>
                 <li><strong>Progress:</strong>
                 <select id="progress"  name="progress" >
-                	<option value="0">In-Progress</option>
-                	<option value="1">Finished</option>
+                	<option value="0" <?php if($books) { if(intval($books->progress) == 0) echo "selected"; }?>>In-Progress</option>
+                	<option value="1" <?php if($books) { if(intval($books->progress) == 1) echo "selected"; }?>>Finished</option>
                 </select>
                 	<!--  
                 	<div class="bookmenubut">

@@ -6,12 +6,15 @@ var userbookOpr = function (){
 				var progress = $('#progress').val();
 				var category = $('#category').val();
 				var bookname = $('#bookname').val();
+				var termid = $("#term_id").val();
+				var userid = $('#userid').val();
 				$.ajax({ 
 					url: pageUrl,  
-					data: {'method':'addbook','bookname':bookname,'bookDes':bookDes,'progress':progress,'category':category},  
+					data: {'method':'addbook','bookname':bookname,'bookDes':bookDes,'progress':progress,
+						'category':category, "termid": termid, "user_id": userid},  
 					success: function(data){
 						var termid = $("#term_id").val(data);
-						alert("the book submit ,please upload the book image");
+						//alert("the book submit ,please upload the book image");
 					},  
 				});
 			}); 

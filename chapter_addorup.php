@@ -5,7 +5,7 @@
  get_header(); ?>
  <?php 
   $series_id = $_GET['series_id']; 
-  $series_id= "14";
+  //$series_id= "14";
  ?>
  <script type="text/javascript">
 <!--
@@ -25,12 +25,12 @@ jQuery(document).ready(function($) {
 
 	$('#btn_ajax').click(function () {
 	     $.post('<?php echo admin_url( 'admin-ajax.php' );?>', {
-	       action: 'my_ajax_action', // ×ÔÈ¡Ò»‚€actionµÄÃû·Q
-	       post_content: $('#chcotent').val(), // ¸½ÉÏµÄ…¢”µ
+	       action: 'my_ajax_action', // ï¿½ï¿½È¡Ò»ï¿½ï¿½actionï¿½ï¿½ï¿½ï¿½Q
+	       post_content: $('#chcotent').val(), // ï¿½ï¿½ï¿½ÏµÄ…ï¿½ï¿½ï¿½
 	       post_title:$("#chtitle").val(),
 	       series_id:<?php echo $series_id ;?>
 	     }, function(data) {
-	       alert(data); // ®”AJAXÌÀíÍê®…£¬¾Í°Ñ»Ø‚÷µÄÙYÁÏalert³öí
+	       alert(data); // ï¿½ï¿½AJAXÌï¿½ï¿½ï¿½ê®…ï¿½ï¿½ï¿½Í°Ñ»Ø‚ï¿½ï¿½ï¿½Yï¿½ï¿½alertï¿½ï¿½ï¿½
 	     });
 	   });
  }); 
@@ -49,10 +49,10 @@ jQuery(document).ready(function($) {
         	<textarea class="bor-top booktextbox" id="chcotent" name="chcotent" >Write your story here</textarea>
         </div>
          <div class="startbut bor-top">
-            <a href="#" id="btn_ajax">Publish</a>
+            <a href="javascript:void(0);" id="btn_ajax">Publish</a>
          </div> 
         <div class="total">
-        	<a href="#"><font>Add a New CHapter</font> </a>
+        	<a href="<?php get_site_url();?>&series_id=<?php echo $series_id ?>"><font>Add a New CHapter</font> </a>
         </div>
         </form>
     </div>  

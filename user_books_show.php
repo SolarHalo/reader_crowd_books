@@ -11,8 +11,8 @@
      global $wpdb;
      
      $sql = <<<SQL
-		select 	te.`name` bookname ,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid 
-		from wp_terms te 
+		select 	te.`name` bookname ,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id as termid
+		, org.words  words, org.progress  progress from wp_terms te 
 		JOIN 			wp_term_taxonomy tx 	on te.term_id = tx.term_id and tx.taxonomy = 'series' 
 		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID'
 SQL;
@@ -28,6 +28,26 @@ SQL;
      	}
      	//
      	
+     	
+ 
+ $pageSql = <<<SQL
+select post.guid uid , me.meta_value meValue from wp_postmeta me ,wp_posts post 
+where me.meta_key ='_wp_page_template' 
+and me.meta_value in ('user_book_uporadd.php', 'chapter_addorup.php') 
+and me.post_id =  post.id
+SQL;
+ $pages = $wpdb->get_results($pageSql);
+ $chapterPageUrl = "";
+ $operPageUrl = "";
+ foreach ($pages as $page) {
+ 	echo $page->meValue;
+ 	if("user_book_uporadd.php"==$page->meValue){
+ 		$operPageUrl=$page->uid;
+ 	}else if("chapter_addorup.php" == $page->meValue){
+ 		$chapterPageUrl= $page->uid;
+ 	}
+ }
+     	
      ?>
      
     <div id="conter"class="bookcontent fl"> 
@@ -36,7 +56,7 @@ SQL;
         	<a href="#" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
-        	<a href="#"><img src="<?php echo $book->bookico ;?>" class="fl" width="181"  height="270"/></a>
+        	<a href="#"><img src="<?php echo  get_template_directory_uri()."/upload/".$book->bookico ;?>" class="fl" width="181"  height="270"/></a>
             <p>
             	<?php echo $book->bookdes ;?>
             </p>
@@ -56,10 +76,10 @@ SQL;
                          -->
                     </div>
                 </li>
-                <li><strong>Words:</strong>17766</li>
+                <li><strong>Words:</strong><?php echo $book->words; ?></li>
                 <li><strong>Progress:</strong>
                 	<div class="bookmenubut">
-                    	<span>Finished</span>
+                    	<span><?php if($book->progress == 0) echo "In-Progress"; else echo "Finished"; ?></span>
                         <ul class="bookmenu">
                             <li><a href="#">In-Progress</a></li>
                             <li><a href="#">Finished</a></li> 
@@ -72,7 +92,7 @@ SQL;
             </ul>
         </div>
          <div class="startbut bor-top">
-            <a href="#">Update Book lnfo.</a>
+            <a href="<?php echo $operPageUrl;?>&termid=<?php echo $book->termid;?>">Update Book lnfo.</a>
          </div>
         <div class="bookboxlist">
         	<ul class="list-title">
@@ -106,7 +126,7 @@ SQL;
            <?php }?>
         </div>
         <div class="total">
-        	<a href="<?php get_site_url(); ?>/?page_id=231&series_id=<?php echo $book->shipid;?>"><font>Add a New CHapter</font> </a>
+        	<a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>"><font>Add a New CHapter</font> </a>
         </div>
     </div> 
     <?php 
