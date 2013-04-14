@@ -32,7 +32,7 @@ SQL;
 		select 	te.`name` bookname ,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id termid,
 		org.words  words, org.progress  progress from wp_terms te 
 		JOIN 			wp_term_taxonomy tx 	on te.term_id = tx.term_id and tx.taxonomy = 'series' 
-		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID and te.term_id=$termid'
+		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID' and te.term_id='$termid'
 SQL;
       
 	  
@@ -76,7 +76,7 @@ jQuery(document).ready(function($) {
            	<input type='button' value='upload' onclick="userbookOpr.bookPhoto('<?php echo $operPageUrl;?>')"/>
            </form>
            <input type="hidden" id="userid" value="<?php echo $current_user->ID;?>" />
-           <input type="hidden" id="term_id" value="<?php echo $_GET['termid']; ?>" />
+           <input type="hidden" id="term_id" value="<?php  $termid ?>" />
            	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2"><?php if ($books) echo $books->bookdes; else echo "Write your story here";?></textarea>
             <ul>
             	<li><strong>Category:</strong>

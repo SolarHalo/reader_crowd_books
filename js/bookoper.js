@@ -15,6 +15,8 @@ var userbookOpr = function (){
 					success: function(data){
 						var termid = $("#term_id").val(data);
 						//alert("the book submit ,please upload the book image");
+						console.log(data);
+						alert(data);
 					},  
 				});
 			}); 
@@ -39,11 +41,12 @@ var userbookOpr = function (){
 					type: "post",
             		url: urls,
             		success: function(data){
-            			data = data.split(":::");
+            			var datas = data.split(":::");
             			if(data == "error"){
             				alert(data[1]);
             			}else{
-            				$("#bookcoverimg").attr("src", data[1]);
+            				$("#bookcoverimg").attr("src", datas[1]);
+            				console.log(datas);
             			}
             		}
 				});

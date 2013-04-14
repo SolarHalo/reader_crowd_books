@@ -12,11 +12,12 @@ if($method == "addbook"){
 	$userid = $_GET['user_id'];
 	$term_id = "";
 	$slug = str_replace(" ","-",$bookname);
-	$data_array = array("name"=>$bookname,'slug'=>$slug,'term_group'=>0);
-	
-	
-	if(isset($_GET['termid'])){
-		$term_id = $_GET['termid'];
+	$data_array = array("name"=>$bookname,'slug'=>$slug,'term_group'=>0); 
+
+	if(isset($_GET['term_id'])){
+			 
+		$term_id = $_GET['term_id'];
+		echo $term_id;
 		$wpdb->update("wp_terms",$data_array, array('term_id'=> $term_id));
 		
 		$data_array = array("term_id"=>$term_id,'taxonomy'=>'series','description'=>$bookDes,'parent'=>$category);
@@ -25,18 +26,22 @@ if($method == "addbook"){
 		$data_array = array("term_id"=>$term_id,'words'=>$len,"progress"=>$progress);
 		$wpdb->update("wp_orgseriesicons",$data_array, array("term_id"=>$term_id));
 	}else{
+	
 		$wpdb->insert("wp_terms",$data_array);
 		$books = $wpdb->get_results("select term_id from wp_terms where name = '".$bookname."'");
+		
 		foreach ($books as $book){
 			$term_id = $book->term_id;
 			break;
 		}
+		
 		$data_array = array("term_id"=>$term_id,'taxonomy'=>'series','description'=>$bookDes,'parent'=>$category);
 		$wpdb->insert("wp_term_taxonomy",$data_array);
 		
 		$len = strlen($bookDes);
 		$data_array = array("user_id"=>$userid, "term_id"=>$term_id,'words'=>$len,"progress"=>$progress);
 		$wpdb->insert("wp_orgseriesicons",$data_array);
+	    
 	}
 	//wp_orgseriesicons
 	
@@ -65,7 +70,7 @@ if($method == "addbook"){
 		      $file_path .$filename);
 		      
 		      $data_array = array("term_id"=>$term_id,'user_id'=>$userid,"icon"=>$filename);
-		      $wpdb->upadte("wp_orgseriesicons", $data_array, array("term_id"=>$term_id));
+		      $wpdb->update("wp_orgseriesicons", $data_array, array("term_id"=>$term_id));
 		      
 		      echo "success:::". get_template_directory_uri()."/upload/".$filename;
 	      

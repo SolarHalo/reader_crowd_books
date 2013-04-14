@@ -25,12 +25,12 @@ jQuery(document).ready(function($) {
 
 	$('#btn_ajax').click(function () {
 	     $.post('<?php echo admin_url( 'admin-ajax.php' );?>', {
-	       action: 'my_ajax_action', // ��ȡһ��action����Q
-	       post_content: $('#chcotent').val(), // ���ϵą���
+	       action: 'my_ajax_action', 
+	       post_content: $('#chcotent').val(),  
 	       post_title:$("#chtitle").val(),
 	       series_id:<?php echo $series_id ;?>
 	     }, function(data) {
-	       alert(data); // ��AJAX̎���ꮅ���Ͱѻ؂���Y��alert���
+	       alert(data);  
 	     });
 	   });
  }); 

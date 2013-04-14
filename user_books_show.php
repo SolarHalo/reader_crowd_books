@@ -17,8 +17,7 @@
 		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID'
 SQL;
       
-	  
-     $books = $wpdb->get_results($sql);
+      $books = $wpdb->get_results($sql);
      foreach ($books as $book) {
      	$catname = "";
      	$catSql = "select te.`name`  catname from wp_terms te ,wp_term_taxonomy tx where tx.term_id = te.term_id and tx.term_taxonomy_id = '".$book->parent."'";
@@ -40,7 +39,7 @@ SQL;
  $chapterPageUrl = "";
  $operPageUrl = "";
  foreach ($pages as $page) {
- 	echo $page->meValue;
+  
  	if("user_book_uporadd.php"==$page->meValue){
  		$operPageUrl=$page->uid;
  	}else if("chapter_addorup.php" == $page->meValue){
