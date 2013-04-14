@@ -56,7 +56,7 @@ jQuery(document).ready(function($) {
         	<a href="<?php echo get_site_url(); ?>/?series=the-virtuous-misfortune" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
-        	<a href=""><img src="<?php echo get_template_directory_uri(); ?>/images/bookcover.gif" class="fl" width="181"  height="270"/></a>
+        	<a href=""><img id="bookcoverimg" src="<?php echo get_template_directory_uri(); ?>/images/bookcover.gif" class="fl" width="181"  height="270"/></a>
            <form id="fileform" enctype='multipart/form-data'>	<input id='bookcover' type='file' name='bookcover' size='20' />
            	<input type='button' value='upload' onclick="userbookOpr.bookPhoto('<?php echo $operPageUrl;?>')"/>
            </form>
