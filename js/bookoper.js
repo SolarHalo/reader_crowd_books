@@ -10,7 +10,7 @@ var userbookOpr = function (){
 					url: pageUrl,  
 					data: {'method':'addbook','bookname':bookname,'bookDes':bookDes,'progress':progress,'category':category},  
 					success: function(data){
-						alert(data);
+						var termid = $("#term_id").val(data);
 					},  
 				});
 			}); 
@@ -19,39 +19,30 @@ var userbookOpr = function (){
 		bookPhoto:function(pageUrl){
 			jQuery(document).ready(function($) { 
 				
+				var termid = $("#term_id").val();
+				if(termid == ""){
+					alert("You must complete other form before upload Book Cover!");
+					return ;
+				}
+				
 				var method = "bookPhoto" ;
-				var bookDes = $('#bookDes').val();
-				var progress = $('#progress').val();
-				var category = $('#category').val();
-				var bookname = $('#bookname').val();
 				var userid = $('#userid').val();
 				
-				var urls = pageUrl+'&method='+method+"&bookname="+bookname+"&bookDes="+bookDes+"&progress="+progress+"&category="+category+"&userid="+userid;
+				var urls = pageUrl+'&method='+method+"&termid="+termid+"&userid="+userid;
 				urls = encodeURI(urls);
 				console.log(urls);
 				$("#fileform").ajaxSubmit({
 					type: "post",
             		url: urls,
             		success: function(data){
-            			console.log(data);
+            			data = data.split(":::");
+            			if(data == "error"){
+            				alert(data[1]);
+            			}else{
+            				$("#bookcoverimg").attr("src", data[1]);
+            			}
             		}
 				});
-				/**
-				jQuery.ajaxFileUpload({
-					type:'post',
-					url:urls,
-			      	secureuri:false,
-			      	fileElementId:'bookcover',
-			     	dataType:'json',
-			     	data:{'method': method},
-			     	success:function (data, status){
-			     		alert(data);
-			      	},
-			      	error:function (data, status, e){
-			      		alert("error");
-			        }
-			    });
-**/
 			}); 
 		}
 	}
