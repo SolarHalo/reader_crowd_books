@@ -28,6 +28,7 @@ jQuery(document).ready(function($) {
 	       action: 'my_ajax_action', 
 	       post_content: $('#chcotent').val(),  
 	       post_title:$("#chtitle").val(),
+	       post_id:$("#post_id").val(),
 	       series_id:<?php echo $series_id ;?>
 	     }, function(data) {
 	       alert(data);  
@@ -36,17 +37,39 @@ jQuery(document).ready(function($) {
  }); 
 //-->
 </script>
+<?php 
+ $post_id = $_GET['post_id'];
+ if(isset($post_id)){
+ 	 $post_7 = get_post($post_id); 
+     $title = $post_7->post_title;
+     $content = $post_7->post_content; 
+ }
+?>
  <div class="chapter">
         chapter
      </div>
     <div id="conter"class="bookcontent fl">
     	<form action=""> 
-    	<div class="usertitle"><input type="text" id="chtitle" name="chtitle" class="h-inpt" value="Write Your Chapter Name here"/></div> 
+    	<div class="usertitle">
+    	<input type="text" id="chtitle" name="chtitle" class="h-inpt" 
+    	<?php  if(isset($post_id)){?>
+    	value="<?php echo $title?>"/>
+    	<?php }else{?>
+    	value="Write Your Chapter Name here"/>
+    	<?php }?>
+    	<input type="hidden" id="post_id" value="<?php echo $post_id?>"/>
+    	</div> 
         <div class="mark fl">
         	<a href="#" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
-        	<textarea class="bor-top booktextbox" id="chcotent" name="chcotent" >Write your story here</textarea>
+        	
+        	<?php  if(isset($post_id)){?>
+    	 <textarea class="bor-top booktextbox" id="chcotent" name="chcotent" ><?php echo $content?></textarea>
+    	<?php }else{?>
+<textarea class="bor-top booktextbox" id="chcotent" name="chcotent" >Write your story here</textarea>
+    	<?php }?>
+        
         </div>
          <div class="startbut bor-top">
             <a href="javascript:void(0);" id="btn_ajax">Publish</a>

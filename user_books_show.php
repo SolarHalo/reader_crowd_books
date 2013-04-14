@@ -102,7 +102,7 @@ SQL;
             </ul>
             <?php 
             $chapterSql = <<<SQL
-		     	select post.ID id, post.post_name postname,DATE_FORMAT(post.post_modified,'%d/%m/%Y') postdate 
+		     	select post.ID id,post.post_content pcontent, post.post_title postname,DATE_FORMAT(post.post_modified,'%d/%m/%Y') postdate 
 		     	from wp_term_relationships ship
 		     	JOIN wp_posts post
 		     	on post.ID = ship.object_id and
@@ -115,11 +115,13 @@ SQL;
             foreach ($chapters as $chapter) {
             	$chaptername = $chapter->postname ;
             	$chapterdate = $chapter->postdate ;
+            	$post_id = $chapter->id ;
+            	$pcontent = $chapter->pcontent;
             ?>
             <ul>
             	<li class="titleChapter"><?php echo ++$chapterIndex;?></li>
-                <li class="titleContent2"><?php echo $chaptername;?><a href="#">edit</a></li>
-                <li class="titleWords">1221</li> 
+                <li class="titleContent2"><?php echo $chaptername;?><a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>">edit</a></li>
+                <li class="titleWords"><?php echo wcountbycontent($pcontent);?></li> 
                 <li class="titleLast"><?php echo $chapterdate;?></li> 
             </ul>
            <?php }?>
