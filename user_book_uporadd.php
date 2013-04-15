@@ -66,7 +66,7 @@ jQuery(document).ready(function($) {
      </div>
     <div id="conter"class="bookcontent fl"> 
     	
-    	<div class="usertitle"><input id="bookname"  name="bookname" type="text"  class="h-inpt" value="<?php if ($books) echo $books->bookname; else echo "Write Your Chapter Name here";?>"/></div> 
+    	<div class="usertitle"><input id="bookname"  name="bookname" type="text"  class="h-inpt" value="<?php if ($books) echo $books->bookname; else echo "Write Your Book Title here";?>"/></div> 
         <div class="mark fl">
         	<a href="<?php echo get_site_url(); ?>/?series=the-virtuous-misfortune" class="viewbook">View Book</a>
         </div> 
