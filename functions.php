@@ -150,7 +150,7 @@ function getTopReviewd ($showNum){
 }
 
 function getBookImg($term_id,$user_id=null){
-	$sql = "select * from wp_orgSeriesIcons where term_id=".$term_id;
+	$sql = "select * from wp_orgseriesicons where term_id=".$term_id;
 	if($user_id!=null){
 		$sql.=" and user_id=".$term_id;
 	}	
@@ -494,8 +494,8 @@ function getGener(){
 
 	$seleSql = <<<SQL
 select tc.term_id,tc.name,tc.slug,c.term_taxonomy_id from wp_terms tc,wp_term_taxonomy c
-		 where c.parent in(select g.term_taxonomy_id from wp_terms t,wp_term_taxonomy g 
-		 where t.name='Genres' and t.term_id=g.term_id) and tc.term_id=c.term_id order by tc.term_id limit 5
+		 where c.parent in(select g.term_id from wp_terms t,wp_term_taxonomy g 
+		 where t.name='Genres' and t.term_id=g.term_id) and tc.term_id=c.term_id order by tc.term_id limit 6
 SQL;
 	global $wpdb;
 	$output = "";

@@ -89,7 +89,7 @@ jQuery(document).ready(function($) {
 						select ste.term_id id,ste.`name` catname 
 						from wp_terms ste
 						join wp_term_taxonomy  stx 		on stx.term_id = ste.term_id 
-						join wp_term_taxonomy  tx 		on tx.term_taxonomy_id = stx.parent 
+						join wp_term_taxonomy  tx 		on tx.term_id = stx.parent 
 						join wp_terms te 							on te.term_id = tx.term_id and te.`name` = 'Genres'
 SQL;
                         $categorys = $wpdb->get_results($sql);

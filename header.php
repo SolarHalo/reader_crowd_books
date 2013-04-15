@@ -57,7 +57,7 @@
             	<li><img src="<?php echo get_template_directory_uri(); ?>/images/suerimg.jpg" /></li>
               
                 <li><a href="<?php get_site_url(); ?>/wp-admin"><?php echo$current_user->user_login; ?> Dashboard</a></li>
-                <li class="active"><a href="<?php get_site_url(); ?>/?page_id=223">My Book</a></li> 
+                <li class="active"><a href="<?php get_site_url(); ?>/?page_id=517">My Book</a></li> 
                 <li><a href="<?php echo wp_logout_url(); ?>">Log Out</a></li>  
             </ul>
        <?php }?> 
@@ -67,7 +67,7 @@
             	<span><input type="text"  id="search_input"   name="s" value="" class="search"/></span><input type="submit" class="input2" value="Search" />
             	</form>
             </div>
-            <span class="write"><a href="<?php echo site_url(); ?>/wp-admin/post-new.php">write</a></span>
+            <span class="write"><a href="<?php get_site_url(); ?>/?page_id=522">write</a></span>
         <ul class="nav">  
         		<?php wp_nav_menu( array('container' => false,"depth"=>1)); ?>
         		

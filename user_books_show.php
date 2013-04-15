@@ -4,7 +4,7 @@
  */
  get_header(); ?>
   <div class="startbut">
-        <a href="<?php get_site_url(); ?>/?page_id=225">Start a New Book</a>
+        <a href="<?php get_site_url(); ?>/?page_id=522">Start a New Book</a>
      </div>
      
      <?php 
@@ -20,7 +20,7 @@ SQL;
       $books = $wpdb->get_results($sql);
      foreach ($books as $book) {
      	$catname = "";
-     	$catSql = "select te.`name`  catname from wp_terms te ,wp_term_taxonomy tx where tx.term_id = te.term_id and tx.term_taxonomy_id = '".$book->parent."'";
+     	$catSql = "select te.`name`  catname from wp_terms te ,wp_term_taxonomy tx where tx.term_id = te.term_id and tx.term_id = '".$book->parent."'";
      	$cats = $wpdb->get_results($catSql);
      	foreach ($cats as $cat) {
      		$catname = $cat->catname;
@@ -75,7 +75,7 @@ SQL;
                          -->
                     </div>
                 </li>
-                <li><strong>Words:</strong><?php echo $book->words; ?></li>
+                <li><strong>Words:</strong><?php echo countTheWordsByTermId($book->termid);?></li>
                 <li><strong>Progress:</strong>
                 	<div class="bookmenubut">
                     	<span><?php if($book->progress == 0) echo "In-Progress"; else echo "Finished"; ?></span>
