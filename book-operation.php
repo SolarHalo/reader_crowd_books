@@ -22,9 +22,16 @@ if($method == "addbook"){
 		
 		$data_array = array("term_id"=>$term_id,'taxonomy'=>'series','description'=>$bookDes,'parent'=>$category);
 		$wpdb->update("wp_term_taxonomy",$data_array, array("term_id" =>$term_id ));
-		$len = strlen($bookDes);
-		$data_array = array("term_id"=>$term_id,'words'=>$len,"progress"=>$progress);
-		$wpdb->update("wp_orgseriesicons",$data_array, array("term_id"=>$term_id));
+		
+		$len = str_word_count($bookDes);
+		//$data_array = array("term_id"=>$term_id,'words'=>$len,"progress"=>$progress,"modifytime"=>new DateTime());
+		//$wpdb->update("wp_orgseriesicons",$data_array, array("term_id"=>$term_id));
+		$wpdb->query(
+			"UPDATE wp_orgseriesicons  
+			SET words = ".$len." , progress =".$progress.",modifytime=SYSDATE() 
+			WHERE term_id = '".$term_id."'"
+		);
+		
 	}else{
 	
 		$wpdb->insert("wp_terms",$data_array);
@@ -38,13 +45,15 @@ if($method == "addbook"){
 		$data_array = array("term_id"=>$term_id,'taxonomy'=>'series','description'=>$bookDes,'parent'=>$category);
 		$wpdb->insert("wp_term_taxonomy",$data_array);
 		
-		$len = strlen($bookDes);
-		$data_array = array("user_id"=>$userid, "term_id"=>$term_id,'words'=>$len,"progress"=>$progress);
-		$wpdb->insert("wp_orgseriesicons",$data_array);
-	    
+		$len = str_word_count($bookDes);
+		//$data_array = array("user_id"=>$userid, "term_id"=>$term_id,'words'=>$len,"progress"=>$progress,"modifytime"=>new DateTime());
+		//$wpdb->insert("wp_orgseriesicons",$data_array);
+		$wpdb->query(
+				"insert into wp_orgseriesicons(term_id,user_id,progress,words,modifytime) 
+				values('".$term_id."','".$userid."','".$progress."',".$len.", SYSDATE())"
+		);
 	}
 	//wp_orgseriesicons
-	
 	
 	echo $term_id;
 }else if("bookPhoto"== $method){ 

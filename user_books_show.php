@@ -12,9 +12,10 @@
      
      $sql = <<<SQL
 		select 	te.`name` bookname ,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id as termid
-		, org.words  words, org.progress  progress from wp_terms te 
+		, org.words  words, org.progress  progress ,DATE_FORMAT(org.modifytime,'%d/%m/%Y') modify from wp_terms te 
 		JOIN 			wp_term_taxonomy tx 	on te.term_id = tx.term_id and tx.taxonomy = 'series' 
-		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID'
+		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID' 
+		order by org.modifytime desc 
 SQL;
       
       $books = $wpdb->get_results($sql);
@@ -50,7 +51,7 @@ SQL;
      ?>
      
     <div id="conter"class="bookcontent fl"> 
-    	<div class="usertitle"><?php echo $book->bookname ;?><span>Last Update:<font>13/03/2013</font></span></div> 
+    	<div class="usertitle"><?php echo $book->bookname ;?><span>Last Update:<font><?php echo $book->modify ;?></font></span></div> 
         <div class="mark fl">
         	<a href="#" class="viewbook">View Book</a>
         </div> 
