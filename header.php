@@ -33,11 +33,11 @@
        <form name="loginform" id="loginform1" action="/?action=login&instance=1" method="post">
         	<ul class="login2">
             	<li><b>Username</b> <br />
-                 <input type="text" class="input1"  name="log" id="user_login1" /><br />
+                 <input type="text" class="input1"  name="log" id="user_login1"  tabIndex=1/><br />
 					<a href="?page_id=4&action=register">Register</a>
                 </li>
                 <li><b>Password</b> <br />
-                <input type="password" name="pwd" id="user_pass1"  class="input1" /><br />
+                <input type="password" name="pwd" id="user_pass1"  class="input1" tabIndex=2 /><br />
 					<a href="?page_id=4&action=lostpassword">Forgot</a>
                 </li>
                 <li><input type="submit" name="wp-submit" id="wp-submit1" class="input2" value="log in"  style="margin-top:25px;"/></li>

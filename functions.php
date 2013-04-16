@@ -501,7 +501,7 @@ SQL;
 	$output = "";
 	$geners = $wpdb->get_results($seleSql);
 	foreach($geners as $gener){ 	
-		$output .= "<li><a href='".get_category_link( $gener->term_taxonomy_id )."'>$gener->name</a></li>";
+		$output .= "<li><a href='".get_category_link( $gener->term_id )."'>$gener->name</a></li>";
 	}
 	echo $output;
 }
@@ -605,8 +605,13 @@ function vf_widget_activities2($args) {
 			$i++;
 			if ($i > $count)
 				break;
-			$desc = mb_substr($Discussion->Name,0,30,'UTF-8');
-			echo '<li><a href="'.vf_combine_paths(array($link_url, '??page_id=437&discussion/'.$Discussion->DiscussionID.'/'.vf_format_url($Discussion->Name)), '/').'">'.$desc.'</a></li>';
+			$desc = $Discussion->Name;
+			$desc = str_replace("Reader Crowd  » ","",$desc);
+			$desc = mb_substr($desc,0,36,'UTF-8');
+			
+			//echo '<li><a href="'.vf_combine_paths(array($link_url, '?page_id=437&discussion/'.$Discussion->DiscussionID.'/'.vf_format_url($Discussion->Name)), '/').'">'.$desc.'</a></li>';
+			echo '<li><a href="'.vf_combine_paths(array(get_site_url(), '?page_id=437&discussion/'.$Discussion->DiscussionID.'/'.vf_format_url($Discussion->Name)), '/').'">'.$desc.'</a></li>';
+			
 		}
 		echo '</ul>';
 	}
