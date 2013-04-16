@@ -59,7 +59,24 @@ if($method == "addbook"){
 	//wp_orgseriesicons
 	
 	echo $term_id;
-}else if("bookPhoto"== $method){ 
+} else if("delchapter" == $method){
+	global $wpdb;
+	$chapterid = $_GET['chapterid'];
+	
+	wp_delete_post( $chapterid, true );
+	
+	$wpdb->query(" DELETE from wp_postmeta where post_id ='".$chapterid."'");
+	echo $chapterid;
+} else if ("delbook" == $method){
+	global $wpdb;
+	$term_id = $_GET['term_id'];
+	//删除 post
+	$wpdb->query(" DELETE from wp_term_taxonomy where term_id ='".$term_id."'");
+	$wpdb->query(" DELETE from wp_term_relationships where term_id ='".$term_id."'");
+	$wpdb->query(" DELETE from wp_terms where term_id ='".$term_id."'");
+	
+	
+} else if("bookPhoto"== $method){ 
 	$term_id = $_GET['termid'];
 	$userid  = $_GET['userid'];
 	$filename = microtime()*1000000;

@@ -4,10 +4,10 @@
  */
 wp_enqueue_script("jquery");
 
- get_header(); 
- global $wpdb;
+get_header(); 
+global $wpdb;
  
- $pageSql = <<<SQL
+$pageSql = <<<SQL
 select post.guid uid , me.meta_value meValue from wp_postmeta me ,wp_posts post 
 where me.meta_key ='_wp_page_template' 
 and me.meta_value in ('user_books_show.php','book-operation.php') 

@@ -2,13 +2,32 @@
  /*
  Template Name: user_book_show
  */
- get_header(); ?>
+ get_header(); 
+ global $wpdb;
+ 
+$pageSql = <<<SQL
+select post.guid uid , me.meta_value meValue from wp_postmeta me ,wp_posts post 
+where me.meta_key ='_wp_page_template' 
+and me.meta_value in ('user_books_show.php','book-operation.php') 
+and me.post_id =  post.id
+SQL;
+$pages = $wpdb->get_results($pageSql);
+$viewPageUrl = "";
+$operPageUrl = "";
+foreach ($pages as $page) {
+	if("user_books_show.php"==$page->meValue){
+		$viewPageUrl=$page->uid;
+	}else{
+		$operPageUrl=$page->uid;
+	}
+}
+?>
+ <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/bookoper.js" ></script>
   <div class="startbut">
         <a href="<?php get_site_url(); ?>/?page_id=522">Start a New Book</a>
      </div>
      
      <?php 
-     global $wpdb;
      
      $sql = <<<SQL
 		select 	te.`name` bookname ,te.`slug` slug,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id as termid
@@ -125,7 +144,7 @@ SQL;
             	<li class="titleChapter"><?php echo ++$chapterIndex;?></li>
                 <li class="titleContent2"><?php echo $chaptername;?>
                  <a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>">edit</a>
-                 <a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>">delete</a>
+                 <a href="javascript:void(0);" onclick="javascript:userbookOpr.chapterDel('<?php echo $operPageUrl;?>','<?php echo $post_id;?>')">delete</a>
                 </li>
                 <li class="titleWords"><?php echo wcountbycontent($pcontent);?></li> 
                 <li class="titleLast"><?php echo $chapterdate;?></li> 
