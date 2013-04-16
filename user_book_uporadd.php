@@ -29,7 +29,7 @@ SQL;
  
  
  $sql = <<<SQL
-		select 	te.`name` bookname ,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id termid,
+		select 	te.`name` bookname ,te.`slug` slug,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id termid,
 		org.words  words, org.progress  progress from wp_terms te 
 		JOIN 			wp_term_taxonomy tx 	on te.term_id = tx.term_id and tx.taxonomy = 'series' 
 		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID' and te.term_id='$termid'
@@ -44,7 +44,7 @@ SQL;
 jQuery(document).ready(function($) { 
 	$("#bookname").click(function(){
 		var tex = $("#bookname").val();
-		if(tex=='Write Your Chapter Name here'){
+		if(tex=='Write Your Book Title here'){
 			$("#bookname").val("");
 		}
    });
@@ -62,21 +62,23 @@ jQuery(document).ready(function($) {
   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.form.js" ></script>
  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/bookoper.js" ></script>
  <div class="startbut">
-        <a href="#">Start a New Book</a>
+        <a href="javascript:window.location.reload()">Start a New Book</a>
      </div>
     <div id="conter"class="bookcontent fl"> 
     	
     	<div class="usertitle"><input id="bookname"  name="bookname" type="text"  class="h-inpt" value="<?php if ($books) echo $books->bookname; else echo "Write Your Book Title here";?>"/></div> 
         <div class="mark fl">
-        	<a href="<?php echo get_site_url(); ?>/?series=the-virtuous-misfortune" class="viewbook">View Book</a>
+        	<a href="<?php echo get_site_url(); ?>/?series=<?php echo $book->slug ?>" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
-        	<a href=""><img id="bookcoverimg" src="<?php echo get_template_directory_uri(); ?><?php if($books) echo "/upload/".$books->bookico; else echo "/images/bookcover.gif";?>" class="fl" width="181"  height="270"/></a>
-           <form id="fileform" enctype='multipart/form-data'>	<input id='bookcover' type='file' name='bookcover' size='20' />
-           	<input type='button' value='upload' onclick="userbookOpr.bookPhoto('<?php echo $operPageUrl;?>')"/>
-           </form>
+          <div id="imgform"> 
+        	<a href=""><img id="bookcoverimg" src="<?php if($books) echo get_site_url()."/".$books->bookico; else echo "/images/bookcover.gif";?>" class="fl" width="181"  height="270"/></a>        	
+	           <form id="fileform" enctype='multipart/form-data'>	<input id='bookcover' type='file' name='bookcover' size='20' />
+	           	<input type='button' value='upload' onclick="userbookOpr.bookPhoto('<?php echo $operPageUrl;?>')"/>
+	           </form>
+          </div>
            <input type="hidden" id="userid" value="<?php echo $current_user->ID;?>" />
-           <input type="hidden" id="term_id" value="<?php  $termid ?>" />
+           <input type="hidden" id="term_id" value="<?php echo $termid ?>" />
            	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2"><?php if ($books) echo $books->bookdes; else echo "Write your story here";?></textarea>
             <ul>
             	<li><strong>Category:</strong>
@@ -138,7 +140,26 @@ SQL;
             <a href="javascript:userbookOpr.bookAdd('<?php echo $operPageUrl;?>');">Update Book lnfo.</a>
          </div> 
         <div class="total">
-        	<a href="javascript:"><font>Add a New CHapter</font> </a>
+        <?php
+          global $wpdb;
+         $pageSql = <<<SQL
+select post.guid uid , me.meta_value meValue from wp_postmeta me ,wp_posts post 
+where me.meta_key ='_wp_page_template' 
+and me.meta_value in ('user_book_uporadd.php', 'chapter_addorup.php') 
+and me.post_id =  post.id
+SQL;
+ $pages = $wpdb->get_results($pageSql);
+ $chapterPageUrl = "";
+ $operPageUrl = "";
+ foreach ($pages as $page) { 
+ 	if("user_book_uporadd.php"==$page->meValue){
+ 		$operPageUrl=$page->uid;
+ 	}else if("chapter_addorup.php" == $page->meValue){
+ 		$chapterPageUrl= $page->uid;
+ 	}
+ } 
+        ?>
+        	<a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $termid;?>"><font>Add a New Chapter</font> </a>
         </div>
         
     </div>

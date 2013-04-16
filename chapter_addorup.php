@@ -44,6 +44,8 @@ jQuery(document).ready(function($) {
      $title = $post_7->post_title;
      $content = $post_7->post_content; 
  }
+ $term = get_term_by('id', $series_id, 'series');
+ 
 ?>
  <div class="chapter">
         chapter
@@ -60,7 +62,7 @@ jQuery(document).ready(function($) {
     	<input type="hidden" id="post_id" value="<?php echo $post_id?>"/>
     	</div> 
         <div class="mark fl">
-        	<a href="#" class="viewbook">View Book</a>
+        	<a href="<?php echo get_site_url(); ?>/?series=<?php echo $term->slug; ?>" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
         	
@@ -75,7 +77,7 @@ jQuery(document).ready(function($) {
             <a href="javascript:void(0);" id="btn_ajax">Publish</a>
          </div> 
         <div class="total">
-        	<a href="<?php get_site_url();?>&series_id=<?php echo $series_id ?>"><font>Add a New CHapter</font> </a>
+        	<a href="javascript:window.location.reload()"><font>Add a New Chapter</font> </a>
         </div>
         </form>
     </div>  

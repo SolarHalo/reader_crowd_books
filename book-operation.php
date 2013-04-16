@@ -13,11 +13,12 @@ if($method == "addbook"){
 	$term_id = "";
 	$slug = str_replace(" ","-",$bookname);
 	$data_array = array("name"=>$bookname,'slug'=>$slug,'term_group'=>0); 
-
-	if(isset($_GET['term_id'])){
-			 
-		$term_id = $_GET['term_id'];
-		echo $term_id;
+    $wpdb->show_errors(); 
+    
+	if(isset($_GET['termid'])){
+		
+		$term_id = $_GET['termid'];
+		 
 		$wpdb->update("wp_terms",$data_array, array('term_id'=> $term_id));
 		
 		$data_array = array("term_id"=>$term_id,'taxonomy'=>'series','description'=>$bookDes,'parent'=>$category);
@@ -31,6 +32,8 @@ if($method == "addbook"){
 			SET words = ".$len." , progress =".$progress.",modifytime=SYSDATE() 
 			WHERE term_id = '".$term_id."'"
 		);
+	 
+	 
 		
 	}else{
 	
@@ -72,16 +75,18 @@ if($method == "addbook"){
 	    }
 	  else
 	    {
-	    $file_path =  get_theme_root()."/reader_crowd_books/upload/";   
-	      
-	    
-		      move_uploaded_file($_FILES["bookcover"]["tmp_name"],
-		      $file_path .$filename);
-		      
-		      $data_array = array("term_id"=>$term_id,'user_id'=>$userid,"icon"=>$filename);
+		     // $upload_dir = wp_upload_dir();
+		     $bashUrl = wp_upload_dir();
+		     $file_path =  $bashUrl['basedir']."/".$bashUrl['subdir']."/";   
+		     $file_save_path = $file_path .$filename;
+		 
+		      move_uploaded_file($_FILES["bookcover"]["tmp_name"],$file_save_path);
+		      //  content/uploads/2013/02/add221a1fe148d0ef6532a770ecd8e5f56104cc1.gif 
+		      $file_content = "wp-content/uploads".$bashUrl['subdir']."/".$filename;
+		      $data_array = array("term_id"=>$term_id,'user_id'=>$userid,"icon"=>$file_content);
 		      $wpdb->update("wp_orgseriesicons", $data_array, array("term_id"=>$term_id));
 		      
-		      echo "success:::". get_template_directory_uri()."/upload/".$filename;
+		      echo "success:::".  get_site_url()."/".$file_content;
 	      
 	    }
   }

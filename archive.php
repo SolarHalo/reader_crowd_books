@@ -121,7 +121,7 @@ function AddFavorite(){
 		<?php endwhile; ?>
 	</div>
 	<div class="total">
-		<font>Total Views:<?php echo getBookTotalView(getSeriesIDByName($current_category))?></font> <font>Total Bookmarks:100</font> <font>Total
+		<font>Total Views:<?php echo getBookTotalView(getSeriesIDByName($current_category))?></font>   <font>Total
 			Comments:<?php echo getBookTotalComments(getSeriesIDByName($current_category))?></font>
 	</div>
 </div>

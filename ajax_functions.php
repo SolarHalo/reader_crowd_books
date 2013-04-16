@@ -6,7 +6,7 @@ function ajax_action_stuff() {
  $post_content=$_POST['post_content'];
  $post_title= $_POST['post_title']; 
  $post_id = $_POST['post_id'];
- $tip = "success";
+ $tip = "successful";
  if(strlen($post_id)==0){
 	 // Create post object
 	$my_post = array(

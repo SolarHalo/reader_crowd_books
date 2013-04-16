@@ -11,7 +11,7 @@
      global $wpdb;
      
      $sql = <<<SQL
-		select 	te.`name` bookname ,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id as termid
+		select 	te.`name` bookname ,te.`slug` slug,tx.description bookdes ,org.icon bookico ,tx.parent parent ,tx.term_taxonomy_id shipid , te.term_id as termid
 		, org.words  words, org.progress  progress ,DATE_FORMAT(org.modifytime,'%d/%m/%Y') modify from wp_terms te 
 		JOIN 			wp_term_taxonomy tx 	on te.term_id = tx.term_id and tx.taxonomy = 'series' 
 		LEFT JOIN wp_orgseriesicons org on org.term_id = te.term_id   where org.user_id='$current_user->ID' 
@@ -21,7 +21,7 @@ SQL;
       $books = $wpdb->get_results($sql);
      foreach ($books as $book) {
      	$catname = "";
-     	$catSql = "select te.`name`  catname from wp_terms te ,wp_term_taxonomy tx where tx.term_id = te.term_id and tx.term_id = '".$book->parent."'";
+     	$catSql = "select te.`name` catname from wp_terms te ,wp_term_taxonomy tx where tx.term_id = te.term_id and tx.term_id = '".$book->parent."'";
      	$cats = $wpdb->get_results($catSql);
      	foreach ($cats as $cat) {
      		$catname = $cat->catname;
@@ -53,10 +53,10 @@ SQL;
     <div id="conter"class="bookcontent fl"> 
     	<div class="usertitle"><?php echo $book->bookname ;?><span>Last Update:<font><?php echo $book->modify ;?></font></span></div> 
         <div class="mark fl">
-        	<a href="#" class="viewbook">View Book</a>
+        	<a href="<?php echo get_site_url()."/?series=$book->slug" ?>" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
-        	<a href="#"><img src="<?php echo  get_template_directory_uri()."/upload/".$book->bookico ;?>" class="fl" width="181"  height="270"/></a>
+        	<a href="#"><img src="<?php echo get_site_url()."/".$book->bookico ;?>" class="fl" width="181"  height="270"/></a>
             <p>
             	<?php echo $book->bookdes ;?>
             </p>
@@ -128,10 +128,11 @@ SQL;
            <?php }?>
         </div>
         <div class="total">
-        	<a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>"><font>Add a New CHapter</font> </a>
+        	<a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>"><font>Add a New Chapter</font> </a>
         </div>
     </div> 
-    <?php 
+<div style="margin:3px 0; width:100%;height:5px;background-color:#999;overflow:hidden;">&nbsp;&nbsp;</div>   
+ <?php 
      }
      ?>
 
