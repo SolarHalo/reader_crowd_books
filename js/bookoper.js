@@ -17,11 +17,35 @@ var userbookOpr = function (){
 						//alert("the book submit ,please upload the book image");
 						console.log(data);
 						alert("successful");
-					},  
+					} 
 				});
 			}); 
 
 		},
+		bookDel:function(pageUrl,termid){
+			jQuery(document).ready(function($) { 
+				$.ajax({ 
+					url: pageUrl,  
+					dataType:'text',
+					data: {'method':'delbook','term_id':termid},  
+					success: function(obj){
+						alert(obj);
+					} 
+				});
+			}); 
+		},
+		chapterDel:function(pageUrl,chapterid){
+			jQuery(document).ready(function($) { 
+				$.ajax({ 
+					url: pageUrl,  
+					dataType:'text',
+					data: {'method':'delchapter','chapterid':chapterid},  
+					success: function(obj){
+						alert(obj);
+					} 
+				});
+			}); 
+		}, 
 		bookPhoto:function(pageUrl){
 			jQuery(document).ready(function($) { 
 				
