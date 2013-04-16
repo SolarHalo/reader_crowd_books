@@ -93,6 +93,8 @@ SQL;
         </div>
          <div class="startbut bor-top">
             <a href="<?php echo $operPageUrl;?>&termid=<?php echo $book->termid;?>">Update Book lnfo.</a>
+             <a href="<?php echo $operPageUrl;?>&termid=<?php echo $book->termid;?>">Delete Book lnfo.</a>
+            
          </div>
         <div class="bookboxlist">
         	<ul class="list-title">
@@ -121,7 +123,10 @@ SQL;
             ?>
             <ul>
             	<li class="titleChapter"><?php echo ++$chapterIndex;?></li>
-                <li class="titleContent2"><?php echo $chaptername;?><a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>">edit</a></li>
+                <li class="titleContent2"><?php echo $chaptername;?>
+                 <a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>">edit</a>
+                 <a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>">delete</a>
+                </li>
                 <li class="titleWords"><?php echo wcountbycontent($pcontent);?></li> 
                 <li class="titleLast"><?php echo $chapterdate;?></li> 
             </ul>
