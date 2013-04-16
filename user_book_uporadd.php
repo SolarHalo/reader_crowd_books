@@ -72,7 +72,7 @@ jQuery(document).ready(function($) {
         </div> 
         <div class="bookcontentbox">
           <div id="imgform"> 
-        	<a href=""><img id="bookcoverimg" src="<?php if($books) echo get_site_url()."/".$books->bookico; else echo "/images/bookcover.gif";?>" class="fl" width="181"  height="270"/></a>        	
+        	<a href=""><img id="bookcoverimg" src="<?php if($books) echo get_site_url()."/".$books->bookico; else echo get_template_directory_uri()."/images/bookcover.gif";?>" class="fl" width="181"  height="270"/></a>        	
 	           <form id="fileform" enctype='multipart/form-data'>	<input id='bookcover' type='file' name='bookcover' size='20' />
 	           	<input type='button' value='upload' onclick="userbookOpr.bookPhoto('<?php echo $operPageUrl;?>')"/>
 	           </form>
@@ -132,7 +132,7 @@ SQL;
                     -->
                 </li>
                 <li><strong>Tags:</strong>
-                	<span style="display:table; margin-top:10px;">Add some keword here</span>
+                	<span style="display:table; margin-top:10px;"></span>
                 </li>
             </ul>
         </div>

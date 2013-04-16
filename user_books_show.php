@@ -87,7 +87,7 @@ SQL;
                     </div>
                 </li>
                 <li><strong>Tags:</strong>
-                	<span style="display:table; margin-top:10px;">Captain hesperus,Feline, Qudira</span>
+                	<span style="display:table; margin-top:10px;"></span>
                 </li>
             </ul>
         </div>
