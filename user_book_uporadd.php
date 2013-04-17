@@ -99,7 +99,7 @@ SQL;
                         	$categoryName = $category->catname;
                         	$categoryId = $category->id;
                         ?>
-                        	<option value="<?php echo $categoryId;?>"><?php echo $categoryName;?></option> 
+                        	<option value="<?php echo $categoryId;?>" <?php if($books) { if($books->parent == $categoryId) echo "selected"; }?>><?php echo $categoryName;?></option> 
                         <?php
 						}?>
                             <!-- 
