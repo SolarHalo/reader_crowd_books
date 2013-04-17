@@ -74,6 +74,3 @@ var ratingsL10n={"plugin_url":"<?php echo get_site_url(); ?>\/wp-content\/plugin
 	<?php endwhile; ?>
 </div>
 	<?php get_footer(); ?>
-</div>
-</body>
-</html>
