@@ -610,7 +610,7 @@ function vf_widget_activities2($args) {
 			$desc = mb_substr($desc,0,36,'UTF-8');
 			
 			//echo '<li><a href="'.vf_combine_paths(array($link_url, '?page_id=437&discussion/'.$Discussion->DiscussionID.'/'.vf_format_url($Discussion->Name)), '/').'">'.$desc.'</a></li>';
-			echo '<li><a href="'.vf_combine_paths(array(get_site_url(), '?page_id=437&discussion/'.$Discussion->DiscussionID.'/'.vf_format_url($Discussion->Name)), '/').'">'.$desc.'</a></li>';
+			echo '<li><a href="'.vf_combine_paths(array(get_site_url(), '/?page_id=437#/discussion/'.$Discussion->DiscussionID.'/'.vf_format_url($Discussion->Name)), '/').'">'.$desc.'</a></li>';
 			
 		}
 		echo '</ul>';
