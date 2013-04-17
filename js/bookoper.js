@@ -23,28 +23,38 @@ var userbookOpr = function (){
 
 		},
 		bookDel:function(pageUrl,termid){
-			jQuery(document).ready(function($) { 
-				$.ajax({ 
-					url: pageUrl,  
-					dataType:'text',
-					data: {'method':'delbook','term_id':termid},  
-					success: function(obj){
-						alert(obj);
-					} 
-				});
-			}); 
+			if(confirm("Are you sure?")){
+				jQuery(document).ready(function($) { 
+					$.ajax({ 
+						url: pageUrl,  
+						dataType:'text',
+						data: {'method':'delbook','term_id':termid},  
+						success: function(obj){
+							if("successful"==obj){
+								document.location.reload();
+							}
+						} 
+					});
+				}); 
+			}
 		},
 		chapterDel:function(pageUrl,chapterid){
-			jQuery(document).ready(function($) { 
-				$.ajax({ 
-					url: pageUrl,  
-					dataType:'text',
-					data: {'method':'delchapter','chapterid':chapterid},  
-					success: function(obj){
-						alert(obj);
-					} 
-				});
-			}); 
+			if(confirm("Are you sure?")){
+				jQuery(document).ready(function($) { 
+					
+					$.ajax({ 
+						url: pageUrl,  
+						dataType:'text',
+						data: {'method':'delchapter','chapterid':chapterid},  
+						success: function(obj){
+							if("successful"==obj){
+								document.location.reload();
+							}
+						} 
+					});
+					
+				}); 
+			}
 		}, 
 		bookPhoto:function(pageUrl){
 			jQuery(document).ready(function($) { 
