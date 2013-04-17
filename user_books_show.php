@@ -2,29 +2,37 @@
  /*
  Template Name: user_book_show
  */
+wp_enqueue_script("jquery");
+
  get_header(); 
  global $wpdb;
  
 $pageSql = <<<SQL
 select post.guid uid , me.meta_value meValue from wp_postmeta me ,wp_posts post 
 where me.meta_key ='_wp_page_template' 
-and me.meta_value in ('user_books_show.php','book-operation.php') 
+and me.meta_value in ('user_books_show.php','book-operation.php','user_book_uporadd.php', 'chapter_addorup.php') 
 and me.post_id =  post.id
 SQL;
 $pages = $wpdb->get_results($pageSql);
 $viewPageUrl = "";
 $operPageUrl = "";
+$operationUrl = "";
+$chapterPageUrl ="";
 foreach ($pages as $page) {
 	if("user_books_show.php"==$page->meValue){
 		$viewPageUrl=$page->uid;
-	}else{
+	}else if("user_book_uporadd.php"==$page->meValue){
 		$operPageUrl=$page->uid;
+	}else if("book-operation.php"==$page->meValue){
+		$operationUrl=$page->uid;
+	}else if("chapter_addorup.php" == $page->meValue){
+		$chapterPageUrl=$page->uid;
 	}
 }
 ?>
  <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/bookoper.js" ></script>
-  <div class="startbut">
-        <a href="<?php get_site_url(); ?>/?page_id=522">Start a New Book</a>
+  <div class="startbut" >
+        <a href="<?php echo $operPageUrl;?>">Start a New Book</a>
      </div>
      
      <?php 
@@ -45,27 +53,6 @@ SQL;
      	foreach ($cats as $cat) {
      		$catname = $cat->catname;
      	}
-     	//
-     	
-     	
- 
- $pageSql = <<<SQL
-select post.guid uid , me.meta_value meValue from wp_postmeta me ,wp_posts post 
-where me.meta_key ='_wp_page_template' 
-and me.meta_value in ('user_book_uporadd.php', 'chapter_addorup.php') 
-and me.post_id =  post.id
-SQL;
- $pages = $wpdb->get_results($pageSql);
- $chapterPageUrl = "";
- $operPageUrl = "";
- foreach ($pages as $page) {
-  
- 	if("user_book_uporadd.php"==$page->meValue){
- 		$operPageUrl=$page->uid;
- 	}else if("chapter_addorup.php" == $page->meValue){
- 		$chapterPageUrl= $page->uid;
- 	}
- }
      	
      ?>
      
@@ -112,7 +99,7 @@ SQL;
         </div>
          <div class="startbut bor-top">
             <a href="<?php echo $operPageUrl;?>&termid=<?php echo $book->termid;?>">Update Book lnfo.</a>
-             <a href="<?php echo $operPageUrl;?>&termid=<?php echo $book->termid;?>">Delete Book lnfo.</a>
+             <a href="javascript:userbookOpr.bookDel('<?php echo $operationUrl;?>','<?php echo $book->termid;?>');">Delete Book lnfo.</a>
             
          </div>
         <div class="bookboxlist">
@@ -144,7 +131,7 @@ SQL;
             	<li class="titleChapter"><?php echo ++$chapterIndex;?></li>
                 <li class="titleContent2"><?php echo $chaptername;?>
                  <a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>">edit</a>
-                 <a href="javascript:void(0);" onclick="javascript:userbookOpr.chapterDel('<?php echo $operPageUrl;?>','<?php echo $post_id;?>')">delete</a>
+                 <a href="javascript:userbookOpr.chapterDel('<?php echo $operationUrl;?>','<?php echo $post_id;?>');">delete</a>
                 </li>
                 <li class="titleWords"><?php echo wcountbycontent($pcontent);?></li> 
                 <li class="titleLast"><?php echo $chapterdate;?></li> 
