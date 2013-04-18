@@ -551,7 +551,7 @@ SQL;
 		if(empty($book->item_id)||$book->item_id==""){
 			continue;
 		}
-		array_push(intval($book->item_id));
+		array_push(intval($book->item_id),bookIds);
 	}
 	return implode(",",$bookIds);
 	
