@@ -540,11 +540,33 @@ SQL;
 	}
 }
 
+function getBookIdFromCateId($cateId){
+	$sql = <<<SQL
+	select t.term_id from wp_terms t,wp_term_taxonomy c where c.parent='$cateId';
+SQL;
+	global $wpdb;
+	$books = $wpdb->get_results($sql);
+	$bookIds = array();
+	foreach($books as $book){
+		if(empty($book->item_id)||$book->item_id==""){
+			continue;
+		}
+		array_push(intval($book->item_id));
+	}
+	return implode(",",$bookIds);
+	
+}
+
 /**
  * get cate book info
  */
 function getCateBookInfo($cateId){
-	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id order by ic.modifytime desc;";
+	$bookIdsFromCate = getBookIdFromCateId($cateId);
+	echo $bookIdsFromCate;
+	if(empty($bookIdsFromCate)||$bookIdsFromCate==""){
+		return getAllBookInfo();
+	}
+	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id where wp_terms.term_id in (".$bookIdsFromCate.") order by ic.modifytime desc;";
 	global $wpdb;
 	$bookBasicInfos = $wpdb->get_results($sql);
 	$output = "";
@@ -554,10 +576,10 @@ function getCateBookInfo($cateId){
 		$term_id = $bookBasicInfo->term_id;
 		$book_name = $bookBasicInfo->name;
 		$slug = $bookBasicInfo->slug;
-		$inThisCate = ifinThisCate($cateId, $term_id);
-		if(!$inThisCate){
-			continue;
-		}
+//		$inThisCate = ifinThisCate($cateId, $term_id);
+//		if(!$inThisCate){
+//			continue;
+//		}
 		$uri = get_site_url();
 		$rating = getRationgBySeriesId($bookBasicInfo->term_id);
 		$uri .= "/?series=$slug";
@@ -593,7 +615,8 @@ SQL;
 	$output = "";
 	$geners = $wpdb->get_results($seleSql);
 	foreach($geners as $gener){ 	
-		$output .= "<li><a href='".get_category_link( $gener->term_id )."'>$gener->name</a></li>";
+//		$output .= "<li><a href='".get_category_link( $gener->term_id )."'>$gener->name</a></li>";
+		$output .= "<li><a href='http://localhost/?page_id=161&cateid=$gener->term_id'>$gener->name</a></li>";
 	}
 	echo $output;
 }
