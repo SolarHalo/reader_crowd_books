@@ -167,7 +167,7 @@ function getBookGenres($term_id){
 //		where tt.term_taxonomy_id=rr.term_taxonomy_id and rr.object_id=ss.object_id and tt.taxonomy='category' and tt.term_id=te.term_id";
 	$sql = <<<SQL
 	select t.name from wp_terms t,wp_term_taxonomy p,
-	wp_term_taxonomy c where c.term_id='$term_id' and c.parent=p.term_taxonomy_id and p.term_id=t.term_id
+	wp_term_taxonomy c where c.term_id='$term_id' and c.parent=p.term_id and p.term_id=t.term_id
 SQL;
 	global $wpdb;
 	$genres = $wpdb->get_results($sql);
@@ -613,9 +613,10 @@ SQL;
 	global $wpdb;
 	$output = "";
 	$geners = $wpdb->get_results($seleSql);
+	$site_uri = get_site_url();
 	foreach($geners as $gener){ 	
 //		$output .= "<li><a href='".get_category_link( $gener->term_id )."'>$gener->name</a></li>";
-		$output .= "<li><a href='http://localhost/?page_id=161&cateid=$gener->term_id'>$gener->name</a></li>";
+		$output .= "<li><a href='$site_uri/?page_id=161&cateid=$gener->term_id'>$gener->name</a></li>";
 	}
 	echo $output;
 }
