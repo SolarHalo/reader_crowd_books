@@ -62,7 +62,7 @@ jQuery(document).ready(function($) {
     	<input type="hidden" id="post_id" value="<?php echo $post_id?>"/>
     	</div> 
         <div class="mark fl">
-        	<a href="<?php echo get_site_url(); ?>/?series=<?php echo $term->slug; ?>" class="viewbook">View Book</a>
+        	<a href="<?php echo get_site_url(); ?>/?p=<?php echo $post_id; ?>" class="viewbook">View Chapter</a> 
         </div> 
         <div class="bookcontentbox">
         	
