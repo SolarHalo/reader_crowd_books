@@ -562,7 +562,6 @@ SQL;
  */
 function getCateBookInfo($cateId){
 	$bookIdsFromCate = getBookIdFromCateId($cateId);
-	echo $bookIdsFromCate;
 	if(empty($bookIdsFromCate)||$bookIdsFromCate==""){
 		return getAllBookInfo();
 	}
