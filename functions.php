@@ -542,18 +542,18 @@ SQL;
 
 function getBookIdFromCateId($cateId){
 	$sql = <<<SQL
-	select t.term_id from wp_terms t,wp_term_taxonomy c where c.parent='$cateId';
+	select t.term_id from wp_terms t,wp_term_taxonomy c where c.parent='$cateId' and t.term_id=c.term_id
 SQL;
 	global $wpdb;
 	$books = $wpdb->get_results($sql);
 	$bookIds = array();
 	foreach($books as $book){
-		if(empty($book->item_id)||$book->item_id==""){
+		if(empty($book->term_id)||$book->term_id==""){
 			continue;
 		}
-		array_push(intval($book->item_id),bookIds);
+		array_push($bookIds,intval($book->term_id));
 	}
-	return implode(",",$bookIds);
+	return implode(',',$bookIds);
 	
 }
 
@@ -565,7 +565,7 @@ function getCateBookInfo($cateId){
 	if(empty($bookIdsFromCate)||$bookIdsFromCate==""){
 		return getAllBookInfo();
 	}
-	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id where wp_terms.term_id in (".$bookIdsFromCate.") order by ic.modifytime desc;";
+	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id where wp_terms.term_id in (".$bookIdsFromCate.") order by ic.modifytime desc";
 	global $wpdb;
 	$bookBasicInfos = $wpdb->get_results($sql);
 	$output = "";
