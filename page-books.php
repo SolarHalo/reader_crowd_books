@@ -17,7 +17,13 @@
                     <td width="50"><b>Date</b></td>
                 </tr>
                 <?php 
-                	getBookInfo();
+                $cateId = $_GET['cateid'];
+                if ($cateId=="" || $cateId==NULL){
+                	getAllBookInfo();
+                }else{
+                	getCateBookInfo($cateId);
+                }
+                	
                 ?>
                 
             </table>  

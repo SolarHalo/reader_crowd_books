@@ -481,6 +481,98 @@ function getBookInfo(){
 	} 
 	echo $output; 
 }
+
+/**
+ * 
+ * 
+ * @param unknown_type $flag
+ */
+function getProgress($flag){
+		if ($flag == 0){
+			return "In-Progress";
+		}else return "Finished";
+}
+/**
+ * get all book info
+ */
+function getAllBookInfo(){
+	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id order by ic.modifytime desc;";
+	global $wpdb;
+	$bookBasicInfos = $wpdb->get_results($sql);
+	$output = "";
+	foreach($bookBasicInfos as $bookBasicInfo){ 
+		$progress = $bookBasicInfo->progress;
+		$updatetime = $bookBasicInfo->modifytime;
+		$term_id = $bookBasicInfo->term_id;
+		$book_name = $bookBasicInfo->name;
+		$slug = $bookBasicInfo->slug;
+		$uri = get_site_url();
+		$rating = getRationgBySeriesId($bookBasicInfo->term_id);
+		$uri .= "/?series=$slug";
+		 $template_uri = get_template_directory_uri(); 
+                  	$output.="<tr><td width='245'><a href='$uri'><b>$book_name</b></a></td>
+                    <td width='145'>".getAuthorByTermID($term_id)."</td>
+                    <td width='65'>".getBookGenres($term_id)."</td>
+                    <td width='65'>".countTheWordsByTermId($term_id)."</td>
+                   	<td width='65'>".getProgress($progress)."</td>
+                    <td width='95'> $rating
+                  </td>
+                  <td width='50'>".mysql2date(get_option('date_format'), $updatetime,false)."</td></tr>";
+	} 
+	echo $output; 
+}
+
+/**
+ * 
+ * Enter judge whether the book with term_id in  category with cateId
+ * @param unknown_type $cateId
+ * @param unknown_type $term_id
+ */
+function ifinThisCate($cateId,$term_id){
+	$sql = <<<SQL
+	select t.term_id from wp_terms t,wp_term_taxonomy p,
+	wp_term_taxonomy c where c.term_id='$term_id' and c.parent=p.term_taxonomy_id and p.term_id=t.term_id
+SQL;
+	global $wpdb;
+	$genres = $wpdb->get_results($sql);
+	foreach($genres as $genre){
+		return $genre->term_id==$cateId;
+	}
+}
+
+/**
+ * get cate book info
+ */
+function getCateBookInfo($cateId){
+	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id order by ic.modifytime desc;";
+	global $wpdb;
+	$bookBasicInfos = $wpdb->get_results($sql);
+	$output = "";
+	foreach($bookBasicInfos as $bookBasicInfo){ 
+		$progress = $bookBasicInfo->progress;
+		$updatetime = $bookBasicInfo->modifytime;
+		$term_id = $bookBasicInfo->term_id;
+		$book_name = $bookBasicInfo->name;
+		$slug = $bookBasicInfo->slug;
+		$inThisCate = ifinThisCate($cateId, $term_id);
+		if(!$inThisCate){
+			continue;
+		}
+		$uri = get_site_url();
+		$rating = getRationgBySeriesId($bookBasicInfo->term_id);
+		$uri .= "/?series=$slug";
+		 $template_uri = get_template_directory_uri(); 
+                  	$output.="<tr><td width='245'><a href='$uri'><b>$book_name</b></a></td>
+                    <td width='145'>".getAuthorByTermID($term_id)."</td>
+                    <td width='65'>".getBookGenres($term_id)."</td>
+                    <td width='65'>".countTheWordsByTermId($term_id)."</td>
+                   	<td width='65'>".getProgress($progress)."</td>
+                    <td width='95'> $rating
+                  </td>
+                  <td width='50'>".mysql2date(get_option('date_format'), $updatetime,false)."</td></tr>";
+	} 
+	echo $output; 
+}
 /**
  * add by yuyue
  * get the gener for index show gener don't show blog
