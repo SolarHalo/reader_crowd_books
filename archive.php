@@ -72,7 +72,7 @@ function AddFavorite(){
 		<ul>
 			<li><strong>Category:</strong>
 			<?php //$category = get_the_category(); 
-				$category = getBookGenres(getSeriesIDByName($current_category));
+				echo $category = getBookGenres(getSeriesIDByName($current_category));
 			?>
 			 <a href="<?php echo get_category_link($category[0]->term_id )?>">
 			 <?php   
@@ -81,7 +81,7 @@ function AddFavorite(){
 			</li>
 			<li><strong>Words:</strong> <?php echo countTheWordsByTermId(getSeriesIDByName($current_category));?>
 			</li>
-			<li><strong>Progress:</strong>Finished</li>
+			<li><strong>Progress:</strong><?php echo getProgressBySeriesId(getSeriesIDByName($current_category))?></li>
 			<li><strong>Tags:</strong><?php echo getBoookTag(getSeriesIDByName($current_category))?></li>
 		</ul>
 
