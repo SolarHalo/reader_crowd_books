@@ -251,7 +251,7 @@ SQL;
 	$site_uri = get_site_url();
 	
 	foreach($bookrates as $bookrate){
-		$name = $bookrate->name;
+		$bookname = $bookrate->name;
 		$avgrate = $bookrate->avgrate;
 		$term_id = $bookrate->term_id;
 		$author = $bookrate->user_login;
@@ -513,15 +513,34 @@ function getBookInfo(){
  * @param unknown_type $flag
  */
 function getProgress($flag){
-		if ($flag == 0){
-			return "In-Progress";
-		}else return "Finished";
+	if ($flag == 0){
+		return "In-Progress";
+	}else{
+		return "Finished";
+	}
 }
+
+/**
+ * get progress by series term_id
+ * @param unknown_type $term_id
+ */
+function getProgressBySeriesId($term_id){
+	$sql = <<<SQL
+	select progress from wp_orgseriesicons t where t.term_id=$term_id
+SQL;
+	global $wpdb;
+	$result = $wpdb->get_col($sql);
+	foreach($result as $progress){
+		return getProgress($progress);
+	}
+	
+}
+
 /**
  * get all book info
  */
 function getAllBookInfo(){
-	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id order by ic.modifytime desc;";
+	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id order by ic.modifytime desc";
 	global $wpdb;
 	$bookBasicInfos = $wpdb->get_results($sql);
 	$output = "";
