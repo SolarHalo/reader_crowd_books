@@ -963,4 +963,29 @@ text-decoration:underline;
 	width:181px;
 	float:left;
 }
+/*===========================  20130418======================*/
+
+.Ratedbooklist h4{
+	height:50px;
+	line-height:50px;
+	font-weight: normal;
+	font-size:14px;
+	}
+
+.Ratedbooklist .mlrp_ul{
+	padding:0;
+	width:46%;
+	float:left;
+	}
+
+.bor-r{
+	border-right:1px solid #666;
+	margin-right:40px;
+	}
+
+.Ratedbooklist{
+	width:940px;
+	}
+
+
 	
