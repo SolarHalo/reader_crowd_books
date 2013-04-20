@@ -35,14 +35,14 @@
             <ul class="mlrp_ul">
             	 <?php getTopReviewd (6) ?>
             </ul>
-            <a href="<?php get_site_url()?>/?page_id=161" class="more">more Top Viewed Books</a>
+            <a href="<?php get_site_url()?>/?page_id=542&show_id=1" class="more">more Top Viewed Books</a>
         </div>
         <div class="clmu fl ml15" id="right_sidebar">
         	<h5 class="title">Top Rated</h5>
             <ul class="mlrp_ul">
             	<?php getHighestRation(6);?>
             </ul>
-            <a href="<?php get_site_url()?>/?page_id=161" class="more">more TopRated</a>
+            <a href="<?php get_site_url()?>/?page_id=542&show_id=2" class="more">more TopRated</a>
         </div>
         <div class="clmu fl" id="Genres">
         	<h5 class="title">Genres</h5>
