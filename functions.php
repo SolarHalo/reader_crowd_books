@@ -516,11 +516,12 @@ SQL;
 	$charpters = $wpdb->get_results($sql);
 	
 	$result = "";
-	
+	$index = 0;
 	foreach ($charpters as $charpter){
+		
 		?>
 		<ul>
-			<li class='titleChapter'><?php echo $charpter->id; ?></li>
+			<li class='titleChapter'><?php echo ++$index; ?></li>
 			<li class='titleContent'><a href='?p=<?php echo $charpter->id;?>'><?php echo $charpter->post_title;?></a></li>
 			<li class='titleWords'><?php echo sizeof(explode(" ", $charpter->post_content));?></li>
 			<li class='titleViews'><?php echo intval($charpter->meta_value);?></li>
