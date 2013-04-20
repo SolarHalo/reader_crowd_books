@@ -219,8 +219,8 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	} 
 .bookcontent{
 	width:938px;
-	border-left:1px solid #f2f2f2;
-	border-right:1px solid #f2f2f2;
+	border-left:1px solid #AEABAB;
+	border-right:1px solid #AEABAB;
 	border-radius: 3px 3px 0px 0px;
 	float:left;
 	}
@@ -501,8 +501,8 @@ width:35px;
 .bookcontentbox p{
 	width:485px;
 	height:269px;
-	border-top:1px solid #eee;
-	border-right:1px solid #eee;
+	border-top:1px solid #EEEEEE;
+	border-right:1px solid #EEEEEE;
 	padding:0 10px 0 15px;
 	float:left;
 	}
@@ -521,7 +521,7 @@ width:35px;
 	color:#782505;
 	}
 .bookcontentbox ul li{ 
-	border-top:1px solid #eee; 
+	border-top:1px solid #EEEEEE; 
 	line-height:40px;
 	height:40px;
 	}
@@ -818,8 +818,8 @@ text-decoration:underline;
 	}
 .usertitle{
 	width:930px;
-	border-top:1px solid #EEEEEE;
-	border-bottom:1px solid #EEEEEE;
+	border-top:1px solid #AEABAB;
+	border-bottom:1px solid #AEABAB;
 	height:48px;
 	line-height:50px;
 	color:#5a2d16;
@@ -905,7 +905,7 @@ text-decoration:underline;
 	visibility:inherit;
 	}
 .bor-top{
-	border-top:1px solid #eee;
+	border-top:1px solid #EEEEEE;
 	 }
 	
 .titleContent2{
@@ -957,7 +957,7 @@ text-decoration:underline;
 .booktextbox2{	
 	width:500px;
 	float:left;
-	border-right:1px solid #eee;
+	border-right:1px solid #EEEEEE;
 	}
 #imgform{
 	width:181px;
