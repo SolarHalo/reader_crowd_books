@@ -79,10 +79,13 @@ function AddFavorite(){
 				   echo $category[0]->cat_name
 			  ?></a>
 			</li>
-			<li><strong>Words:</strong> <?php echo countTheWordsByTermId(getSeriesIDByName($current_category));?>
+			<li><strong>Words:</strong> <?php echo countTheWordsByTermId($currnt_term_id);//countTheWordsByTermId(getSeriesIDByName($current_category));
+				   ?>
 			</li>
-			<li><strong>Progress:</strong><?php echo getProgressBySeriesId(getSeriesIDByName($current_category))?></li>
-			<li><strong>Tags:</strong><?php echo getBoookTag(getSeriesIDByName($current_category))?></li>
+			<li><strong>Progress:</strong><?php echo getProgressBySeriesId($currnt_term_id);//getProgressBySeriesId(getSeriesIDByName($current_category))
+				   ?></li>
+			<li><strong>Tags:</strong><?php echo getBoookTag($currnt_term_id);//getBoookTag(getSeriesIDByName($current_category))
+				   ?></li>
 		</ul>
 
 
@@ -98,27 +101,10 @@ function AddFavorite(){
 			<li class="titleLast">Last Upadte</li>
 		</ul>
 
-		<?php while ( have_posts() ) : the_post(); ?>
-
-		<ul>
-			<li class="titleChapter"><?php the_ID()?></li>
-			<li class="titleContent"><a href="?p=<?php the_ID()?>"><?php the_title()?>
-			</a></li>
-			<li class="titleWords"><?php  echo wcount();?></li>
-			<li class="titleViews"><?php get_post_clicked_nums(the_ID())?></li>
-			<li class="titleRating">
-				<div class="ratingsbox">
-				<?php 
-				   $postid = get_the_ID(); 
-				  get_post_rating($postid);
-				?>
-				</div>
-			</li>
-			<li class="titleLast"><?php the_modified_date()?></li>
-		</ul>
-
-
-		<?php endwhile; ?>
+<!-- start -->
+		<?php echo getChapterByTermId($currnt_term_id);?>
+		
+		<!-- end -->
 	</div>
 	<div class="total">
 		<font>Total Views:<?php echo getBookTotalView(getSeriesIDByName($current_category))?></font>   <font>Total

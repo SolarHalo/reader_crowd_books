@@ -500,6 +500,36 @@ function getAuthorByTermID($term_id){
 	  return   get_user_loginname($user_author->post_author);
 	}
 }
+
+function getChapterByTermId($term_id){
+	$sql = <<<SQL
+		select post.id ,post.post_title,post.post_content,m.meta_value ,DATE_FORMAT(post.post_modified,'%d/%m/%Y') postdate from wp_posts post 
+		join wp_term_relationships ship 
+		on ship.object_id = post.ID and post.post_type = 'post' and post.post_status  = 'publish' 
+		LEFT JOIN  wp_postmeta m
+		on m.post_id = post.id and m.meta_key = 'custom_total_hits' 
+		JOIN wp_term_taxonomy tax 
+		on tax.term_taxonomy_id =  ship.term_taxonomy_id  
+SQL;
+	$sql = $sql." and tax.term_id = '".$term_id."' order by post.id ";
+	global $wpdb;
+	$charpters = $wpdb->get_results($sql);
+	
+	$result = "";
+	
+	foreach ($charpters as $charpter){
+		?>
+		<ul>
+			<li class='titleChapter'><?php echo $charpter->id; ?></li>
+			<li class='titleContent'><a href='?p=<?php echo $charpter->id;?>'><?php echo $charpter->post_title;?></a></li>
+			<li class='titleWords'><?php echo sizeof(explode(" ", $charpter->post_content));?></li>
+			<li class='titleViews'><?php echo intval($charpter->meta_value);?></li>
+			<li class='titleRating'><?php get_post_rating($charpter->id); ?></li>
+			<li class='titleLast'><?php echo $charpter->postdate;?></li>
+		</ul>
+		<?php 
+	}
+}
 /**
  * get series id by series name
  */
