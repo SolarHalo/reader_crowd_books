@@ -105,11 +105,8 @@ function get_user_loginname($userid=''){
 	 return $user_name;
 	 }
 }
-/*
- * get the top views posts
- */
 
-function getTopReviewd ($showNum){
+function getTopReviewdDatas($showNum){
 	global $wpdb;
 //	$selectSql = "select t.post_title,t.post_author,m.meta_value,t.ID from wp_posts t,wp_postmeta m where t.ID = m.post_id and m.meta_key = 'custom_total_hits' order by m.meta_value desc limit $showNum";
 //	$selectSql = "select  m.term_id,m.name,sum(CONVERT(pm.meta_value,UNSIGNED))sumhit,m.slug,u.user_login from wp_terms m,wp_term_taxonomy t,wp_term_relationships r,wp_posts p,wp_postmeta pm ,wp_users u where m.term_id = t.term_id and t.taxonomy='series' and r.term_taxonomy_id=t.term_taxonomy_id and r.object_id=p.id and p.id=pm.post_id and pm.meta_key='custom_total_hits' and p.post_author=u.id group by  m.term_id, m.name,m.slug,u.user_login order by sumhit desc limit $showNum";
@@ -123,11 +120,17 @@ function getTopReviewd ($showNum){
 SQL;
 	
 	$top_posts = $wpdb->get_results($selectSql);
-	
-	$output = "";
-	
-	$uri = get_site_url();
-	
+	return $top_posts;
+}
+
+/*
+ * get the top views posts
+ */
+
+function getTopReviewd ($showNum){ 
+	$top_posts = getTopReviewdDatas($showNum); 
+	$output = ""; 
+	$uri = get_site_url(); 
 	$i = 1;
 	foreach($top_posts as $top_post){
 		$name = $top_post->name;
@@ -142,6 +145,36 @@ SQL;
 	}
  	
 	echo $output;
+}
+/**
+ * 
+ * for topviewor rating show
+ */
+function getTopReviewdShow($showtype){
+	$top_posts = null;
+	$i = 1;
+	if($showtype == 1){
+		$top_posts = getTopReviewdDatas(10);
+	}else{
+		$i = 11;
+		$top_posts = getTopReviewdDatas('10,20');
+	}
+	
+    $output = ""; 
+	$uri = get_site_url(); 
+	
+	foreach($top_posts as $top_post){
+		$name = $top_post->name;
+		$sumhit = $top_post->sumhit;
+		$author = $top_post->user_login;
+		$book_url = $url.'/?series='.$top_post->slug;
+		$term_id = $top_post->term_id;
+		$bookImg = getBookImg($term_id);
+		$image = $uri.'/'.$bookImg;
+		$output.="<li><a href='$book_url' title='$name'><img src='$image'  width='45' height='70'  alt='$i.$name'/> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
+		$i++;
+	}
+  return  $output;
 }
 
 function getBookImg($term_id,$user_id=null){
@@ -232,10 +265,14 @@ function getBookTotalComments($term_id){
 		return $total->commentNums;
 	}
 }
-function getHighestRation ($showNum){
-	global $wpdb; 
-//	$sql = "select m.name,round(avg(rating_rating),0)avgrate,m.slug,m.term_id,u.user_login from wp_terms m,wp_term_taxonomy t,wp_term_relationships r ,wp_ratings a,wp_posts p,wp_users u where m.term_id=t.term_id and t.taxonomy='series' and t.term_taxonomy_id=r.term_taxonomy_id and r.object_id=p.id and p.id=rating_postid and p.post_author=u.id group by m.name,m.slug,m.term_id,u.user_login order by avgrate desc limit ".$showNum;
-	
+
+/**
+ * 
+ * get highest rating datas
+ * @param unknown_type $showNum
+ */
+function getHighestRationDatas ($showNum){
+   global $wpdb;  
 	$sql = <<<SQL
 	select m.name,round(avg(rating_rating),0)avgrate,m.slug,m.term_id,u.user_login 
 	from wp_terms m,wp_term_taxonomy t,wp_term_relationships r ,wp_ratings a,wp_posts p,wp_users u,wp_orgseriesicons o 
@@ -245,6 +282,11 @@ function getHighestRation ($showNum){
 SQL;
 	
 	$bookrates = $wpdb->get_results($sql);
+	return $bookrates;
+}
+
+function getHighestRation ($showNum){ 
+	$bookrates = getHighestRationDatas($showNum);
 	$i = 1;
 	$output = "";
 	$dir_uri = get_template_directory_uri();
@@ -267,57 +309,47 @@ SQL;
 			$rateImage
 		</span></li>"; 
 		$i++;
-	}
-	
-	
-	//为了防止同一本数的不同章节有不同的作者，做如下处理
-//	$books = array();
-//	foreach($bookrates as $bookrate){
-//		$name = $bookrate->name;
-//		$avgrate = 0;
-//		if($bookrate->avgrate!=null&&$bookrate->avgrate!=''){
-//			
-//			$avgrate = intval($bookrate->avgrate);
-//		}
-//		
-//		$term_id = $bookrate->term_id;
-//		if(!array_key_exists($name, $books)){
-//			$books[$name] = array($name,array($avgrate),$bookrate->user_login,$bookrate->slug,$term_id);
-//		}else{
-//			$book = $books[$name];
-//			array_push($book[1], $avgrate);
-//			$books[$name] = $book;
-//		}
-//	}
-//	foreach($books as $key=>$book){
-//		$bookname = $books[$key][0];
-//		$bookurl = $site_uri.'/?series='.$books[$key][3];
-//		$term_id = $books[$key][4];
-//		$bookImg = getBookImg($term_id);
-//		$author = $books[$key][2];
-//		$avgrateArr = $books[$key][1];
-//		$ratesum = 0;
-//		$avgrate = 0;
-//		if($avgrateArr!=null&&count($avgrateArr)>0){
-//			foreach ($avgrateArr as $r){
-//				$ratesum = $ratesum+$r;
-//			}
-//			$avgrate = $ratesum/count($avgrateArr);
-//		}
-//		$image;
-//		if($bookImg){
-//			$image = $site_uri.'/'.$bookImg;
-//		}
-//		$rateImage = getRatingImage($avgrate, $dir_uri);
-//		$output.="<li><a href='$bookurl' title='$bookname'><img src='$image' alt='$i.$bookname'/> $i.$bookname </a> <span >$author</span>
-//		<span >
-//			$rateImage
-//		</span></li>"; 
-//		$i++;
-//	}
+	} 
+	 
 	echo $output;
 }
-
+function getTopRationgShow($showtype){
+	$bookrates = null;
+	$i = 1;
+	if($showtype==1){
+	  $bookrates = getHighestRationDatas(10);
+	}else{
+		$i = 11;
+	  $bookrates = getHighestRationDatas('10,20');	
+	}
+	
+	 
+	$output = "";
+	$dir_uri = get_template_directory_uri();
+	$site_uri = get_site_url();
+	
+	foreach($bookrates as $bookrate){
+		$bookname = $bookrate->name;
+		$avgrate = $bookrate->avgrate;
+		$term_id = $bookrate->term_id;
+		$author = $bookrate->user_login;
+		$bookurl = $site_uri.'/?series='.$bookrate->slug;
+		$bookImg = getBookImg($term_id);
+		$image;
+		if($bookImg){
+			$image = $site_uri.'/'.$bookImg;
+		}
+		$rateImage = getRatingImage($avgrate, $dir_uri);
+		$output.="<li><a href='$bookurl' title='$bookname'><img  width='45' height='70'  src='$image' alt='$i.$bookname'/> $i.$bookname </a> <span >$author</span>
+		<span >
+			$rateImage
+		</span></li>"; 
+		$i++;
+	} 
+ 	
+	return  $output;
+	
+}
 function getRatingImage($rate,$dir_uri){
  
 	$output = "<div class='ratingsbox'>"; 
