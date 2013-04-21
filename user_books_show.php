@@ -129,7 +129,8 @@ SQL;
             ?>
             <ul>
             	<li class="titleChapter"><?php echo ++$chapterIndex;?></li>
-                <li class="titleContent2"><?php echo $chaptername;?>
+                <li class="titleContent2">
+                 <a id="chapter_title" href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>"> <?php echo $chaptername;?></a>
                  <a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $book->termid;?>&post_id=<?php echo $post_id?>">edit</a>
                  <a href="javascript:userbookOpr.chapterDel('<?php echo $operationUrl;?>','<?php echo $post_id;?>');">delete</a>
                 </li>

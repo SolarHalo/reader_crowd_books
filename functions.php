@@ -102,7 +102,7 @@ function get_user_loginname($userid=''){
 	 global $wpdb;
 	 $user_names = $wpdb->get_col("SELECT user_login FROM $wpdb->users WHERE id = $user ORDER BY ID");
 	 foreach($user_names as $user_name){
-	 return $user_name;
+	  return $user_name;
 	 }
 }
 
@@ -247,7 +247,9 @@ function getBoookTag($term_id){
 		$e = "<a href=\"?s=$tag->slug\">$tag->slug</a>";
 		$ret =$ret.$e.",";
 	}
+	if($ret!=""){
 	$ret[strlen($ret)-1] = '';
+	}
 	return $ret;
 }
 
@@ -493,11 +495,14 @@ function getLastUpate($postnum){
  * get Author name by term_id
  */
 function getAuthorByTermID($term_id){
-	$sql = "select p.post_author from wp_posts p,wp_terms t,wp_term_taxonomy m where t.term_id = m.term_id and t.term_id = '$term_id' limit 1";
+	//$sql = "select p.post_author from wp_posts p,wp_terms t,wp_term_taxonomy m where t.term_id = m.term_id and t.term_id = '$term_id' limit 1";
+	$sql ="select user_id from wp_orgseriesicons where term_id =  '$term_id' ";
 	global $wpdb;
 	$user_authors = $wpdb->get_results($sql);
+	  
 	foreach ($user_authors as $user_author) {
-	  return   get_user_loginname($user_author->post_author);
+	 
+	  return   get_user_loginname($user_author->user_id);
 	}
 }
 

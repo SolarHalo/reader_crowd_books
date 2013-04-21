@@ -29,6 +29,13 @@ function ajax_action_stuff() {
 	    $data_array = array("object_id"=>$post_id,'term_taxonomy_id'=>$term_taxonomy_id,'term_order'=>0);
 	    
 		$wpdb->insert("wp_term_relationships",$data_array);
+		
+		$wpdb->query(
+			"UPDATE wp_orgseriesicons  
+			SET modifytime=SYSDATE()  
+			WHERE term_id = '".$series_id."'"
+		);
+	 
  }else{ 
 //	$my_post = array(
 //		  'ID'    => $post_id,
@@ -49,7 +56,11 @@ function ajax_action_stuff() {
 	 
      ); 
  }	 
-
+	$wpdb->query(
+			"UPDATE wp_orgseriesicons  
+			SET modifytime=SYSDATE() 
+			WHERE term_id = '".$series_id."'"
+		);
  echo $tip; //  
  die(); // 一定要加這行，才會完整的處理ajax請求
 }
