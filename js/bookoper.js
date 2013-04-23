@@ -26,9 +26,9 @@ var userbookOpr = function (){
 						'category':category, "termid": termid, "user_id": userid},  
 					success: function(data){
 						var termid = $("#term_id").val(data);
-						//alert("the book submit ,please upload the book image");
+						alert("the book submit successful  ,please upload the book image");
 						//console.log(data);
-						alert("successful");
+						//alert("successful");
 					} 
 				});
 			}); 
