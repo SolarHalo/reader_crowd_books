@@ -3,7 +3,7 @@ var userbookOpr = function (){
 		bookChapter:function(chapterUrl){
 			jQuery(document).ready(function($) { 
 				var termid = $("#term_id").val();
-				if(termid == null || "" == termid){
+				if(termid == null || "" == termid ){
 					alert("must update book info first!");
 				}else{
 					var url =  chapterUrl+"&series_id="+termid;
@@ -18,6 +18,10 @@ var userbookOpr = function (){
 				var progress = $('#progress').val();
 				var category = $('#category').val();
 				var bookname = $('#bookname').val();
+				if(bookname == null || bookname.replace(/[ ]/g,"")=="" || 'Write Your Book Title here'==bookname){
+					alert("Book Title not be empty!");
+					return ;
+				}
 				var termid = $("#term_id").val();
 				var userid = $('#userid').val();
 				$.ajax({ 

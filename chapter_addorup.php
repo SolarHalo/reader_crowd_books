@@ -24,6 +24,11 @@ jQuery(document).ready(function($) {
    });
 
 	$('#btn_ajax').click(function () {
+		var chapterName = $("#chtitle").val();
+		if(chapterName == null || chapterName.replace(/[ ]/g,"")=="" || 'Write Your Chapter Name here'==chapterName){
+			alert("Chapter Name not be empty!");
+			return ;
+		}
 	     $.post('<?php echo admin_url( 'admin-ajax.php' );?>', {
 	       action: 'my_ajax_action', 
 	       post_content: $('#chcotent').val(),  

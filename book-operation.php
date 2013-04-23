@@ -13,7 +13,7 @@ if($method == "addbook"){
 	$term_id = "";
 	$slug = str_replace(" ","-",$bookname);
 	$data_array = array("name"=>$bookname,'slug'=>$slug,'term_group'=>0); 
-    $wpdb->show_errors(); 
+    //$wpdb->show_errors(); 
     
 	if($_GET['termid'] != null && $_GET['termid'] != "" ){
 		
