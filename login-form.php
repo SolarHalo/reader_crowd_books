@@ -16,10 +16,11 @@ Theme My Login will always look in your theme's directory first, before using th
 				<label for="rememberme<?php $template->the_instance(); ?>"><?php _e( 'Remember Me', 'theme-my-login' ); ?></label>
 			</p>
 		</div>
-		<div class="login_div"
+		<div class="login_div">
 			<label for="user_pass<?php $template->the_instance(); ?>"><?php _e( 'Password', 'theme-my-login' ) ?></label>
 			<input type="password" name="pwd" id="user_pass<?php $template->the_instance(); ?>" class="input" value="" size="20" />
-			<a href="http://elitechronicles.tk/?page_id=4&action=lostpassword">Lost Password</a>
+             <input type="hidden" name="redirect_to" value="<?php echo home_url(); ?>" />
+			<a href="http://readercrowd.com/?page_id=4&action=lostpassword">Lost Password</a>
 		</div>
 <?php
 do_action( 'login_form' ); // Wordpress hook
@@ -28,10 +29,10 @@ do_action_ref_array( 'tml_login_form', array( &$template ) ); // TML hook
 		
 		<p class="submit">
 			<input type="submit" name="wp-submit" id="wp-submit<?php $template->the_instance(); ?>" value="<?php _e( 'Log In', 'theme-my-login' ); ?>" />
-			<input type="hidden" name="redirect_to" value="<?php $template->the_redirect_url( 'login' ); ?>" />
+             <input type="hidden" name="redirect_to" value="<?php echo home_url(); ?>" />
 			<input type="hidden" name="testcookie" value="1" />
 			<input type="hidden" name="instance" value="<?php $template->the_instance(); ?>" />
-			<a href="http://elitechronicles.tk/?page_id=4&action=register">Register</a>
+			<a href="http://readercrowd.com/?page_id=4&action=register">Register</a>
 		</p>
 	</form>
 </div>
