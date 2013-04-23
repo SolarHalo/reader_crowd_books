@@ -10,15 +10,18 @@ global $wpdb;
 $pageSql = <<<SQL
 select post.guid uid , me.meta_value meValue from wp_postmeta me ,wp_posts post 
 where me.meta_key ='_wp_page_template' 
-and me.meta_value in ('user_books_show.php','book-operation.php') 
+and me.meta_value in ('user_books_show.php','book-operation.php','chapter_addorup.php') 
 and me.post_id =  post.id
 SQL;
  $pages = $wpdb->get_results($pageSql);
  $viewPageUrl = "";
  $operPageUrl = "";
+ $chapterPageUrl = "";
  foreach ($pages as $page) {
  	if("user_books_show.php"==$page->meValue){
  		$viewPageUrl=$page->uid;
+ 	}else if("chapter_addorup.php" == $page->meValue){
+ 		$chapterPageUrl= $page->uid;
  	}else{
  		$operPageUrl=$page->uid;
  	}
@@ -140,26 +143,7 @@ SQL;
             <a href="javascript:userbookOpr.bookAdd('<?php echo $operPageUrl;?>');">Update Book lnfo.</a>
          </div> 
         <div class="total">
-        <?php
-          global $wpdb;
-         $pageSql = <<<SQL
-select post.guid uid , me.meta_value meValue from wp_postmeta me ,wp_posts post 
-where me.meta_key ='_wp_page_template' 
-and me.meta_value in ('user_book_uporadd.php', 'chapter_addorup.php') 
-and me.post_id =  post.id
-SQL;
- $pages = $wpdb->get_results($pageSql);
- $chapterPageUrl = "";
- $operPageUrl = "";
- foreach ($pages as $page) { 
- 	if("user_book_uporadd.php"==$page->meValue){
- 		$operPageUrl=$page->uid;
- 	}else if("chapter_addorup.php" == $page->meValue){
- 		$chapterPageUrl= $page->uid;
- 	}
- } 
-        ?>
-        	<a href="<?php echo $chapterPageUrl; ?>&series_id=<?php echo $termid;?>"><font>Add a New Chapter</font> </a>
+        	<a id='chapteradd' href="javascript:userbookOpr.bookChapter('<?php echo $chapterPageUrl;?>');"><font>Add a New Chapter</font> </a>
         </div>
         
     </div>

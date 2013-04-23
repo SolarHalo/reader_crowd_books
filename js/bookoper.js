@@ -1,5 +1,17 @@
 var userbookOpr = function (){
 	return {
+		bookChapter:function(chapterUrl){
+			jQuery(document).ready(function($) { 
+				var termid = $("#term_id").val();
+				if(termid == null || "" == termid){
+					alert("must update book info first!");
+				}else{
+					var url =  chapterUrl+"&series_id="+termid;
+					window.location.href=url;
+					//document.location.href = url;
+				}
+			}); 
+		},
 		bookAdd:function(pageUrl){
 			jQuery(document).ready(function($) { 
 				var bookDes = $('#bookDes').val();
@@ -15,8 +27,8 @@ var userbookOpr = function (){
 					success: function(data){
 						var termid = $("#term_id").val(data);
 						//alert("the book submit ,please upload the book image");
-						 
-						alert("successful");
+						//console.log(data);
+						//alert("successful");
 					} 
 				});
 			}); 
