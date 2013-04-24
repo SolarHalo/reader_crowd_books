@@ -61,10 +61,12 @@ var ratingsL10n={"plugin_url":"<?php echo get_site_url(); ?>\/wp-content\/plugin
 				<h5 class="title">Author's Note</h5>
 
 			</div>
--->
+--><?php $author = get_the_author();
+ 
+?>
 			<div id="postauthor">
-				<img src="images/photo04.jpg" /> <span>About</span> <span>Mail&nbsp;&nbsp;|&nbsp;&nbsp;<a
-					href="#">More Posts(8)</a> </span>
+				 <?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?>  <span>About:<?php the_author_posts_link();?></span> <span><a href="mailto:<?php echo get_the_author_meta( 'user_email' )?>">Mail</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+					href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) );?>">More Posts</a> </span>
 			</div>
       <!--  
 			the commont source

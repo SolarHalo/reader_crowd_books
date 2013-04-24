@@ -118,7 +118,7 @@ SQL;
                          </select>
                     </div>
                 </li>
-                <li><strong>Words:</strong><?php if($books) echo $books->words; else echo "0";?></li>
+                <li><strong>Words:</strong><?php if($books) echo countTheWordsByTermId($termid); else echo "0";?></li>
                 <li><strong>Progress:</strong>
                 <select id="progress"  name="progress" >
                 	<option value="0" <?php if($books) { if(intval($books->progress) == 0) echo "selected"; }?>>In-Progress</option>
