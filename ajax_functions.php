@@ -61,6 +61,6 @@ function ajax_action_stuff() {
 			SET modifytime=SYSDATE() 
 			WHERE term_id = '".$series_id."'"
 		);
- echo $tip; //  
- die(); // 一定要加這行，才會完整的處理ajax請求
+ echo $post_id; //  
+ die(); // 一锟斤拷要锟斤拷锟紷锟叫ｏ拷锟脚曪拷锟斤拷锟斤拷锟教庯拷锟絘jax請锟斤拷
 }
