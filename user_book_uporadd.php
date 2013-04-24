@@ -53,7 +53,7 @@ jQuery(document).ready(function($) {
    });
 	$("#bookDes").click(function(){
 		var tex = $("#bookDes").val();
-		if(tex=='Write your story here'){
+		if(tex=='Write your book summary here'){
 			$("#bookDes").val("");
 		}
    });
@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
           </div>
            <input type="hidden" id="userid" value="<?php echo $current_user->ID;?>" />
            <input type="hidden" id="term_id" value="<?php echo $termid ?>" />
-           	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2"><?php if ($books) echo $books->bookdes; else echo "Write your story here";?></textarea>
+           	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2"><?php if ($books) echo $books->bookdes; else echo "Write your book summary here";?></textarea>
             <ul>
             	<li><strong>Category:</strong>
                 	<div class="bookmenubut">
