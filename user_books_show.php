@@ -84,12 +84,14 @@ SQL;
                 </li>
                 <li><strong>Words:</strong><?php echo countTheWordsByTermId($book->termid);?></li>
                 <li><strong>Progress:</strong>
-                	<div class="bookmenubut">
+                	<div >
                     	<span><?php if($book->progress == 0) echo "In-Progress"; else echo "Finished"; ?></span>
+                        <!-- 
                         <ul class="bookmenu">
                             <li><a href="#">In-Progress</a></li>
                             <li><a href="#">Finished</a></li> 
                         </ul>
+                        -->
                     </div>
                 </li>
                 <li><strong>Tags:</strong>

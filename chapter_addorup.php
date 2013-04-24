@@ -9,6 +9,18 @@
  ?>
  <script type="text/javascript">
 <!--
+function viewChapter(siteUrl){
+	jQuery(document).ready(function($) {
+		var postid = $("#post_id").val();
+		if(postid == null || "" == postid){
+			alert("Please publish chapter info first, then view chapter");
+			return ;
+		}
+		var url = siteUrl+"/?p="+postid;
+		window.location.href=url;
+	});
+	
+}
 jQuery(document).ready(function($) { 
 	$("#chtitle").click(function(){
 		var tex = $("#chtitle").val();
@@ -26,7 +38,7 @@ jQuery(document).ready(function($) {
 	$('#btn_ajax').click(function () {
 		var chapterName = $("#chtitle").val();
 		if(chapterName == null || chapterName.replace(/[ ]/g,"")=="" || 'Write Your Chapter Name here'==chapterName){
-			alert("Chapter Name not be empty!");
+			alert("Please fill the Chapter name/summary");
 			return ;
 		}
 	     $.post('<?php echo admin_url( 'admin-ajax.php' );?>', {
@@ -36,7 +48,8 @@ jQuery(document).ready(function($) {
 	       post_id:$("#post_id").val(),
 	       series_id:<?php echo $series_id ;?>
 	     }, function(data) {
-	       alert(data);  
+	    	 $("#post_id").val(data)
+	       alert("successful");  
 	     });
 	   });
  }); 
@@ -67,7 +80,7 @@ jQuery(document).ready(function($) {
     	<input type="hidden" id="post_id" value="<?php echo $post_id?>"/>
     	</div> 
         <div class="mark fl">
-        	<a href="<?php echo get_site_url(); ?>/?p=<?php echo $post_id; ?>" class="viewbook">View Chapter</a> 
+        	<a href="javascript:viewChapter('<?php echo get_site_url(); ?>')" class="viewbook">View Chapter</a> 
         </div> 
         <div class="bookcontentbox">
         	

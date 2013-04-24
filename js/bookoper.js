@@ -77,7 +77,7 @@ var userbookOpr = function (){
 				
 				var termid = $("#term_id").val();
 				if(termid == ""){
-					alert("You must complete other form before upload Book Cover!");
+					alert("Please update book info first, then upload a book cover.");
 					return ;
 				}
 				
