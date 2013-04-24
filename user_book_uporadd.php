@@ -71,7 +71,7 @@ jQuery(document).ready(function($) {
     	
     	<div class="usertitle"><input id="bookname"  name="bookname" type="text"  class="h-inpt" value="<?php if ($books) echo $books->bookname; else echo "Write Your Book Title here";?>"/></div> 
         <div class="mark fl">
-        	<a href="<?php echo get_site_url(); ?>/?series=<?php echo $book->slug ?>" class="viewbook">View Book</a>
+        	<a href="javascript:userbookOpr.viewBook('<?php echo get_site_url(); ?>')" class="viewbook">View Book</a>
         </div> 
         <div class="bookcontentbox">
           <div id="imgform"> 
