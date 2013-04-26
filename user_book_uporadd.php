@@ -71,7 +71,9 @@ jQuery(document).ready(function($) {
     	
     	<div class="usertitle"><input id="bookname"  name="bookname" type="text"  class="h-inpt" value="<?php if ($books) echo $books->bookname; else echo "Write Your Book Title here";?>"/></div> 
         <div class="mark fl">
-        	<a href="<?php echo get_site_url(); ?>/?series=<?php echo $books->slug ?>" class="viewbook">View Book</a>
+ 
+        	<a href="javascript:userbookOpr.viewBook('<?php echo get_site_url(); ?>')" class="viewbook">View Book</a>
+ 
         </div> 
         <div class="bookcontentbox">
           <div id="imgform"> 
@@ -82,7 +84,7 @@ jQuery(document).ready(function($) {
           </div>
            <input type="hidden" id="userid" value="<?php echo $current_user->ID;?>" />
            <input type="hidden" id="term_id" value="<?php echo $termid ?>" />
-           	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2"><?php if ($books) echo $books->bookdes; else echo "Write your book summary here";?></textarea>
+           	<textarea id='bookDes' name="bookDes" class="bor-top booktextbox2"><?php if ($books) echo  $books->bookdes; else echo "Write your book summary here";?></textarea>
             <ul>
             	<li><strong>Category:</strong>
                 	<div class="bookmenubut">

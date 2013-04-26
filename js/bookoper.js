@@ -1,5 +1,16 @@
 var userbookOpr = function (){
 	return {
+		viewBook:function(siteUrl){
+			jQuery(document).ready(function($) { 
+				var term_id = $("#term_id").val();
+				if(term_id == null || term_id == ""){
+					alert("Please update book info first, then view book");
+					return ;
+				}
+				var url = siteUrl+"/?series="+term_id;
+				window.location.href=url;
+			}); 
+		},
 		bookChapter:function(chapterUrl){
 			jQuery(document).ready(function($) { 
 				var termid = $("#term_id").val();
@@ -30,9 +41,9 @@ var userbookOpr = function (){
 						'category':category, "termid": termid, "user_id": userid},  
 					success: function(data){
 						var termid = $("#term_id").val(data);
-						alert("the book submit successful  ,please upload the book image");
+						//alert("the book submit successful  ,please upload the book image");
 						//console.log(data);
-						//alert("successful");
+						alert("successful");
 					} 
 				});
 			}); 

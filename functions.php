@@ -76,7 +76,7 @@ function get_post_rating ($pid){
 	global $wpdb;
 	$selectSql = "select (sum(rating_rating)/count(rating_rating) )aa from wp_ratings where rating_postid=$pid";
 	 
-	$rating = $wpdb->get_var($selectSql);
+	$rating = round($wpdb->get_var($selectSql));
 	$output = "";
 	$parentUrl = get_template_directory_uri();
 	for ($i = 0; $i < $rating; $i++) {
@@ -531,6 +531,7 @@ SQL;
 			<li class='titleWords'><?php echo sizeof(explode(" ", $charpter->post_content));?></li>
 			<li class='titleViews'><?php echo intval($charpter->meta_value);?></li>
 			<li class='titleRating'><?php get_post_rating($charpter->id); ?></li>
+			 
 			<li class='titleLast'><?php echo $charpter->postdate;?></li>
 		</ul>
 		<?php 

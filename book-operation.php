@@ -5,20 +5,16 @@
 
 $method = $_GET['method'];
 if($method == "addbook"){
-	$bookDes = $_GET['bookDes'];
+	$bookDes = stripslashes($_GET['bookDes']);
 	$progress = $_GET['progress'];
 	$category = $_GET['category'];
-	$bookname = $_GET['bookname'];
+	$bookname = stripslashes($_GET['bookname']);
 	$userid = $_GET['user_id'];
-	$term_id = "";
-	$slug = str_replace(" ","-",$bookname);
-	$data_array = array("name"=>$bookname,'slug'=>$slug,'term_group'=>0); 
+	$term_id = $_GET['termid'];
     //$wpdb->show_errors(); 
     
 	if($_GET['termid'] != null && $_GET['termid'] != "" ){
-		
-		$term_id = $_GET['termid'];
-		 
+		$data_array = array("name"=>$bookname,"slug"=>$term_id,'term_group'=>0);
 		$wpdb->update("wp_terms",$data_array, array('term_id'=> $term_id));
 		
 		$data_array = array("term_id"=>$term_id,'taxonomy'=>'series','description'=>$bookDes,'parent'=>$category);
@@ -35,6 +31,7 @@ if($method == "addbook"){
 	 
 		
 	}else{
+		$data_array = array("name"=>$bookname,"slug"=>$bookname,'term_group'=>0);
 		$wpdb->insert("wp_terms",$data_array);
 		$books = $wpdb->get_results("select term_id from wp_terms where name = '".$bookname."'");
 		
@@ -42,6 +39,8 @@ if($method == "addbook"){
 			$term_id = $book->term_id;
 			break;
 		}
+		$wpdb->query(
+				"update wp_terms set slug='".$term_id."' where term_id='".$term_id."'");
 		
 		$data_array = array("term_id"=>$term_id,'taxonomy'=>'series','description'=>$bookDes,'parent'=>$category);
 		$wpdb->insert("wp_term_taxonomy",$data_array);

@@ -10,8 +10,8 @@ function ajax_action_stuff() {
  if(strlen($post_id)==0){
 	 // Create post object
 	$my_post = array(
-	  'post_title'    => $post_title,
-	  'post_content'  => $post_content,
+	  'post_title'    => stripslashes($post_title),
+	  'post_content'  => stripslashes($post_content),
 	  'post_status'   => 'publish',
 	  'post_author'   => 1  
 	);
@@ -49,8 +49,8 @@ function ajax_action_stuff() {
  	$wpdb->update( 
 	'wp_posts', 
 	array( 
-		'post_content' => "$post_content",	// string
-		'post_title' => "$post_title"	// integer (number) 
+		'post_content' => stripslashes("$post_content"),	// string
+		'post_title' => stripslashes("$post_title") 
 	), 
 	array( 'ID' => $post_id ) 
 	 
@@ -62,5 +62,5 @@ function ajax_action_stuff() {
 			WHERE term_id = '".$series_id."'"
 		);
  echo $post_id; //  
- die(); // һ��Ҫ���@�У��ŕ������̎��ajaxՈ��
+ die(); // 
 }
