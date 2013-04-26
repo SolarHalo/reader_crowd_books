@@ -47,6 +47,24 @@ var ratingsL10n={"plugin_url":"<?php echo get_site_url(); ?>\/wp-content\/plugin
        
 			<a title="Go to homepage" href="<?php echo get_settings('home'); ?>/">Home</a>
 			>
+			<?php 
+			 $booksql = "select ter.* from wp_term_relationships ship 
+				join wp_term_taxonomy tax 
+				on tax.term_taxonomy_id = ship.term_taxonomy_id and ship.object_id = '".get_the_ID()."' 
+				join wp_terms ter 
+				on ter.term_id = tax.term_id and tax.taxonomy = 'series' ";
+			 global $wpdb;
+			 $bookName = "";
+			 $bookSlug = "";
+			 $books = $wpdb->get_results($booksql);
+			 foreach ($books as $book){
+			 	$bookName = $book->name;
+			 	$bookSlug = $book->slug;
+			 	break;
+			 }
+			?>
+			<a title="<?php echo $bookName;?>" href="<?php echo get_site_url(); ?>/?series=<?php echo $bookSlug;?>"><?php echo $bookName;?></a>
+			>
 			<?php the_title(); ?>
 		 <?php if(function_exists('the_ratings')) { the_ratings(); } ?>
 			
