@@ -843,5 +843,19 @@ function vf_widget_activities2($args) {
 		}
 		echo '</ul>';
 	}
+	
+function getUserPotoPath($userID){
+	  
+     $userPotoPath = get_site_url()."/wp-content/uploads/userphoto/";
+     
+   $sql =  "select meta_value from wp_usermeta where user_id = '$userID' and meta_key='userphoto_thumb_file'";
+    global $wpdb;
+	$metas = $wpdb->get_results($sql);
+	foreach ($metas as $meta) {
+        $userPotoPath =  $userPotoPath.$meta->meta_value; 
+ 		break;
+	} 
+	return $userPotoPath;
+}
 endif;
 ?>

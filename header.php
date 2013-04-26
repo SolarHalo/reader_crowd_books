@@ -47,14 +47,17 @@
         </form> 
         <?php }else{?>
         	<!-- <ul class="login">
-        	 <li>       welcome  <b><?php echo$current_user->user_login; ?></b> </li>
+        	 <li>       welcome  <b><?php echo $current_user->user_login; ?></b> </li>
         	 <li><a href="<?php get_site_url(); ?>/wp-admin">Dashboard</a></li>
         	 <li><a href="?page_id=4&action=profile">Profile</a></li>
         	 <li><a href="<?php get_site_url(); ?>/wp-admin"><?php echo$current_user->user_login; ?> Dashboard</a></li>
         	 <li><a href="<?php echo wp_logout_url(); ?>">Login out</a></li>
         	 </ul> -->
         	 <ul class="userlogin">
-            	<li><img src="<?php echo get_template_directory_uri(); ?>/images/suerimg.jpg" /></li>
+        	 <?php 
+        	    $userpoto = getUserPotoPath($current_user->ID);
+        	 ?>
+            	<li><img src="<?php echo $userpoto;?>"  width="43" height="43"/></li>
               	 <li><a href="?page_id=4&action=profile">Profile</a></li>
                  <li class="active"><a href="<?php get_site_url(); ?>/?page_id=517">My Book</a></li> 
                 <li><a href="<?php echo wp_logout_url(); ?>">Log Out</a></li>  
