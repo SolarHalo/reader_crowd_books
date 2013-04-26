@@ -120,7 +120,7 @@ SQL;
 		     	post.post_type = 'post' and
 		     	post.post_status  = 'publish'
 SQL;
-            $chapterSql = $chapterSql." and ship.term_taxonomy_id = '".$book->shipid."'";
+            $chapterSql = $chapterSql." and ship.term_taxonomy_id = '".$book->shipid."' order by post.post_modified asc ";
             $chapters = $wpdb->get_results($chapterSql);
             $chapterIndex = 0;
             foreach ($chapters as $chapter) {
