@@ -58,7 +58,7 @@
         	    $userpoto = getUserPotoPath($current_user->ID);
         	 ?>
             	<li><img src="<?php echo $userpoto;?>"  width="43" height="43"/></li>
-              	 <li><a href="?page_id=4&action=profile">Profile</a></li>
+              	 <li><a href="?page_id=4&action=profile"><?php echo$current_user->user_login; ?> Dashboard</a></li>
                  <li class="active"><a href="<?php get_site_url(); ?>/?page_id=517">My Book</a></li> 
                 <li><a href="<?php echo wp_logout_url(); ?>">Log Out</a></li>  
             </ul>
