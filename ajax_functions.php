@@ -9,12 +9,7 @@ function ajax_action_stuff() {
  $tip = "successful";
  if(strlen($post_id)==0){
 	 // Create post object
-	$my_post = array(
-	  'post_title'    => stripslashes($post_title),
-	  'post_content'  => stripslashes($post_content),
-	  'post_status'   => 'publish',
-	  'post_author'   => 1  
-	);
+
 	global $wpdb;
 	$sql = "select term_taxonomy_id from wp_term_taxonomy where term_id ='$series_id'";
 	$term_taxonomy_id = '';
@@ -25,6 +20,23 @@ function ajax_action_stuff() {
 	 }
 	// Insert the post into the database
 	global $post_id;
+	
+	$authorSql = "select user_id from wp_orgseriesicons where term_id='$series_id'";
+	
+	$authors = $wpdb->get_results($authorSql);
+	$authorId = "";
+	foreach($authors as $author){
+		$authorId = $author->user_id ;
+		break;
+	}
+	
+	$my_post = array(
+			'post_title'    => stripslashes($post_title),
+			'post_content'  => stripslashes($post_content),
+			'post_status'   => 'publish',
+			'post_author'   => $authorId
+	);
+	
 	   $post_id = wp_insert_post( $my_post); 
 	    $data_array = array("object_id"=>$post_id,'term_taxonomy_id'=>$term_taxonomy_id,'term_order'=>0);
 	    
