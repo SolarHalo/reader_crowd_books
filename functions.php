@@ -130,6 +130,7 @@ SQL;
 function getTopReviewd ($showNum){ 
 	$top_posts = getTopReviewdDatas($showNum); 
 	$output = ""; 
+	$dir_uri = get_template_directory_uri();
 	$uri = get_site_url(); 
 	$i = 1;
 	foreach($top_posts as $top_post){
@@ -140,7 +141,8 @@ function getTopReviewd ($showNum){
 		$term_id = $top_post->term_id;
 		$bookImg = getBookImg($term_id);
 		$image = $uri.'/'.$bookImg;
-		$output.="<li><a href='$book_url' title='$name'><img src='$image' alt='$i.$name'/> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
+		$errimage = $dir_uri.'/images/nnnn.png';
+		$output.="<li><a href='$book_url' title='$name'><img src='$image' alt='$i.$name' onerror=\"javascript:this.src='$errimage'\"/> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
 		$i++;
 	}
  	
@@ -162,7 +164,7 @@ function getTopReviewdShow($showtype){
 	
     $output = ""; 
 	$uri = get_site_url(); 
-	
+	 $dir_uri = get_template_directory_uri();
 	foreach($top_posts as $top_post){
 		$name = $top_post->name;
 		$sumhit = $top_post->sumhit;
@@ -171,7 +173,8 @@ function getTopReviewdShow($showtype){
 		$term_id = $top_post->term_id;
 		$bookImg = getBookImg($term_id);
 		$image = $uri.'/'.$bookImg;
-		$output.="<li><a href='$book_url' title='$name'><img src='$image'  width='45' height='70'  alt='$i.$name'/> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
+		$errimage = $dir_uri.'/images/nnnn.png';
+		$output.="<li><a href='$book_url' title='$name'><img src='$image'  width='45' height='70'  alt='$i.$name' onerror=\"javascript:this.src='$errimage'\" /> $i.$name </a> <span >$author</span><span >($sumhit) </span></li>"; 
 		$i++;
 	}
   return  $output;
@@ -306,7 +309,8 @@ function getHighestRation ($showNum){
 			$image = $site_uri.'/'.$bookImg;
 		}
 		$rateImage = getRatingImage($avgrate, $dir_uri);
-		$output.="<li><a href='$bookurl' title='$bookname'><img src='$image' alt='$i.$bookname'/> $i.$bookname </a> <span >$author</span>
+		$errimage = $dir_uri.'/images/nnnn.png';
+		$output.="<li><a href='$bookurl' title='$bookname'><img src='$image' alt='$i.$bookname' onerror=\"javascript:this.src='$errimage'\" /> $i.$bookname </a> <span >$author</span>
 		<span >
 			$rateImage
 		</span></li>"; 
@@ -338,11 +342,12 @@ function getTopRationgShow($showtype){
 		$bookurl = $site_uri.'/?series='.$bookrate->slug;
 		$bookImg = getBookImg($term_id);
 		$image;
+		$errimage = $dir_uri.'/images/nnnn.png';
 		if($bookImg){
 			$image = $site_uri.'/'.$bookImg;
 		}
 		$rateImage = getRatingImage($avgrate, $dir_uri);
-		$output.="<li><a href='$bookurl' title='$bookname'><img  width='45' height='70'  src='$image' alt='$i.$bookname'/> $i.$bookname </a> <span >$author</span>
+		$output.="<li><a href='$bookurl' title='$bookname'><img  width='45' height='70'  src='$image' alt='$i.$bookname' onerror=\"javascript:this.src='$errimage'\" /> $i.$bookname </a> <span >$author</span>
 		<span >
 			$rateImage
 		</span></li>"; 
@@ -609,7 +614,7 @@ SQL;
  * get all book info
  */
 function getAllBookInfo(){
-	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic left join wp_terms on ic.term_id =wp_terms.term_id order by ic.modifytime desc";
+	$sql = "select ic.*,wp_terms.name,wp_terms.slug from (select term_id,user_id,progress,modifytime from wp_orgseriesicons) as ic   join wp_terms on ic.term_id =wp_terms.term_id order by ic.modifytime desc";
 	global $wpdb;
 	$bookBasicInfos = $wpdb->get_results($sql);
 	$output = "";
@@ -826,7 +831,7 @@ function vf_widget_activities2($args) {
 		// These lines generate our output. Widgets can be very complex
 		// but as you can see here, they can also be very, very simple.
 		 
-		echo '<ul>';
+		echo '<ul class="index-list">';
 		$i = 0;
 		foreach ($Discussions as $Discussion) {
 //         var_dump($Discussion);
@@ -843,7 +848,11 @@ function vf_widget_activities2($args) {
 		}
 		echo '</ul>';
 	}
-	
+/**
+ * 
+ * get user poto by userid
+ * @param   $userID
+ */	
 function getUserPotoPath($userID){
 	  
      $userPotoPath = get_site_url()."/wp-content/uploads/userphoto/";
@@ -856,6 +865,14 @@ function getUserPotoPath($userID){
  		break;
 	} 
 	return $userPotoPath;
+}
+/**
+ * 
+ * get user info by post
+ * @param unknown_type $posts_id
+ */
+function getUserInfoByPostID($posts_id){
+	
 }
 endif;
 ?>

@@ -159,7 +159,7 @@ function doSlide(s){
 }}
 </script>
 <SCRIPT language=javascript>
-var intDelay=30; //���ò˵���ʾ�ٶȣ�Խ��Խ��
+var intDelay=30;  
 var intInterval=5; 
 function MenuClick(){
 LayerMenu.filters.alpha.opacity=0; 

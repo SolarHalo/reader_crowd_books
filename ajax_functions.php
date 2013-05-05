@@ -34,8 +34,7 @@ function ajax_action_stuff() {
 			"UPDATE wp_orgseriesicons  
 			SET modifytime=SYSDATE()  
 			WHERE term_id = '".$series_id."'"
-		);
-	 
+		); 
  }else{ 
 //	$my_post = array(
 //		  'ID'    => $post_id,

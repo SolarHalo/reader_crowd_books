@@ -85,7 +85,7 @@ var ratingsL10n={"plugin_url":"<?php echo get_site_url(); ?>\/wp-content\/plugin
         	 ?>
             	
 			<div id="postauthor">
-				  <img src="<?php echo $userpoto;?>"  width="43" height="43"/>   <span>About:<?php the_author_posts_link();?></span> <span><a href="mailto:<?php echo get_the_author_meta( 'user_email' )?>">Mail</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+				  <img src="<?php echo $userpoto;?>"  width="43" height="43"/>   <span>About:<?php the_author_posts_link();?></span>  <a
 					href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) );?>">More Posts</a> </span>
 			</div>
       <!--  

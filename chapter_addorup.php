@@ -34,7 +34,14 @@ jQuery(document).ready(function($) {
 			$("#chcotent").val("");
 		}
    });
-
+	$("#addchapter").click(function(){
+		var urlstr = window.location.href;
+		if(urlstr.indexOf("post_id") >=0){
+			urlstr = urlstr.substr(0,urlstr.lastIndexOf("&"));
+		    
+		 }
+		 window.location.href=urlstr;
+		});
 	$('#btn_ajax').click(function () {
 		var chapterName = $("#chtitle").val();
 		if(chapterName == null || chapterName.replace(/[ ]/g,"")=="" || 'Write Your Chapter Name here'==chapterName){
@@ -49,7 +56,8 @@ jQuery(document).ready(function($) {
 	       series_id:<?php echo $series_id ;?>
 	     }, function(data) {
 	    	 $("#post_id").val(data)
-	       alert("successful");  
+	        alert("successful");  
+		 	 //   alert(data);
 	     });
 	   });
  }); 
@@ -95,7 +103,7 @@ jQuery(document).ready(function($) {
             <a href="javascript:void(0);" id="btn_ajax">Publish</a>
          </div> 
         <div class="total">
-        	<a href="javascript:window.location.reload()"><font>Add a New Chapter</font> </a>
+        	<a href="javascript:void(0);" id="addchapter"><font>Add a New Chapter</font> </a>
         </div>
         </form>
     </div>  

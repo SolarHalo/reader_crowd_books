@@ -29,7 +29,7 @@
     	 $current_user = wp_get_current_user();
     	 if( 0 == $current_user->ID) {?> 
     	 
-       <form name="loginform" id="loginform1" action="/?action=login&instance=1" method="post">
+       <form name="loginform" id="loginform1" action="/?page_id=4&action=login&instance=1" method="post">
         	<ul class="login2">
             	<li><b>Username</b> <br />
                  <input type="text" class="input1"  name="log" id="user_login1"  tabIndex=1/><br />

@@ -152,7 +152,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 .nav li{
 	float:left; 
 	text-align:center;
-	width:176px;
+	width:155px;
 	}
 
 .nav li a{
@@ -160,7 +160,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	font-size:18px; 
 	line-height: 23px;
 	height:24px;
-	width:176px;
+	width:155px;
 	display:block;
 	}
 
@@ -998,4 +998,7 @@ width:100%;
 	line-height: 40px;
 	float: left;
 }
-	
+.current-menu-item{
+	color:#fff; 
+	background:#362d2e;
+}
