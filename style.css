@@ -253,7 +253,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	vertical-align:middle;
 	}
 .mark{
-	width:100px;
+	width:100%;
 	height:40px;
 	line-height:40px; 
 	}
@@ -856,7 +856,7 @@ text-decoration:underline;
 	color:#fff;
 	}
 
-.mark .viewbook{
+.mark .Delete, .mark .viewbook{
 	display:inline-block;
 	width:90px;
 	height:32px;
@@ -868,6 +868,7 @@ text-decoration:underline;
 	line-height:32px;
 	font-size:12px;
 	text-align:center;
+	padding:0 8px;
 	}
 .bookcontentbox .bookmenu{
 	visibility:hidden;
@@ -1003,3 +1004,6 @@ width:100%;
 	color:#fff; 
 	background:#362d2e;
 }
+.fr{
+	float:right;
+	}

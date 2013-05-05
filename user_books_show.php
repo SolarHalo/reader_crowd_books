@@ -60,6 +60,7 @@ SQL;
     	<div class="usertitle"><?php echo $book->bookname ;?><span>Last Update:<font><?php echo $book->modify ;?></font></span></div> 
         <div class="mark fl">
         	<a href="<?php echo get_site_url()."/?series=$book->slug" ?>" class="viewbook">View Book</a>
+        	  <a class="Delete fr" href="javascript:userbookOpr.bookDel('<?php echo $operationUrl;?>','<?php echo $book->termid;?>');">Delete Book</a>
         </div> 
         <div class="bookcontentbox">
         	<a href="#"><img src="<?php echo get_site_url()."/".$book->bookico ;?>" class="fl" width="181"  height="270" onerror="javascript:this.src='<?php echo get_template_directory_uri();?>/images/bookcover.gif'"/></a>
@@ -101,7 +102,7 @@ SQL;
         </div>
          <div class="startbut bor-top">
             <a href="<?php echo $operPageUrl;?>&termid=<?php echo $book->termid;?>">Update Book lnfo.</a>
-             <a href="javascript:userbookOpr.bookDel('<?php echo $operationUrl;?>','<?php echo $book->termid;?>');">Delete Book</a>
+           
             
          </div>
         <div class="bookboxlist">
