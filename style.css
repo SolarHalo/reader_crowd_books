@@ -401,7 +401,8 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{
 	width:220px;
 	}
 #right_sidebar .mlrp_ul li a img{
-width:35px;
+width:45px;
+height:70px;
 }
 
 #right_sidebar .ratingsbox{
